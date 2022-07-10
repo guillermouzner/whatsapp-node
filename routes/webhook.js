@@ -28,7 +28,7 @@ router.get("/webhook", (req, res) => {
     }
 });
 
-app.post("/webhook", (req, res) => {
+router.post("/webhook", (req, res) => {
     // Parse the request body from the POST
     let body = req.body;
 
