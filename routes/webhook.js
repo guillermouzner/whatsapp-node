@@ -31,7 +31,8 @@ router.get("/webhook", (req, res) => {
 router.post("/webhook", (req, res) => {
     // Parse the request body from the POST
     let body = req.body;
-
+    console.log(body);
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     // Check the Incoming webhook message
     console.log(JSON.stringify(req.body, null, 2));
 
