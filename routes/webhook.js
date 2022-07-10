@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, text } from "express";
 import axios from "axios";
 const router = Router();
 
@@ -55,7 +55,11 @@ router.post("/webhook", (req, res) => {
             var data = {
                 messaging_product: "whatsapp",
                 to: from,
-                text: { body: "Ack: " + msg_body },
+                type: "text",
+                text: {
+                    preview_url: false,
+                    body: "Ack: " + msg_body,
+                },
             };
             var config = {
                 method: "post",
