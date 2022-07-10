@@ -64,6 +64,7 @@ router.post("/webhook", (req, res) => {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
+                data: data,
             };
             axios(config)
                 .then(function (response) {
