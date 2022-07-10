@@ -1,11 +1,8 @@
 import { Router } from "express";
 import axios from "axios";
 const router = Router();
-import { createBot } from 'whatsapp-cloud-api';
 
-const fromGit  = process.env.WHATSAPP_BUSINESS_ACCOUNT_ID
 const token = process.env.WHATSAPP_TOKEN;
-const webhookVerifyToken = process.env.VERIFY_TOKEN
 
 router.get("/webhook", (req, res) => {
     /**
@@ -40,24 +37,46 @@ router.post("/webhook", (req, res) => {
     // Check the Incoming webhook message
     console.log(JSON.stringify(req.body, null, 2));
 
+    //info on WhatsApp text message payload: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#text-messages
     if (req.body.object) {
         if (
-          req.body.entry &&
-          req.body.entry[0].changes &&
-          req.body.entry[0].changes[0] &&
-          req.body.entry[0].changes[0].value.messages &&
-          req.body.entry[0].changes[0].value.messages[0]
+            req.body.entry &&
+            req.body.entry[0].changes &&
+            req.body.entry[0].changes[0] &&
+            req.body.entry[0].changes[0].value.messages &&
+            req.body.entry[0].changes[0].value.messages[0]
         ) {
-          let phone_number_id =
-            req.body.entry[0].changes[0].value.metadata.phone_number_id;
-          let to = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
-          let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body
+            let phone_number_id =
+                req.body.entry[0].changes[0].value.metadata.phone_number_id;
+            let from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
+            let msg_body =
+                req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
 
-          const bot = createBot(fromGit, token);
-
-          const result = await bot.sendMessage(to, 'Hello world');
-
+            axios({
+                method: "POST", // Required, HTTP method, a string, e.g. POST, GET
+                url:
+                    "https://graph.facebook.com/v13.0/" +
+                    phone_number_id +
+                    "/messages?access_token=" +
+                    token,
+                data: {
+                    messaging_product: "whatsapp",
+                    to: from,
+                    text: { body: "Ack: " + msg_body },
+                },
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+                .then((m) => console.log(m))
+                .catch((err) =>
+                    console.log("tenes un error pero no se de que")
+                );
         }
+        res.sendStatus(200);
+    } else {
+        // Return a '404 Not Found' if event is not from a WhatsApp API
+        res.sendStatus(404);
     }
 });
 
