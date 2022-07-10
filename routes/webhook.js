@@ -2,6 +2,8 @@ import { Router } from "express";
 import axios from "axios";
 const router = Router();
 
+const token = process.env.WHATSAPP_TOKEN;
+
 router.get("/webhook", (req, res) => {
     /**
      * UPDATE YOUR VERIFY TOKEN
