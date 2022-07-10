@@ -53,7 +53,7 @@ router.post("/webhook", (req, res) => {
                 req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
 
             console.log(
-                "https://graph.facebook.com/v12.0/" +
+                "https://graph.facebook.com/v13.0/" +
                     phone_number_id +
                     "/messages?access_token=" +
                     token
@@ -61,16 +61,18 @@ router.post("/webhook", (req, res) => {
             axios({
                 method: "POST", // Required, HTTP method, a string, e.g. POST, GET
                 url:
-                    "https://graph.facebook.com/v12.0/" +
+                    "https://graph.facebook.com/v13.0/" +
                     phone_number_id +
-                    "/messages?access_token=" +
-                    token,
+                    "/messages",
                 data: {
                     messaging_product: "whatsapp",
                     to: from,
                     text: { body: "Ack: " + msg_body },
                 },
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
             })
                 .then((m) => console.log(m))
                 .catch((err) =>
