@@ -64,7 +64,9 @@ router.post("/webhook", (req, res) => {
                     text: { body: "Ack: " + msg_body },
                 },
                 headers: { "Content-Type": "application/json" },
-            });
+            })
+                .then((m) => console.log(m))
+                .catch((err) => console.log(err));
         }
         res.sendStatus(200);
     } else {
