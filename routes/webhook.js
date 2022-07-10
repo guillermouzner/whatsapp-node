@@ -52,26 +52,26 @@ router.post("/webhook", (req, res) => {
             let msg_body =
                 req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
 
-            axios({
-                method: "POST", // Required, HTTP method, a string, e.g. POST, GET
-                url:
-                    "https://graph.facebook.com/v13.0/" +
-                    phone_number_id +
-                    "/messages?access_token=" +
-                    token,
-                data: {
-                    messaging_product: "whatsapp",
-                    to: from,
-                    text: { body: "Ack: " + msg_body },
-                },
+            var data = {
+                messaging_product: "whatsapp",
+                to: from,
+                text: { body: "Ack: " + msg_body },
+            };
+            var config = {
+                method: "post",
+                url: `https://graph.facebook.com/v13.0/${phone_number_id}/messages`,
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
                 },
-            })
-                .then((m) => console.log(m))
-                .catch((err) =>
-                    console.log("tenes un error pero no se de que")
-                );
+            };
+            axios(config)
+                .then(function (response) {
+                    console.log(JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
         res.sendStatus(200);
     } else {
