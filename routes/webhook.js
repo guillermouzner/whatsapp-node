@@ -35,7 +35,7 @@ router.post("/webhook", (req, res) => {
     // Check the Incoming webhook message
     console.log(JSON.stringify(req.body, null, 2));
 
-    info on WhatsApp text message payload: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#text-messages
+    //info on WhatsApp text message payload: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#text-messages
     if (req.body.object) {
         if (
             req.body.entry &&
@@ -62,7 +62,7 @@ router.post("/webhook", (req, res) => {
                     text: { body: "Ack: " + msg_body },
                 },
                 headers: { "Content-Type": "application/json" },
-            }).then(m=>console.log(m))
+            }).then((m) => console.log(m));
         }
         res.sendStatus(200);
     } else {
