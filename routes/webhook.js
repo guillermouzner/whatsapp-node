@@ -66,7 +66,9 @@ router.post("/webhook", (req, res) => {
                 headers: { "Content-Type": "application/json" },
             })
                 .then((m) => console.log(m))
-                .catch((err) => console.log(err));
+                .catch((err) =>
+                    console.log("tenes un error pero no se de que")
+                );
         }
         res.sendStatus(200);
     } else {
