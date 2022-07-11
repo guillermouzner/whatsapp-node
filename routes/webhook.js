@@ -57,7 +57,6 @@ router.post("/webhook", (req, res) => {
                 to: from,
                 type: "text",
                 text: {
-                    preview_url: false,
                     body: "Ack: " + msg_body,
                 },
             };
