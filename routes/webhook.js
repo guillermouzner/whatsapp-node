@@ -35,26 +35,32 @@ const Whatsapp = new WhatsappCloudAPI({
 });
 
 router.post("/webhook", async (req, res) => {
-    let data = Whatsapp.parseMessage(req.body);
+    try {
+        let data = Whatsapp.parseMessage(req.body);
+        console.log(data);
+        if (data?.isMessage) {
+            let incomingMessage = data.message;
+            let recipientPhone = incomingMessage.from.phone; // extract the phone number of the customer
+            let recipientName = incomingMessage.from.name; // extract the name of the customer
+            let typeOfMsg = incomingMessage.type; // extract the type of message
+            let message_id = incomingMessage.message_id; // extract the message id
 
-    if (data?.isMessage) {
-        let incomingMessage = data.message;
-        let recipientPhone = incomingMessage.from.phone; // extract the phone number of the customer
-        let recipientName = incomingMessage.from.name; // extract the name of the customer
-        let typeOfMsg = incomingMessage.type; // extract the type of message
-        let message_id = incomingMessage.message_id; // extract the message id
-
-        if (typeOfMsg === "simple_button_message") {
-            let button_id = incomingMessage.button_reply.id;
-            if (button_id === "book_appointment") {
-                // The customer clicked on a simple button whose id is 'book_appointment'.
-                // You can respond to them with an outbound action eg, a text message
-                await Whatsapp.sendText({
-                    message: `Hello customer, You clicked on the 'book appointment' button`,
-                    recipientPhone: recipientPhone,
-                });
+            if (typeOfMsg === "simple_button_message") {
+                let button_id = incomingMessage.button_reply.id;
+                if (button_id === "book_appointment") {
+                    // The customer clicked on a simple button whose id is 'book_appointment'.
+                    // You can respond to them with an outbound action eg, a text message
+                    await Whatsapp.sendText({
+                        message: `Hello customer, You clicked on the 'book appointment' button`,
+                        recipientPhone: recipientPhone,
+                    });
+                }
             }
         }
+        res.sendStatus(200);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(404);
     }
 });
 
