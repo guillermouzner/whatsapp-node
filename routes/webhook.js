@@ -76,7 +76,7 @@ router.post("/webhook", async (req, res) => {
                 if (theTextMessage == "1") {
                     await Whatsapp.sendText({
                         message: `The customer said: ${theTextMessage}`,
-                        recipientPhone: "your recipient phone number here",
+                        recipientPhone: 543814987351,
                     });
                 }
                 await Whatsapp.sendSimpleButtons({
