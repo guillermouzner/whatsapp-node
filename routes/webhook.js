@@ -107,37 +107,37 @@ router.post("/webhook", async (req, res) => {
                             rows: [
                                 {
                                     title: "Operar activos",
-                                    description: "",
+                                    description: "1",
                                     id: "operar_activos",
                                 },
                                 {
                                     title: "Operar Dolar MEP",
-                                    description: "",
+                                    description: "2",
                                     id: "Operar_Dolar_MEP",
                                 },
                                 {
                                     title: "Transferir a Banco",
-                                    description: "",
+                                    description: "3",
                                     id: "Transferir_a_Banco",
                                 },
                                 {
                                     title: "Convertir Cable-Mep",
-                                    description: "",
+                                    description: "4",
                                     id: "Convertir_Cable-Mep",
                                 },
                                 {
                                     title: "Abrir cuenta Cocos",
-                                    description: "",
+                                    description: "5",
                                     id: "Abrir_cuenta_Cocos",
                                 },
                                 {
                                     title: "Consultar",
-                                    description: "",
+                                    description: "6",
                                     id: "consultar",
                                 },
                                 {
                                     title: "Cerrar cuenta",
-                                    description: "",
+                                    description: "7",
                                     id: "cerrar_cuenta",
                                 },
                             ],
