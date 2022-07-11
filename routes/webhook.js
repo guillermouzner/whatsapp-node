@@ -58,6 +58,10 @@ router.post("/webhook", async (req, res) => {
             //         recipientPhone: recipientPhone,
             //     });
             // }
+            await Whatsapp.markMessageAsRead({
+                message_id: message_id,
+            });
+
             if (typeOfMsg === "text_message") {
                 await Whatsapp.sendText({
                     message: "hola culiao",
