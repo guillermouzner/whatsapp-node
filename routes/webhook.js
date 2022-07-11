@@ -45,7 +45,7 @@ router.post("/webhook", async (req, res) => {
             let typeOfMsg = incomingMessage.type; // extract the type of message
             let message_id = incomingMessage.message_id; // extract the message id
             // let text = incomingMessage.text.body;
-            let text = incomingMessage.button_reply.id;
+            // let text = incomingMessage.button_reply.id;
             console.log(recipientPhone, recipientName, typeOfMsg, message_id);
             // if (typeOfMsg === "text_message") {
             //     // let button_id = incomingMessage.button_reply.id;
@@ -93,7 +93,7 @@ router.post("/webhook", async (req, res) => {
 
             if (
                 typeOfMsg === "simple_button_message" &&
-                text === "see_categories"
+                incomingMessage.button_reply.id === "see_categories"
             ) {
                 await Whatsapp.sendRadioButtons({
                     recipientPhone: 543814987351,
