@@ -196,8 +196,8 @@ router.post("/webhook", async (req, res) => {
                         // },
                         phones: [
                             {
-                                phone: "5438144987351",
-                                type: "HOME",
+                                phone: "543814987351",
+                                type: "Cel",
                                 //wa_id: "16505551234", // optional
                             },
                             // {
