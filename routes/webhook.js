@@ -12,10 +12,14 @@ const Whatsapp = new WhatsappCloudAPI({
 });
 
 const mandarWp = async () => {
-    await Whatsapp.sendText({
-        message: "Hello world",
-        recipientPhone: process.env.wp,
-    });
+    try {
+        await Whatsapp.sendText({
+            message: "Hello world",
+            recipientPhone: process.env.wp,
+        });
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 router.get("/webhook", (req, res) => {
