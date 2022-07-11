@@ -72,7 +72,7 @@ router.post("/webhook", async (req, res) => {
 
             if (typeOfMsg === "text_message") {
                 await Whatsapp.sendSimpleButtons({
-                    recipientPhone: 543816617137,
+                    recipientPhone: 543814987351,
                     message: `Hola soy Santi, tu asistente virtual en Santander! 🤖`,
                     listOfButtons: [
                         {
@@ -92,7 +92,7 @@ router.post("/webhook", async (req, res) => {
                 incomingMessage.button_reply.id === "see_categories"
             ) {
                 await Whatsapp.sendRadioButtons({
-                    recipientPhone: 543816617137,
+                    recipientPhone: 543814987351,
                     headerText: "¿En qué puedo ayudarte? 👇",
                     bodyText:
                         "1. Operar Activos (Compra, Venta, Sucripciones a FCI) 💣\n2. Comprar/ Vender Dólar MEP\n3. Transferir fondos a mi banco (Nuevo)\n4. Convertir dólar CABLE en dólar MEP\n5. Abrir una cuenta en Cocos 🥥\n6. Hacer una consulta\n7. Cerrar mi cuenta en Cocos 🥥\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
@@ -148,7 +148,7 @@ router.post("/webhook", async (req, res) => {
                 incomingMessage.button_reply.id === "talk_to_human"
             ) {
                 await Whatsapp.sendContact({
-                    recipientPhone: 543816617137,
+                    recipientPhone: 543814987351,
                     contact_profile: {
                         emails: [
                             {
@@ -178,7 +178,7 @@ router.post("/webhook", async (req, res) => {
                 incomingMessage.list_reply.description === "1"
             ) {
                 await Whatsapp.sendContact({
-                    recipientPhone: 543816617137,
+                    recipientPhone: 543814987351,
                     contact_profile: {
                         emails: [
                             {
