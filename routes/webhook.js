@@ -139,81 +139,84 @@ router.post("/webhook", async (req, res) => {
                                 },
                             ],
                         },
-                        // {
-                        //     title: "Top 3 Fashion",
-                        //     rows: [
-                        //         {
-                        //             title: "Black LVX T-Shirt",
-                        //             description:
-                        //                 "KES 2999.00\nLVX is a warm cotton t-shirt",
-                        //             id: "SKU12_black_lvx_tshirt",
-                        //         },
-                        //         {
-                        //             title: "Purple hoodie",
-                        //             description:
-                        //                 "KES 1999.00\nPurple hoodie with a Logrocket logo",
-                        //             id: "SKU13_purple_hoodie",
-                        //         },
-                        //         {
-                        //             title: "Air Jordan 1",
-                        //             description:
-                        //                 "KES 10999.00\nWe move where others do not.Wanna fly?",
-                        //             id: "SKU14_air_jordan_1",
-                        //         },
-                        //     ],
-                        // },
-                        // {
-                        //     title: "Top 3 Gadgets",
-                        //     rows: [
-                        //         {
-                        //             title: "Apple Watch",
-                        //             description:
-                        //                 "KES 75999.00\nTime is finite, enjoy every second of it",
-                        //             id: "SKU15_apple_watch",
-                        //         },
-                        //         {
-                        //             title: "Surface Pro",
-                        //             description: `KES 59999.00\nDon't just surf the web, surf the world`,
-                        //             id: "SKU16_surface_pro",
-                        //         },
-                        //         {
-                        //             title: "Xiaomi Beats Speaker",
-                        //             description: `KES 45699\nIt is in how your heartbeats, the way Xiaomi Beats.`,
-                        //             id: "SKU17_xiaomi_beats_speaker",
-                        //         },
-                        //     ],
-                        // },
-                        // {
-                        //     title: "Top 3 Kitchen",
-                        //     rows: [
-                        //         {
-                        //             title: "Portable Hand Mixer",
-                        //             description: `KES7899\nTempt thy sweetbuds by mixing your favorite food uniformly.`,
-                        //             id: "SKU18_portable_hand_mixer",
-                        //         },
-                        //         {
-                        //             title: "Non-stick waffle-maker",
-                        //             description: `KES7899\nGreat Waffles are made with the best ingredients.`,
-                        //             id: "SKU19_non_stick_waffle_maker",
-                        //         },
-                        //         {
-                        //             title: "6-set Cooking Spoons",
-                        //             description: `KES7899\nHold thy happiness right.`,
-                        //             id: "SKU20_6_set_cooking_spoons",
-                        //         },
-                        //     ],
-                        // },
-                        // {
-                        //     title: "1 random pick",
-                        //     rows: [
-                        //         {
-                        //             title: "Nivea Icy Soap",
-                        //             description: `KES899\nStay hydrated and refreshed. Nourish your skin.`,
-                        //             id: "SKU21_nivea_icy_soap",
-                        //         },
-                        //     ],
-                        // },
                     ],
+                });
+            }
+
+            if (
+                typeOfMsg === "radio_button_message" &&
+                incomingMessage.list_reply.description === "1"
+            ) {
+                await Whatsapp.sendContact({
+                    recipientPhone: 543814987351,
+                    contact_profile: {
+                        addresses: [
+                            {
+                                street: "1 Hacker Way",
+                                city: "Menlo Park",
+                                state: "CA",
+                                zip: "94025",
+                                country: "United States",
+                                country_code: "us",
+                                type: "HOME",
+                            },
+                            {
+                                street: "200 Jefferson Dr",
+                                city: "Menlo Park",
+                                state: "CA",
+                                zip: "94025",
+                                country: "United States",
+                                country_code: "us",
+                                type: "WORK",
+                            },
+                        ],
+                        birthday: "2002-02-14",
+                        emails: [
+                            {
+                                email: "test@fb.com",
+                                type: "WORK",
+                            },
+                            {
+                                email: "test@whatsapp.com",
+                                type: "HOME",
+                            },
+                        ],
+                        name: {
+                            formatted_name: "Daggie Blanqx",
+                            first_name: "Daggie",
+                            last_name: "Blanqx",
+                            middle_name: "M.",
+                            suffix: "Sr",
+                            prefix: "Sw Engr",
+                        },
+                        org: {
+                            company: "WhatsApp",
+                            department: "Design",
+                            title: "Manager",
+                        },
+                        phones: [
+                            {
+                                phone: "+1 (940) 555-1234",
+                                type: "HOME",
+                                wa_id: "16505551234", // optional
+                            },
+                            {
+                                phone: "+1 (650) 555-1234",
+                                type: "WORK", // optional
+                                wa_id: "16505551234", // optional
+                            },
+                        ],
+                        urls: [
+                            {
+                                url: "https://www.facebook.com",
+                                type: "WORK",
+                            },
+                            {
+                                url: "https://www.whatsapp.com",
+                                type: "HOME",
+                            },
+                        ],
+                    },
                 });
             }
         }
