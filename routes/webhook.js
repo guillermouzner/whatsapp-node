@@ -1,8 +1,22 @@
-import { Router, text } from "express";
-import axios from "axios";
+import { Router } from "express";
+// import axios from "axios";
+import WhatsappCloudAPI from "whatsappcloudapi_wrapper";
 const router = Router();
 
 const token = process.env.WHATSAPP_TOKEN;
+
+const Whatsapp = new WhatsappCloudAPI({
+    accessToken: process.env.WHATSAPP_TOKEN,
+    senderPhoneNumberId: process.env.senderPhoneNumberId,
+    WABA_ID: process.env.WHATSAPP_BUSINESS_ACCOUNT_ID,
+});
+
+const mandarWp = async () => {
+    await Whatsapp.sendText({
+        message: "Hello world",
+        recipientPhone: process.env.wp,
+    });
+};
 
 router.get("/webhook", (req, res) => {
     /**
@@ -51,32 +65,12 @@ router.post("/webhook", (req, res) => {
             let from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
             let msg_body =
                 req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
-
-            var data = {
-                messaging_product: "whatsapp",
-                to: from,
-                type: "text",
-                text: {
-                    body: "Ack: " + msg_body,
-                },
-            };
-            var config = {
-                method: "post",
-                url: `https://graph.facebook.com/v13.0/${phone_number_id}/messages`,
-                headers: {
-                    "content-type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                data: data,
-            };
-            axios(config)
-                .then(function (response) {
-                    console.log(JSON.stringify(response.data));
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
+            
+            await Whatsapp.sendText({
+                message: "Hello world",
+                recipientPhone: from,
+            });
+            }
         res.sendStatus(200);
     } else {
         // Return a '404 Not Found' if event is not from a WhatsApp API
