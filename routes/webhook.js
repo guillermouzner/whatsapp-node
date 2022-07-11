@@ -98,21 +98,22 @@ router.post("/webhook", async (req, res) => {
                             ],
                         },
                     });
+                } else {
+                    await Whatsapp.sendSimpleButtons({
+                        recipientPhone: 543814987351,
+                        message: `Hola soy Santi, tu asistente virtual en Santander! 🤖`,
+                        listOfButtons: [
+                            {
+                                title: "Mostrar Opciones",
+                                id: "see_categories",
+                            },
+                            {
+                                title: "Hablar con un humano",
+                                id: "talk_to_human",
+                            },
+                        ],
+                    });
                 }
-                await Whatsapp.sendSimpleButtons({
-                    recipientPhone: 543814987351,
-                    message: `Hola soy Santi, tu asistente virtual en Santander! 🤖`,
-                    listOfButtons: [
-                        {
-                            title: "Mostrar Opciones",
-                            id: "see_categories",
-                        },
-                        {
-                            title: "Hablar con un humano",
-                            id: "talk_to_human",
-                        },
-                    ],
-                });
             }
 
             if (
