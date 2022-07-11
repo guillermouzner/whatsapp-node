@@ -71,6 +71,34 @@ router.post("/webhook", async (req, res) => {
             // }
 
             if (typeOfMsg === "text_message") {
+                let theTextMessage = incomingMessage.text.body;
+
+                if (theTextMessage == "1") {
+                    await Whatsapp.sendContact({
+                        recipientPhone: 543814987351,
+                        contact_profile: {
+                            emails: [
+                                {
+                                    email: "guillermouz16@gmail.com",
+                                    type: "Gmail",
+                                },
+                            ],
+                            name: {
+                                formatted_name: "Guillermo Uzner",
+                                first_name: "Guillermo",
+                                last_name: "Uzner",
+                            },
+
+                            phones: [
+                                {
+                                    phone: "543814987351",
+                                    type: "Cel",
+                                    wa_id: "543814987351", // optional
+                                },
+                            ],
+                        },
+                    });
+                }
                 await Whatsapp.sendSimpleButtons({
                     recipientPhone: 543814987351,
                     message: `Hola soy Santi, tu asistente virtual en Santander! 🤖`,
