@@ -104,6 +104,7 @@ router.post("/webhook", async (req, res) => {
                         "Selecciona una de las opciones para continuar:",
                     listOfSections: [
                         {
+                            title: "Selecciona una opcion",
                             rows: [
                                 {
                                     title: "Operar activos",
