@@ -1,26 +1,6 @@
 import { Router } from "express";
-// import axios from "axios";
 import WhatsappCloudAPI from "whatsappcloudapi_wrapper";
 const router = Router();
-
-const token = process.env.WHATSAPP_TOKEN;
-
-const Whatsapp = new WhatsappCloudAPI({
-    accessToken: process.env.WHATSAPP_TOKEN,
-    senderPhoneNumberId: process.env.senderPhoneNumberId,
-    WABA_ID: process.env.WHATSAPP_BUSINESS_ACCOUNT_ID,
-});
-
-const mandarWp = async () => {
-    try {
-        await Whatsapp.sendText({
-            message: "Hello world",
-            recipientPhone: process.env.wp,
-        });
-    } catch (error) {
-        console.log(error);
-    }
-};
 
 router.get("/webhook", (req, res) => {
     /**
@@ -48,34 +28,33 @@ router.get("/webhook", (req, res) => {
     }
 });
 
+const Whatsapp = new WhatsappCloudAPI({
+    accessToken: process.env.accessToken,
+    senderPhoneNumberId: process.env.senderPhoneNumberId,
+    WABA_ID: process.env.WABA_ID,
+});
+
 router.post("/webhook", async (req, res) => {
-    // Parse the request body from the POST
-    let body = req.body;
+    let data = Whatsapp.parseMessage(req.body);
 
-    // Check the Incoming webhook message
-    console.log(JSON.stringify(req.body, null, 2));
+    if (data?.isMessage) {
+        let incomingMessage = data.message;
+        let recipientPhone = incomingMessage.from.phone; // extract the phone number of the customer
+        let recipientName = incomingMessage.from.name; // extract the name of the customer
+        let typeOfMsg = incomingMessage.type; // extract the type of message
+        let message_id = incomingMessage.message_id; // extract the message id
 
-    //info on WhatsApp text message payload: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#text-messages
-    if (req.body.object) {
-        if (
-            req.body.entry &&
-            req.body.entry[0].changes &&
-            req.body.entry[0].changes[0] &&
-            req.body.entry[0].changes[0].value.messages &&
-            req.body.entry[0].changes[0].value.messages[0]
-        ) {
-            let phone_number_id =
-                req.body.entry[0].changes[0].value.metadata.phone_number_id;
-            let from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
-            let msg_body =
-                req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
-
-            mandarWp();
+        if (typeOfMsg === "simple_button_message") {
+            let button_id = incomingMessage.button_reply.id;
+            if (button_id === "book_appointment") {
+                // The customer clicked on a simple button whose id is 'book_appointment'.
+                // You can respond to them with an outbound action eg, a text message
+                await Whatsapp.sendText({
+                    message: `Hello customer, You clicked on the 'book appointment' button`,
+                    recipientPhone: recipientPhone,
+                });
+            }
         }
-        res.sendStatus(200);
-    } else {
-        // Return a '404 Not Found' if event is not from a WhatsApp API
-        res.sendStatus(404);
     }
 });
 
