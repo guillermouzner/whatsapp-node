@@ -198,7 +198,7 @@ router.post("/webhook", async (req, res) => {
                             {
                                 phone: "543814987351",
                                 type: "Cel",
-                                //wa_id: "16505551234", // optional
+                                wa_id: "543814987351", // optional
                             },
                             // {
                             //     phone: "+1 (650) 555-1234",
