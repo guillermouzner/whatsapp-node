@@ -47,28 +47,10 @@ router.post("/webhook", async (req, res) => {
             // let text = incomingMessage.text.body;
             // let text = incomingMessage.button_reply.id;
             console.log(recipientPhone, recipientName, typeOfMsg, message_id);
-            // if (typeOfMsg === "text_message") {
-            //     // let button_id = incomingMessage.button_reply.id;
-            //     // if (button_id === "book_appointment") {
-            //     //     // The customer clicked on a simple button whose id is 'book_appointment'.
-            //     //     // You can respond to them with an outbound action eg, a text message
 
-            //     // }
-            //     await Whatsapp.sendText({
-            //         message: `Hello customer, You clicked on the 'book appointment' button`,
-            //         recipientPhone: recipientPhone,
-            //     });
-            // }
             await Whatsapp.markMessageAsRead({
                 message_id: message_id,
             });
-
-            // if (typeOfMsg === "text_message") {
-            // await Whatsapp.sendText({
-            //         message: text,
-            //         recipientPhone: 543814987351,
-            //     });
-            // }
 
             if (typeOfMsg === "text_message") {
                 let theTextMessage = incomingMessage.text.body;
@@ -233,6 +215,10 @@ router.post("/webhook", async (req, res) => {
                 });
             }
         }
+        if (!data?.isMessage) {
+            console.log("VAMO KENIAAAAAAAAAAAA");
+        }
+
         res.sendStatus(200);
     } catch (error) {
         console.log(error);
