@@ -105,13 +105,31 @@ router.post("/webhook", async (req, res) => {
                     listOfSections: [
                         {
                             rows: [
-                                { title: "Operar activos" },
-                                { title: "Operar Dolar MEP" },
-                                { title: "Transferir a Banco" },
-                                { title: "Convertir Cable-Mep" },
-                                { title: "Abrir cuenta Cocos" },
-                                { title: "Consultar" },
-                                { title: "Cerrar cuenta" },
+                                {
+                                    title: "Operar activos",
+                                    id: "operar_activos",
+                                },
+                                {
+                                    title: "Operar Dolar MEP",
+                                    id: "Operar_Dolar_MEP",
+                                },
+                                {
+                                    title: "Transferir a Banco",
+                                    id: "Transferir_a_Banco",
+                                },
+                                {
+                                    title: "Convertir Cable-Mep",
+                                    id: "Convertir_Cable-Mep",
+                                },
+                                {
+                                    title: "Abrir cuenta Cocos",
+                                    id: "Abrir_cuenta_Cocos",
+                                },
+                                { title: "Consultar", id: "consultar" },
+                                {
+                                    title: "Cerrar cuenta",
+                                    id: "cerrar_cuenta",
+                                },
                             ],
                         },
                         // {
