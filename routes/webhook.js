@@ -44,8 +44,14 @@ router.post("/webhook", async (req, res) => {
             let recipientName = incomingMessage.from.name; // extract the name of the customer
             let typeOfMsg = incomingMessage.type; // extract the type of message
             let message_id = incomingMessage.message_id; // extract the message id
-
-            console.log(recipientPhone, recipientName, typeOfMsg, message_id);
+            let text = incomingMessage.text.body;
+            console.log(
+                recipientPhone,
+                recipientName,
+                typeOfMsg,
+                message_id,
+                text
+            );
             // if (typeOfMsg === "text_message") {
             //     // let button_id = incomingMessage.button_reply.id;
             //     // if (button_id === "book_appointment") {
@@ -64,7 +70,7 @@ router.post("/webhook", async (req, res) => {
 
             if (typeOfMsg === "text_message") {
                 await Whatsapp.sendText({
-                    message: "hola culiao",
+                    message: text,
                     recipientPhone: 543814987351,
                 });
             }
