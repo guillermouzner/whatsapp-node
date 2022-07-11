@@ -107,27 +107,37 @@ router.post("/webhook", async (req, res) => {
                             rows: [
                                 {
                                     title: "Operar activos",
+                                    description: "",
                                     id: "operar_activos",
                                 },
                                 {
                                     title: "Operar Dolar MEP",
+                                    description: "",
                                     id: "Operar_Dolar_MEP",
                                 },
                                 {
                                     title: "Transferir a Banco",
+                                    description: "",
                                     id: "Transferir_a_Banco",
                                 },
                                 {
                                     title: "Convertir Cable-Mep",
+                                    description: "",
                                     id: "Convertir_Cable-Mep",
                                 },
                                 {
                                     title: "Abrir cuenta Cocos",
+                                    description: "",
                                     id: "Abrir_cuenta_Cocos",
                                 },
-                                { title: "Consultar", id: "consultar" },
+                                {
+                                    title: "Consultar",
+                                    description: "",
+                                    id: "consultar",
+                                },
                                 {
                                     title: "Cerrar cuenta",
+                                    description: "",
                                     id: "cerrar_cuenta",
                                 },
                             ],
