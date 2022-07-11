@@ -44,14 +44,8 @@ router.post("/webhook", async (req, res) => {
             let recipientName = incomingMessage.from.name; // extract the name of the customer
             let typeOfMsg = incomingMessage.type; // extract the type of message
             let message_id = incomingMessage.message_id; // extract the message id
-            let text = incomingMessage.text.body;
-            console.log(
-                recipientPhone,
-                recipientName,
-                typeOfMsg,
-                message_id,
-                text
-            );
+            // let text = incomingMessage.text.body;
+            console.log(recipientPhone, recipientName, typeOfMsg, message_id);
             // if (typeOfMsg === "text_message") {
             //     // let button_id = incomingMessage.button_reply.id;
             //     // if (button_id === "book_appointment") {
@@ -69,32 +63,32 @@ router.post("/webhook", async (req, res) => {
             });
 
             // if (typeOfMsg === "text_message") {
-            //     await Whatsapp.sendText({
+            // await Whatsapp.sendText({
             //         message: text,
             //         recipientPhone: 543814987351,
             //     });
             // }
 
-            if (typeOfMsg === "text_message") {
-                await Whatsapp.sendSimpleButtons({
-                    recipientPhone: 543814987351,
-                    message: `How may I help you today`,
-                    listOfButtons: [
-                        {
-                            title: "See some products",
-                            id: "see_categories",
-                        },
-                        {
-                            title: "Send my invoice",
-                            id: "print_invoice",
-                        },
-                        {
-                            title: "Talk to a human",
-                            id: "talk_to_human",
-                        },
-                    ],
-                });
-            }
+            // if (typeOfMsg === "text_message") {
+            //     await Whatsapp.sendSimpleButtons({
+            //         recipientPhone: 543814987351,
+            //         message: `How may I help you today`,
+            //         listOfButtons: [
+            //             {
+            //                 title: "See some products",
+            //                 id: "see_categories",
+            //             },
+            //             {
+            //                 title: "Send my invoice",
+            //                 id: "print_invoice",
+            //             },
+            //             {
+            //                 title: "Talk to a human",
+            //                 id: "talk_to_human",
+            //             },
+            //         ],
+            //     });
+            // }
         }
         res.sendStatus(200);
     } catch (error) {
