@@ -58,6 +58,13 @@ router.post("/webhook", async (req, res) => {
             //         recipientPhone: recipientPhone,
             //     });
             // }
+            if (typeOfMsg === "text_message") {
+                console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                await Whatsapp.sendText({
+                    message: "hola culiao",
+                    recipientPhone: recipientPhone,
+                });
+            }
         }
         res.sendStatus(200);
     } catch (error) {
