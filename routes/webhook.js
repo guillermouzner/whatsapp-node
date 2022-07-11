@@ -144,78 +144,61 @@ router.post("/webhook", async (req, res) => {
             }
 
             if (
-                typeOfMsg === "radio_button_message" &&
-                incomingMessage.list_reply.description === "1"
+                typeOfMsg === "simple_button_message" &&
+                incomingMessage.button_reply.id === "talk_to_human"
             ) {
                 await Whatsapp.sendContact({
                     recipientPhone: 543814987351,
                     contact_profile: {
-                        // addresses: [
-                        //     {
-                        //         street: "1 Hacker Way",
-                        //         city: "Menlo Park",
-                        //         state: "CA",
-                        //         zip: "94025",
-                        //         country: "United States",
-                        //         country_code: "us",
-                        //         type: "HOME",
-                        //     },
-                        //     {
-                        //         street: "200 Jefferson Dr",
-                        //         city: "Menlo Park",
-                        //         state: "CA",
-                        //         zip: "94025",
-                        //         country: "United States",
-                        //         country_code: "us",
-                        //         type: "WORK",
-                        //     },
-                        // ],
-                        // birthday: "2002-02-14",
                         emails: [
                             {
                                 email: "guillermouz16@gmail.com",
                                 type: "Gmail",
                             },
-                            // {
-                            //     email: "test@whatsapp.com",
-                            //     type: "HOME",
-                            // },
                         ],
                         name: {
                             formatted_name: "Guillermo Uzner",
                             first_name: "Guillermo",
                             last_name: "Uzner",
-                            // middle_name: "M.",
-                            // suffix: "Sr",
-                            // prefix: "Sw Engr",
                         },
-                        // org: {
-                        //     company: "WhatsApp",
-                        //     department: "Design",
-                        //     title: "Manager",
-                        // },
+
                         phones: [
                             {
                                 phone: "543814987351",
                                 type: "Cel",
                                 wa_id: "543814987351", // optional
                             },
-                            // {
-                            //     phone: "+1 (650) 555-1234",
-                            //     type: "WORK", // optional
-                            //     wa_id: "16505551234", // optional
-                            // },
                         ],
-                        // urls: [
-                        //     {
-                        //         url: "https://www.facebook.com",
-                        //         type: "WORK",
-                        //     },
-                        //     {
-                        //         url: "https://www.whatsapp.com",
-                        //         type: "HOME",
-                        //     },
-                        // ],
+                    },
+                });
+            }
+
+            if (
+                typeOfMsg === "radio_button_message" &&
+                incomingMessage.list_reply.description === "1"
+            ) {
+                await Whatsapp.sendContact({
+                    recipientPhone: 543814987351,
+                    contact_profile: {
+                        emails: [
+                            {
+                                email: "guillermouz16@gmail.com",
+                                type: "Gmail",
+                            },
+                        ],
+                        name: {
+                            formatted_name: "Guillermo Uzner",
+                            first_name: "Guillermo",
+                            last_name: "Uzner",
+                        },
+
+                        phones: [
+                            {
+                                phone: "543814987351",
+                                type: "Cel",
+                                wa_id: "543814987351", // optional
+                            },
+                        ],
                     },
                 });
             }
