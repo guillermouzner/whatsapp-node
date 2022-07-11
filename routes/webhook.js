@@ -11,12 +11,12 @@ const Whatsapp = new WhatsappCloudAPI({
     WABA_ID: process.env.WHATSAPP_BUSINESS_ACCOUNT_ID,
 });
 
-const mandarWp = async () => {
-    await Whatsapp.sendText({
-        message: "Hello world",
-        recipientPhone: process.env.wp,
-    });
-};
+// const mandarWp = async () => {
+//     await Whatsapp.sendText({
+//         message: "Hello world",
+//         recipientPhone: process.env.wp,
+//     });
+// };
 
 router.get("/webhook", (req, res) => {
     /**
@@ -44,7 +44,7 @@ router.get("/webhook", (req, res) => {
     }
 });
 
-router.post("/webhook", (req, res) => {
+router.post("/webhook", async (req, res) => {
     // Parse the request body from the POST
     let body = req.body;
 
@@ -65,12 +65,12 @@ router.post("/webhook", (req, res) => {
             let from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
             let msg_body =
                 req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
-            
+
             await Whatsapp.sendText({
                 message: "Hello world",
                 recipientPhone: from,
             });
-            }
+        }
         res.sendStatus(200);
     } else {
         // Return a '404 Not Found' if event is not from a WhatsApp API
