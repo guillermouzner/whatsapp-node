@@ -45,16 +45,17 @@ router.post("/webhook", async (req, res) => {
             let typeOfMsg = incomingMessage.type; // extract the type of message
             let message_id = incomingMessage.message_id; // extract the message id
 
-            if (typeOfMsg === "simple_button_message") {
-                let button_id = incomingMessage.button_reply.id;
-                if (button_id === "book_appointment") {
-                    // The customer clicked on a simple button whose id is 'book_appointment'.
-                    // You can respond to them with an outbound action eg, a text message
-                    await Whatsapp.sendText({
-                        message: `Hello customer, You clicked on the 'book appointment' button`,
-                        recipientPhone: recipientPhone,
-                    });
-                }
+            if (typeOfMsg === "text_message") {
+                // let button_id = incomingMessage.button_reply.id;
+                // if (button_id === "book_appointment") {
+                //     // The customer clicked on a simple button whose id is 'book_appointment'.
+                //     // You can respond to them with an outbound action eg, a text message
+
+                // }
+                await Whatsapp.sendText({
+                    message: `Hello customer, You clicked on the 'book appointment' button`,
+                    recipientPhone: recipientPhone,
+                });
             }
         }
         res.sendStatus(200);
