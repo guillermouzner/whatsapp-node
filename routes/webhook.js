@@ -62,7 +62,7 @@ router.post("/webhook", async (req, res) => {
                 console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
                 await Whatsapp.sendText({
                     message: "hola culiao",
-                    recipientPhone: recipientPhone,
+                    recipientPhone: 543814987351,
                 });
             }
         }
