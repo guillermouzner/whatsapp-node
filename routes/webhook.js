@@ -95,7 +95,8 @@ router.post("/webhook", async (req, res) => {
                     recipientPhone: 543814987351,
                     headerText: "¿En qué puedo ayudarte? 👇",
                     bodyText:
-                        "1. Operar Activos (Compra, Venta, Sucripciones a FCI) 💣\n2. Comprar/ Vender Dólar MEP\n3. Transferir fondos a mi banco (Nuevo)\n4. Convertir dólar CABLE en dólar MEP\n5. Abrir una cuenta en Cocos 🥥\n6. Hacer una consulta\n7. Cerrar mi cuenta en Cocos 🥥\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
+                        // "1. Operar Activos (Compra, Venta, Sucripciones a FCI) 💣\n2. Comprar/ Vender Dólar MEP\n3. Transferir fondos a mi banco (Nuevo)\n4. Convertir dólar CABLE en dólar MEP\n5. Abrir una cuenta en Cocos 🥥\n6. Hacer una consulta\n7. Cerrar mi cuenta en Cocos 🥥\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
+                        "1. Opcion 1 blabla bla\n 2. Opcion 2 blablabla\n 3. Opcion 3 blablabla",
                     footerText:
                         "Selecciona una de las opciones para continuar:",
                     listOfSections: [
@@ -103,40 +104,40 @@ router.post("/webhook", async (req, res) => {
                             title: "Selecciona una opcion",
                             rows: [
                                 {
-                                    title: "Operar activos",
+                                    title: "Opcion 1",
                                     description: "1",
                                     id: "operar_activos",
                                 },
                                 {
-                                    title: "Operar Dolar MEP",
+                                    title: "Opcion 2",
                                     description: "2",
                                     id: "Operar_Dolar_MEP",
                                 },
                                 {
-                                    title: "Transferir a Banco",
+                                    title: "Opcion 3",
                                     description: "3",
                                     id: "Transferir_a_Banco",
                                 },
-                                {
-                                    title: "Convertir Cable-Mep",
-                                    description: "4",
-                                    id: "Convertir_Cable-Mep",
-                                },
-                                {
-                                    title: "Abrir cuenta Cocos",
-                                    description: "5",
-                                    id: "Abrir_cuenta_Cocos",
-                                },
-                                {
-                                    title: "Consultar",
-                                    description: "6",
-                                    id: "consultar",
-                                },
-                                {
-                                    title: "Cerrar cuenta",
-                                    description: "7",
-                                    id: "cerrar_cuenta",
-                                },
+                                // {
+                                //     title: "Convertir Cable-Mep",
+                                //     description: "4",
+                                //     id: "Convertir_Cable-Mep",
+                                // },
+                                // {
+                                //     title: "Abrir cuenta Cocos",
+                                //     description: "5",
+                                //     id: "Abrir_cuenta_Cocos",
+                                // },
+                                // {
+                                //     title: "Consultar",
+                                //     description: "6",
+                                //     id: "consultar",
+                                // },
+                                // {
+                                //     title: "Cerrar cuenta",
+                                //     description: "7",
+                                //     id: "cerrar_cuenta",
+                                // },
                             ],
                         },
                     ],
