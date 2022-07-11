@@ -66,7 +66,7 @@ router.post("/webhook", (req, res) => {
                 url: `https://graph.facebook.com/v13.0/${phone_number_id}/messages`,
                 headers: {
                     "content-type": "application/json",
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer EAAKWn8YlQfoBACaohLQqi8gc9LaULkn6oc7Op7ZB3WJVs6AKQMrZB2a8OvyvYA4fmEsNUCZC6FpWaOv7gdHrXGeU7x1S8Cxxjill6sGq9Xtj4TaAO5fxvSKpvFg7ZAvQ8uff89coZBK1oA3Xk71lsYhtZAy7eH0i70l7QAEzENDZCP0NbHGiuaRMZB5q5jmAbbTXkhl8AHOdAI6xD3kWZBJb3`,
                 },
                 data: data,
             };
