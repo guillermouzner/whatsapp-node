@@ -97,85 +97,97 @@ router.post("/webhook", async (req, res) => {
             ) {
                 await Whatsapp.sendRadioButtons({
                     recipientPhone: 543814987351,
-                    headerText: "Black Friday Top 10 Products",
+                    headerText: "¿En qué puedo ayudarte? 👇",
                     bodyText:
-                        "Daggie has some great products lined up for you based on your previous shopping history.\nPlease select one of the products below.",
-                    footerText: "Approved by Daggie Blanqx",
+                        "1. Operar Activos (Compra, Venta, Sucripciones a FCI) 💣\n2. Comprar/ Vender Dólar MEP\n3. Transferir fondos a mi banco (Nuevo)\n4. Convertir dólar CABLE en dólar MEP\n5. Abrir una cuenta en Cocos 🥥\n6. Hacer una consulta\n7. Cerrar mi cuenta en Cocos 🥥\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
+                    footerText:
+                        "Selecciona una de las opciones para continuar:",
                     listOfSections: [
                         {
-                            title: "Top 3 Fashion",
                             rows: [
-                                {
-                                    title: "Black LVX T-Shirt",
-                                    description:
-                                        "KES 2999.00\nLVX is a warm cotton t-shirt",
-                                    id: "SKU12_black_lvx_tshirt",
-                                },
-                                {
-                                    title: "Purple hoodie",
-                                    description:
-                                        "KES 1999.00\nPurple hoodie with a Logrocket logo",
-                                    id: "SKU13_purple_hoodie",
-                                },
-                                {
-                                    title: "Air Jordan 1",
-                                    description:
-                                        "KES 10999.00\nWe move where others do not.Wanna fly?",
-                                    id: "SKU14_air_jordan_1",
-                                },
+                                { title: "Operar activos" },
+                                { title: "Operar Dolar MEP" },
+                                { title: "Transferir a Banco" },
+                                { title: "Convertir Cable-Mep" },
+                                { title: "Abrir cuenta Cocos" },
+                                { title: "Consultar" },
+                                { title: "Cerrar cuenta" },
                             ],
                         },
-                        {
-                            title: "Top 3 Gadgets",
-                            rows: [
-                                {
-                                    title: "Apple Watch",
-                                    description:
-                                        "KES 75999.00\nTime is finite, enjoy every second of it",
-                                    id: "SKU15_apple_watch",
-                                },
-                                {
-                                    title: "Surface Pro",
-                                    description: `KES 59999.00\nDon't just surf the web, surf the world`,
-                                    id: "SKU16_surface_pro",
-                                },
-                                {
-                                    title: "Xiaomi Beats Speaker",
-                                    description: `KES 45699\nIt is in how your heartbeats, the way Xiaomi Beats.`,
-                                    id: "SKU17_xiaomi_beats_speaker",
-                                },
-                            ],
-                        },
-                        {
-                            title: "Top 3 Kitchen",
-                            rows: [
-                                {
-                                    title: "Portable Hand Mixer",
-                                    description: `KES7899\nTempt thy sweetbuds by mixing your favorite food uniformly.`,
-                                    id: "SKU18_portable_hand_mixer",
-                                },
-                                {
-                                    title: "Non-stick waffle-maker",
-                                    description: `KES7899\nGreat Waffles are made with the best ingredients.`,
-                                    id: "SKU19_non_stick_waffle_maker",
-                                },
-                                {
-                                    title: "6-set Cooking Spoons",
-                                    description: `KES7899\nHold thy happiness right.`,
-                                    id: "SKU20_6_set_cooking_spoons",
-                                },
-                            ],
-                        },
-                        {
-                            title: "1 random pick",
-                            rows: [
-                                {
-                                    title: "Nivea Icy Soap",
-                                    description: `KES899\nStay hydrated and refreshed. Nourish your skin.`,
-                                    id: "SKU21_nivea_icy_soap",
-                                },
-                            ],
-                        },
+                        // {
+                        //     title: "Top 3 Fashion",
+                        //     rows: [
+                        //         {
+                        //             title: "Black LVX T-Shirt",
+                        //             description:
+                        //                 "KES 2999.00\nLVX is a warm cotton t-shirt",
+                        //             id: "SKU12_black_lvx_tshirt",
+                        //         },
+                        //         {
+                        //             title: "Purple hoodie",
+                        //             description:
+                        //                 "KES 1999.00\nPurple hoodie with a Logrocket logo",
+                        //             id: "SKU13_purple_hoodie",
+                        //         },
+                        //         {
+                        //             title: "Air Jordan 1",
+                        //             description:
+                        //                 "KES 10999.00\nWe move where others do not.Wanna fly?",
+                        //             id: "SKU14_air_jordan_1",
+                        //         },
+                        //     ],
+                        // },
+                        // {
+                        //     title: "Top 3 Gadgets",
+                        //     rows: [
+                        //         {
+                        //             title: "Apple Watch",
+                        //             description:
+                        //                 "KES 75999.00\nTime is finite, enjoy every second of it",
+                        //             id: "SKU15_apple_watch",
+                        //         },
+                        //         {
+                        //             title: "Surface Pro",
+                        //             description: `KES 59999.00\nDon't just surf the web, surf the world`,
+                        //             id: "SKU16_surface_pro",
+                        //         },
+                        //         {
+                        //             title: "Xiaomi Beats Speaker",
+                        //             description: `KES 45699\nIt is in how your heartbeats, the way Xiaomi Beats.`,
+                        //             id: "SKU17_xiaomi_beats_speaker",
+                        //         },
+                        //     ],
+                        // },
+                        // {
+                        //     title: "Top 3 Kitchen",
+                        //     rows: [
+                        //         {
+                        //             title: "Portable Hand Mixer",
+                        //             description: `KES7899\nTempt thy sweetbuds by mixing your favorite food uniformly.`,
+                        //             id: "SKU18_portable_hand_mixer",
+                        //         },
+                        //         {
+                        //             title: "Non-stick waffle-maker",
+                        //             description: `KES7899\nGreat Waffles are made with the best ingredients.`,
+                        //             id: "SKU19_non_stick_waffle_maker",
+                        //         },
+                        //         {
+                        //             title: "6-set Cooking Spoons",
+                        //             description: `KES7899\nHold thy happiness right.`,
+                        //             id: "SKU20_6_set_cooking_spoons",
+                        //         },
+                        //     ],
+                        // },
+                        // {
+                        //     title: "1 random pick",
+                        //     rows: [
+                        //         {
+                        //             title: "Nivea Icy Soap",
+                        //             description: `KES899\nStay hydrated and refreshed. Nourish your skin.`,
+                        //             id: "SKU21_nivea_icy_soap",
+                        //         },
+                        //     ],
+                        // },
                     ],
                 });
             }
