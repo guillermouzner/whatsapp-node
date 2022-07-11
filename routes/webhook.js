@@ -71,14 +71,14 @@ router.post("/webhook", async (req, res) => {
             // }
 
             if (typeOfMsg === "text_message") {
-                let theTextMessage = incomingMessage.text.body;
+                // let theTextMessage = incomingMessage.text.body;
 
-                if (theTextMessage == "1") {
-                    await Whatsapp.sendText({
-                        message: `The customer said: ${theTextMessage}`,
-                        recipientPhone: 543814987351,
-                    });
-                }
+                // if (theTextMessage == "1") {
+                //     await Whatsapp.sendText({
+                //         message: `The customer said: ${theTextMessage}`,
+                //         recipientPhone: 543814987351,
+                //     });
+                // }
                 await Whatsapp.sendSimpleButtons({
                     recipientPhone: 543814987351,
                     message: `Hola soy Santi, tu asistente virtual en Santander! 🤖`,
