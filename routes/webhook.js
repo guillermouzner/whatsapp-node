@@ -99,7 +99,8 @@ router.post("/webhook", async (req, res) => {
                             ],
                         },
                     });
-                } else {
+                }
+                if (theTextMessage === "hola" || theTextMessage === "Hola") {
                     await Whatsapp.sendSimpleButtons({
                         recipientPhone: 543814987351,
                         message: `Hola soy Santi, tu asistente virtual en Santander! 🤖`,
