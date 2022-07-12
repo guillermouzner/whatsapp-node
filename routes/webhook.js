@@ -116,7 +116,11 @@ router.post("/webhook", async (req, res) => {
                         ],
                     });
                 }
-                if (body !== "Hola" && body !== "hola" && isNaN(body)) {
+                if (
+                    theTextMessage !== "Hola" &&
+                    theTextMessage !== "hola" &&
+                    isNaN(theTextMessage)
+                ) {
                     await Whatsapp.sendText({
                         message:
                             "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\n Hola",
