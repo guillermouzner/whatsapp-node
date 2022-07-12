@@ -35,7 +35,7 @@ const Whatsapp = new WhatsappCloudAPI({
 });
 
 let listaDeSesiones = [];
-
+// let datos = {}
 router.post("/webhook", async (req, res) => {
     try {
         let data = Whatsapp.parseMessage(req.body);
@@ -62,6 +62,7 @@ router.post("/webhook", async (req, res) => {
             // let text = incomingMessage.text.body;
             // let text = incomingMessage.button_reply.id;
             console.log(recipientPhone, recipientName, typeOfMsg, message_id);
+            console.log(datos);
             if (incomingMessage?.context)
                 console.log("vengo de un mensaje reply_button");
             else console.log("soy solo un texto");
