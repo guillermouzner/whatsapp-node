@@ -74,7 +74,7 @@ router.post("/webhook", async (req, res) => {
             if (typeOfMsg === "text_message") {
                 let theTextMessage = incomingMessage.text.body;
 
-                if (theTextMessage == "1") {
+                if (theTextMessage == "80") {
                     await Whatsapp.sendContact({
                         recipientPhone: 543814987351,
                         contact_profile: {
@@ -206,8 +206,11 @@ router.post("/webhook", async (req, res) => {
             }
 
             if (
-                typeOfMsg === "radio_button_message" &&
-                incomingMessage.list_reply.description === "1"
+                (typeOfMsg === "radio_button_message" &&
+                    incomingMessage.list_reply.description === "1") ||
+                (typeOfMsg === "text_message" &&
+                    recipientPhone === datos.numCliente &&
+                    incomingMessage.text.body === "1")
             ) {
                 await Whatsapp.sendContact({
                     recipientPhone: 543814987351,
