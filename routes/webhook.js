@@ -35,6 +35,7 @@ const Whatsapp = new WhatsappCloudAPI({
 });
 
 router.post("/webhook", async (req, res) => {
+    let listaDeSesiones = [];
     try {
         let data = Whatsapp.parseMessage(req.body);
         console.log(data);
@@ -42,6 +43,7 @@ router.post("/webhook", async (req, res) => {
         if (!data?.isMessage) {
             console.log("VAMO KENIAAAAAAAAAAAA");
             console.log(data.notificationMessage.id);
+            console.log(listaDeSesiones);
         }
 
         if (data?.isMessage) {
@@ -111,6 +113,48 @@ router.post("/webhook", async (req, res) => {
                 typeOfMsg === "simple_button_message" &&
                 incomingMessage.button_reply.id === "see_categories"
             ) {
+                listaDeSesiones = [
+                    {
+                        title: "Selecciona una opcion",
+                        rows: [
+                            {
+                                title: "operar activos",
+                                description: "1",
+                                id: "operar_activos",
+                            },
+                            {
+                                title: "Operar Dolar MEP",
+                                description: "2",
+                                id: "Operar_Dolar_MEP",
+                            },
+                            {
+                                title: "Transferir a Banco",
+                                description: "3",
+                                id: "Transferir_a_Banco",
+                            },
+                            {
+                                title: "Convertir Cable-Mep",
+                                description: "4",
+                                id: "Convertir_Cable-Mep",
+                            },
+                            {
+                                title: "Abrir cuenta Cocos",
+                                description: "5",
+                                id: "Abrir_cuenta_Cocos",
+                            },
+                            {
+                                title: "Consultar",
+                                description: "6",
+                                id: "consultar",
+                            },
+                            {
+                                title: "Cerrar cuenta",
+                                description: "7",
+                                id: "cerrar_cuenta",
+                            },
+                        ],
+                    },
+                ];
                 await Whatsapp.sendRadioButtons({
                     recipientPhone: 543814987351,
                     headerText: "¿En qué puedo ayudarte? 👇",
@@ -119,48 +163,7 @@ router.post("/webhook", async (req, res) => {
 
                     footerText:
                         "Selecciona una de las opciones para continuar:",
-                    listOfSections: [
-                        {
-                            title: "Selecciona una opcion",
-                            rows: [
-                                {
-                                    title: "operar activos",
-                                    description: "1",
-                                    id: "operar_activos",
-                                },
-                                {
-                                    title: "Operar Dolar MEP",
-                                    description: "2",
-                                    id: "Operar_Dolar_MEP",
-                                },
-                                {
-                                    title: "Transferir a Banco",
-                                    description: "3",
-                                    id: "Transferir_a_Banco",
-                                },
-                                {
-                                    title: "Convertir Cable-Mep",
-                                    description: "4",
-                                    id: "Convertir_Cable-Mep",
-                                },
-                                {
-                                    title: "Abrir cuenta Cocos",
-                                    description: "5",
-                                    id: "Abrir_cuenta_Cocos",
-                                },
-                                {
-                                    title: "Consultar",
-                                    description: "6",
-                                    id: "consultar",
-                                },
-                                {
-                                    title: "Cerrar cuenta",
-                                    description: "7",
-                                    id: "cerrar_cuenta",
-                                },
-                            ],
-                        },
-                    ],
+                    listOfSections: listaDeSesiones,
                 });
             }
 
