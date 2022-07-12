@@ -54,8 +54,8 @@ router.post("/webhook", async (req, res) => {
             // let text = incomingMessage.button_reply.id;
             console.log(recipientPhone, recipientName, typeOfMsg, message_id);
             if (incomingMessage?.context)
-                print("vengo de un mensaje reply_button");
-            else print("soy solo un texto");
+                console.log("vengo de un mensaje reply_button");
+            else console.log("soy solo un texto");
 
             await Whatsapp.markMessageAsRead({
                 message_id: message_id,
