@@ -35,7 +35,6 @@ const Whatsapp = new WhatsappCloudAPI({
 });
 
 router.post("/webhook", async (req, res) => {
-    let listaDeSesiones = [];
     try {
         let data = Whatsapp.parseMessage(req.body);
         console.log(data);
@@ -113,7 +112,7 @@ router.post("/webhook", async (req, res) => {
                 typeOfMsg === "simple_button_message" &&
                 incomingMessage.button_reply.id === "see_categories"
             ) {
-                listaDeSesiones = [
+                let listaDeSesiones = [
                     {
                         title: "Selecciona una opcion",
                         rows: [
