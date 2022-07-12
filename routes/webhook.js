@@ -168,8 +168,8 @@ router.post("/webhook", async (req, res) => {
                     recipientPhone: 543814987351,
                     headerText: "¿En qué puedo ayudarte? 👇",
                     bodyText:
-                        "1. Operar Activos (Compra, Venta, Sucripciones a FCI) 💣\n2. Comprar/ Vender Dólar MEP\n3. Transferir fondos a mi banco (Nuevo)\n4. Convertir dólar CABLE en dólar MEP\n5. Abrir una cuenta en Cocos 🥥\n6. Hacer una consulta\n7. Cerrar mi cuenta en Cocos 🥥\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
-
+                        "1. Mostrar contacto de Guillermo💣\n2. Comprar/ Vender Dólar MEP\n3. Transferir fondos a mi banco (Nuevo)\n4. Convertir dólar CABLE en dólar MEP\n5. Abrir una cuenta en Cocos 🥥\n6. Hacer una consulta\n7. Cerrar mi cuenta en Cocos 🥥\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
+                    //Operar Activos (Compra, Venta, Sucripciones a FCI)
                     footerText:
                         "Selecciona una de las opciones para continuar:",
                     listOfSections: listaDeSesiones,
