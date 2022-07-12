@@ -119,8 +119,7 @@ router.post("/webhook", async (req, res) => {
                 }
                 if (
                     theTextMessage !== "Hola" ||
-                    theTextMessage !== "hola" ||
-                    !isNaN(theTextMessage)
+                    (theTextMessage !== "hola" && !isNaN(theTextMessage))
                 ) {
                     await Whatsapp.sendText({
                         message:
