@@ -44,7 +44,6 @@ router.post("/webhook", async (req, res) => {
         if (!data?.isMessage) {
             console.log("VAMO KENIAAAAAAAAAAAA");
             console.log(data.notificationMessage.id);
-            console.log(data.notificationMessage.conversation.origin);
             console.log(listaDeSesiones);
         }
 
