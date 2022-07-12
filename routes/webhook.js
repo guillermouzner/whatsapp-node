@@ -35,7 +35,7 @@ const Whatsapp = new WhatsappCloudAPI({
 });
 
 let listaDeSesiones = [];
-let datos = {};
+let datos = [];
 router.post("/webhook", async (req, res) => {
     try {
         let data = Whatsapp.parseMessage(req.body);
@@ -46,10 +46,10 @@ router.post("/webhook", async (req, res) => {
             console.log(data.notificationMessage.id);
             // console.log(data.notificationMessage.recipient_id);
             // console.log(listaDeSesiones);
-            datos = {
-                numCliente: data.notificationMessage.recipient_id,
-                listaDeSesiones,
-            };
+            // datos = {
+            //     numCliente: data.notificationMessage.recipient_id,
+            //     listaDeSesiones,
+            // };
             console.log(datos);
         }
 
@@ -74,32 +74,33 @@ router.post("/webhook", async (req, res) => {
             if (typeOfMsg === "text_message") {
                 let theTextMessage = incomingMessage.text.body;
 
-                if (theTextMessage == "80") {
-                    await Whatsapp.sendContact({
-                        recipientPhone: 543814987351,
-                        contact_profile: {
-                            emails: [
-                                {
-                                    email: "guillermouz16@gmail.com",
-                                    type: "Gmail",
-                                },
-                            ],
-                            name: {
-                                formatted_name: "Guillermo Uzner",
-                                first_name: "Guillermo",
-                                last_name: "Uzner",
-                            },
+                // if (theTextMessage == "80") {
+                //     await Whatsapp.sendContact({
+                //         recipientPhone: 543814987351,
+                //         contact_profile: {
+                //             emails: [
+                //                 {
+                //                     email: "guillermouz16@gmail.com",
+                //                     type: "Gmail",
+                //                 },
+                //             ],
+                //             name: {
+                //                 formatted_name: "Guillermo Uzner",
+                //                 first_name: "Guillermo",
+                //                 last_name: "Uzner",
+                //             },
 
-                            phones: [
-                                {
-                                    phone: "543814987351",
-                                    type: "Cel",
-                                    wa_id: "543814987351", // optional
-                                },
-                            ],
-                        },
-                    });
-                }
+                //             phones: [
+                //                 {
+                //                     phone: "543814987351",
+                //                     type: "Cel",
+                //                     wa_id: "543814987351", // optional
+                //                 },
+                //             ],
+                //         },
+                //     });
+                // }
+
                 if (theTextMessage === "hola" || theTextMessage === "Hola") {
                     await Whatsapp.sendSimpleButtons({
                         recipientPhone: 543814987351,
@@ -185,6 +186,7 @@ router.post("/webhook", async (req, res) => {
                         "Selecciona una de las opciones para continuar:",
                     listOfSections: listaDeSesiones,
                 });
+                datos.push({ recipientPhone, listaDeSesiones });
             }
 
             if (
@@ -218,11 +220,11 @@ router.post("/webhook", async (req, res) => {
             }
 
             if (
-                (typeOfMsg === "radio_button_message" &&
-                    incomingMessage.list_reply.description === "1") ||
-                (typeOfMsg === "text_message" &&
-                    recipientPhone === datos.numCliente &&
-                    incomingMessage.text.body === "1")
+                typeOfMsg === "radio_button_message" &&
+                incomingMessage.list_reply.description === "1"
+                // (typeOfMsg === "text_message" &&
+                //     recipientPhone === datos.numCliente &&
+                //     incomingMessage.text.body === "1")
             ) {
                 await Whatsapp.sendContact({
                     recipientPhone: 543814987351,
