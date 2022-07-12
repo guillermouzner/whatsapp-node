@@ -34,6 +34,8 @@ const Whatsapp = new WhatsappCloudAPI({
     WABA_ID: process.env.WABA_ID,
 });
 
+let listaDeSesiones = [];
+
 router.post("/webhook", async (req, res) => {
     try {
         let data = Whatsapp.parseMessage(req.body);
@@ -112,7 +114,7 @@ router.post("/webhook", async (req, res) => {
                 typeOfMsg === "simple_button_message" &&
                 incomingMessage.button_reply.id === "see_categories"
             ) {
-                let listaDeSesiones = [
+                listaDeSesiones = [
                     {
                         title: "Selecciona una opcion",
                         rows: [
