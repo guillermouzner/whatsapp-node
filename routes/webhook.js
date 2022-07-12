@@ -116,6 +116,17 @@ router.post("/webhook", async (req, res) => {
                         ],
                     });
                 }
+                if (
+                    !Number(theTextMessage) ||
+                    theTextMessage != "hola" ||
+                    theTextMessage != "Hola"
+                ) {
+                    await Whatsapp.sendText({
+                        message:
+                            "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\n Hola",
+                        recipientPhone: 543814987351,
+                    });
+                }
             }
 
             if (
