@@ -38,6 +38,12 @@ router.post("/webhook", async (req, res) => {
     try {
         let data = Whatsapp.parseMessage(req.body);
         console.log(data);
+
+        if (!data?.isMessage) {
+            console.log("VAMO KENIAAAAAAAAAAAA");
+            console.log(data.notificationMessage.id);
+        }
+
         if (data?.isMessage) {
             let incomingMessage = data.message;
             let recipientPhone = incomingMessage.from.phone; // extract the phone number of the customer
@@ -47,6 +53,9 @@ router.post("/webhook", async (req, res) => {
             // let text = incomingMessage.text.body;
             // let text = incomingMessage.button_reply.id;
             console.log(recipientPhone, recipientName, typeOfMsg, message_id);
+            if (incomingMessage?.context)
+                print("vengo de un mensaje reply_button");
+            else print("soy solo un texto");
 
             await Whatsapp.markMessageAsRead({
                 message_id: message_id,
@@ -214,10 +223,6 @@ router.post("/webhook", async (req, res) => {
                     },
                 });
             }
-        }
-        if (!data?.isMessage) {
-            console.log("VAMO KENIAAAAAAAAAAAA");
-            console.log(data.notificationMessage.id);
         }
 
         res.sendStatus(200);
