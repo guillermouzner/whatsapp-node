@@ -35,7 +35,7 @@ const Whatsapp = new WhatsappCloudAPI({
 });
 
 let listaDeSesiones = [];
-// let datos = {}
+let datos = {};
 router.post("/webhook", async (req, res) => {
     try {
         let data = Whatsapp.parseMessage(req.body);
@@ -46,7 +46,7 @@ router.post("/webhook", async (req, res) => {
             console.log(data.notificationMessage.id);
             // console.log(data.notificationMessage.recipient_id);
             // console.log(listaDeSesiones);
-            let datos = {
+            datos = {
                 numCliente: data.notificationMessage.recipient_id,
                 listaDeSesiones,
             };
