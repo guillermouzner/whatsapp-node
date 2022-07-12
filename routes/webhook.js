@@ -118,8 +118,8 @@ router.post("/webhook", async (req, res) => {
                 }
                 if (
                     !Number(theTextMessage) ||
-                    theTextMessage != "hola" ||
-                    theTextMessage != "Hola"
+                    theTextMessage !== "hola" ||
+                    theTextMessage !== "Hola"
                 ) {
                     await Whatsapp.sendText({
                         message:
