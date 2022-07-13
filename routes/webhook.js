@@ -44,12 +44,6 @@ router.post("/webhook", async (req, res) => {
         if (!data?.isMessage) {
             console.log("VAMO KENIAAAAAAAAAAAA");
             console.log(data.notificationMessage.id);
-            // console.log(data.notificationMessage.recipient_id);
-            // console.log(listaDeSesiones);
-            // datos = {
-            //     numCliente: data.notificationMessage.recipient_id,
-            //     listaDeSesiones,
-            // };
             console.log(datos);
         }
 
@@ -71,36 +65,6 @@ router.post("/webhook", async (req, res) => {
                 message_id: message_id,
             });
 
-            // if (typeOfMsg === "text_message") {
-            //     let theTextMessage = incomingMessage.text.body;
-
-            //     if (theTextMessage === "hola" || theTextMessage === "Hola") {
-            //         await Whatsapp.sendSimpleButtons({
-            //             recipientPhone: 543814987351,
-            //             message: `Hola soy Santi, tu asistente virtual en Santander! 🤖`,
-            //             listOfButtons: [
-            //                 {
-            //                     title: "Mostrar Opciones",
-            //                     id: "see_categories",
-            //                 },
-            //                 {
-            //                     title: "Hablar con un humano",
-            //                     id: "talk_to_human",
-            //                 },
-            //             ],
-            //         });
-            //     }
-            //     if (
-            //         (theTextMessage !== "Hola" && theTextMessage !== "hola") ||
-            //         Number(theTextMessage) > 10
-            //     ) {
-            //         await Whatsapp.sendText({
-            //             message:
-            //                 "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
-            //             recipientPhone: 543814987351,
-            //         });
-            //     }
-            // }
             if (typeOfMsg === "text_message") {
                 let theTextMessage = incomingMessage.text.body;
                 if (!isNaN(theTextMessage)) {
