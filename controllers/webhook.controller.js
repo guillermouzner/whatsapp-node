@@ -138,7 +138,7 @@ export const sendReceiveMessages = async (req, res) => {
                         datos.push({
                             recipientPhone,
                             listaDeSesiones,
-                            id: "menuInicio",
+                            id: "menuinicio",
                         });
                     }
                 }
