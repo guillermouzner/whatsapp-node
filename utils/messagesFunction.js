@@ -1,10 +1,8 @@
 import { Whatsapp } from "../utils/whatsappCloud.js";
+import { listaDeSesiones, datos } from "../controllers/webhook.controller.js";
 
-let listaDeSesiones = [];
-let datos = [];
-
-export const textMessage = async (_req, _res) => {
-    let theTextMessage = incomingMessage.text.body;
+export const textMessage = async (incomingMessage) => {
+    let theTextMessage = incomingMessage;
     if (!isNaN(theTextMessage)) {
         if (theTextMessage > 10) {
             await Whatsapp.sendText({

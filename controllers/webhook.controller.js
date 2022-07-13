@@ -26,7 +26,8 @@ export const verifyToken = (req, res) => {
     }
 };
 
-let datos = [];
+export let listaDeSesiones = [];
+export let datos = [];
 
 export const sendReceiveMessages = async (req, res) => {
     try {
