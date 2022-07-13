@@ -79,7 +79,7 @@ export const sendReceiveMessages = async (req, res) => {
                     }
                 } else {
                     await Whatsapp.sendText({
-                        message: `Hola soy Santi, tu asistente virtual en Santander! 🤖`,
+                        message: `🤖 Hola soy Santi, tu asistente virtual en Santander♨️`,
                         recipientPhone: 543814987351,
                     });
                     {
