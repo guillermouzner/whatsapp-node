@@ -1,15 +1,9 @@
 import { Router } from "express";
-import WhatsappCloudAPI from "whatsappcloudapi_wrapper";
+import { Whatsapp } from "../utils/whatsappCloud.js";
 import { verifyToken } from "../controllers/webhook.controller.js";
 const router = Router();
 
 router.get("/webhook", verifyToken);
-
-const Whatsapp = new WhatsappCloudAPI({
-    accessToken: process.env.accessToken,
-    senderPhoneNumberId: process.env.senderPhoneNumberId,
-    WABA_ID: process.env.WABA_ID,
-});
 
 let listaDeSesiones = [];
 let datos = [];
