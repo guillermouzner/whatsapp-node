@@ -8,7 +8,7 @@ export const prueba = (req, res, next) => {
         if (!data?.isMessage) {
             console.log("VAMO KENIAAAAAAAAAAAA");
             console.log(data.notificationMessage.id);
-            console.log(datos);
+            // console.log(datos);
         }
 
         if (data?.isMessage) {
@@ -20,7 +20,7 @@ export const prueba = (req, res, next) => {
             // let text = incomingMessage.text.body;
             // let text = incomingMessage.button_reply.id;
             console.log(recipientPhone, recipientName, typeOfMsg, message_id);
-            console.log(datos);
+            // console.log(datos);
         }
         next();
     } catch (error) {
