@@ -1,3 +1,5 @@
+import { Whatsapp } from "../utils/whatsappCloud.js";
+
 export const prueba = (req, res, next) => {
     try {
         let data = Whatsapp.parseMessage(req.body);
