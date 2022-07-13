@@ -101,6 +101,10 @@ router.post("/webhook", async (req, res) => {
                     //         },
                     //     ],
                     // });
+                    await Whatsapp.sendText({
+                        message: `Hola soy Santi, tu asistente virtual en Santander! 🤖`,
+                        recipientPhone: 543814987351,
+                    });
                     {
                         listaDeSesiones = [
                             {
