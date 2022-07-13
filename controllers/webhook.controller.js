@@ -25,7 +25,7 @@ export const verifyToken = (req, res) => {
         }
     }
 };
-let listaDeSesiones = [];
+
 let datos = [];
 
 export const sendReceiveMessages = async (req, res) => {

@@ -1,5 +1,7 @@
 import { Whatsapp } from "../utils/whatsappCloud.js";
 
+let listaDeSesiones = [];
+
 export const textMessage = async (incomingMessage) => {
     let theTextMessage = incomingMessage;
     if (!isNaN(theTextMessage)) {
