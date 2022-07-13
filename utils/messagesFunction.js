@@ -1,5 +1,7 @@
 import { Whatsapp } from "../utils/whatsappCloud.js";
-import { listaDeSesiones, datos } from "../controllers/webhook.controller.js";
+
+export let listaDeSesiones = [];
+export let datos = [];
 
 export const textMessage = async (incomingMessage) => {
     let theTextMessage = incomingMessage;
