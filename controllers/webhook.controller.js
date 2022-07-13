@@ -57,7 +57,7 @@ export const sendReceiveMessages = async (req, res) => {
             });
 
             if (typeOfMsg === "text_message") {
-                textMessage();
+                textMessage;
                 // let theTextMessage = incomingMessage.text.body;
                 // if (!isNaN(theTextMessage)) {
                 //     if (theTextMessage > 10) {
