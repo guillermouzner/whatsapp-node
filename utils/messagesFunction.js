@@ -2,8 +2,9 @@ import { Whatsapp } from "../utils/whatsappCloud.js";
 
 let listaDeSesiones = [];
 let datos = [];
-export const textMessage = async (incomingMessage) => {
-    let theTextMessage = incomingMessage;
+
+export const textMessage = async (_req, _res) => {
+    let theTextMessage = incomingMessage.text.body;
     if (!isNaN(theTextMessage)) {
         if (theTextMessage > 10) {
             await Whatsapp.sendText({
