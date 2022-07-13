@@ -74,33 +74,6 @@ router.post("/webhook", async (req, res) => {
             if (typeOfMsg === "text_message") {
                 let theTextMessage = incomingMessage.text.body;
 
-                // if (theTextMessage == "80") {
-                //     await Whatsapp.sendContact({
-                //         recipientPhone: 543814987351,
-                //         contact_profile: {
-                //             emails: [
-                //                 {
-                //                     email: "guillermouz16@gmail.com",
-                //                     type: "Gmail",
-                //                 },
-                //             ],
-                //             name: {
-                //                 formatted_name: "Guillermo Uzner",
-                //                 first_name: "Guillermo",
-                //                 last_name: "Uzner",
-                //             },
-
-                //             phones: [
-                //                 {
-                //                     phone: "543814987351",
-                //                     type: "Cel",
-                //                     wa_id: "543814987351", // optional
-                //                 },
-                //             ],
-                //         },
-                //     });
-                // }
-
                 if (theTextMessage === "hola" || theTextMessage === "Hola") {
                     await Whatsapp.sendSimpleButtons({
                         recipientPhone: 543814987351,
@@ -123,7 +96,7 @@ router.post("/webhook", async (req, res) => {
                 ) {
                     await Whatsapp.sendText({
                         message:
-                            "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\n Hola",
+                            "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
                         recipientPhone: 543814987351,
                     });
                 }
@@ -249,6 +222,9 @@ router.post("/webhook", async (req, res) => {
                         ],
                     },
                 });
+                datos = datos.filter(
+                    (item) => item.recipientPhone !== recipientPhone
+                );
             }
         }
 
