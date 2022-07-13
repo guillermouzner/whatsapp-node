@@ -135,22 +135,28 @@ export const sendReceiveMessages = async (req, res) => {
                                 "Selecciona una de las opciones para continuar:",
                             listOfSections: listaDeSesiones,
                         });
-                        datos.push({ recipientPhone, listaDeSesiones });
+                        datos.push({
+                            recipientPhone,
+                            listaDeSesiones,
+                            id: "menuInicio",
+                        });
                     }
                 }
             }
 
-            let estaElnumero = [];
+            let estaElNumero = [];
+            // let verificationId = []
             datos.forEach((item) => {
                 if (item.recipientPhone === recipientPhone)
-                    estaElnumero.push(recipientPhone);
+                    estaElNumero.push(recipientPhone, item.id);
             });
 
             if (
                 (typeOfMsg === "radio_button_message" &&
                     incomingMessage.list_reply.description === "1") ||
                 (typeOfMsg === "text_message" &&
-                    estaElnumero.includes(recipientPhone) &&
+                    estaElNumero.includes(recipientPhone) &&
+                    estaElNumero[1] === "menuInicio" &&
                     incomingMessage.text.body === "1")
             ) {
                 await Whatsapp.sendContact({
