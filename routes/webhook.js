@@ -191,12 +191,18 @@ router.post("/webhook", async (req, res) => {
                 });
             }
 
+            let estaElnumero = [];
+            datos.forEach((item) => {
+                if (item.recipientPhone === recipientPhone)
+                    estaElnumero.push(recipientPhone);
+            });
+
             if (
-                typeOfMsg === "radio_button_message" &&
-                incomingMessage.list_reply.description === "1"
-                // (typeOfMsg === "text_message" &&
-                //     recipientPhone === datos.numCliente &&
-                //     incomingMessage.text.body === "1")
+                (typeOfMsg === "radio_button_message" &&
+                    incomingMessage.list_reply.description === "1") ||
+                (typeOfMsg === "text_message" &&
+                    estaElnumero.includes(recipientPhone) &&
+                    incomingMessage.text.body === "1")
             ) {
                 await Whatsapp.sendContact({
                     recipientPhone: 543814987351,
