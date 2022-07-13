@@ -71,10 +71,58 @@ router.post("/webhook", async (req, res) => {
                 message_id: message_id,
             });
 
+            // if (typeOfMsg === "text_message") {
+            //     let theTextMessage = incomingMessage.text.body;
+
+            //     if (theTextMessage === "hola" || theTextMessage === "Hola") {
+            //         await Whatsapp.sendSimpleButtons({
+            //             recipientPhone: 543814987351,
+            //             message: `Hola soy Santi, tu asistente virtual en Santander! 🤖`,
+            //             listOfButtons: [
+            //                 {
+            //                     title: "Mostrar Opciones",
+            //                     id: "see_categories",
+            //                 },
+            //                 {
+            //                     title: "Hablar con un humano",
+            //                     id: "talk_to_human",
+            //                 },
+            //             ],
+            //         });
+            //     }
+            //     if (
+            //         (theTextMessage !== "Hola" && theTextMessage !== "hola") ||
+            //         Number(theTextMessage) > 10
+            //     ) {
+            //         await Whatsapp.sendText({
+            //             message:
+            //                 "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
+            //             recipientPhone: 543814987351,
+            //         });
+            //     }
+            // }
             if (typeOfMsg === "text_message") {
                 let theTextMessage = incomingMessage.text.body;
-
-                if (theTextMessage === "hola" || theTextMessage === "Hola") {
+                if (!isNaN(theTextMessage)) {
+                    if (theTextMessage > 10) {
+                        await Whatsapp.sendText({
+                            message:
+                                "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
+                            recipientPhone: 543814987351,
+                        });
+                    }
+                } else if (
+                    theTextMessage !== "Hola" &&
+                    theTextMessage !== "hola"
+                ) {
+                    {
+                        await Whatsapp.sendText({
+                            message:
+                                "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
+                            recipientPhone: 543814987351,
+                        });
+                    }
+                } else {
                     await Whatsapp.sendSimpleButtons({
                         recipientPhone: 543814987351,
                         message: `Hola soy Santi, tu asistente virtual en Santander! 🤖`,
@@ -90,18 +138,7 @@ router.post("/webhook", async (req, res) => {
                         ],
                     });
                 }
-                if (
-                    (theTextMessage !== "Hola" && theTextMessage !== "hola") ||
-                    Number(theTextMessage) > 10
-                ) {
-                    await Whatsapp.sendText({
-                        message:
-                            "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
-                        recipientPhone: 543814987351,
-                    });
-                }
             }
-
             if (
                 typeOfMsg === "simple_button_message" &&
                 incomingMessage.button_reply.id === "see_categories"
@@ -152,7 +189,7 @@ router.post("/webhook", async (req, res) => {
                     recipientPhone: 543814987351,
                     headerText: "¿En qué puedo ayudarte? 👇",
                     bodyText:
-                        "1. Mostrar contacto de Guillermo💣\n2. Comprar/ Vender Dólar MEP\n3. Transferir fondos a mi banco (Nuevo)\n4. Convertir dólar CABLE en dólar MEP\n5. Abrir una cuenta en Cocos 🥥\n6. Hacer una consulta\n7. Cerrar mi cuenta en Cocos 🥥\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
+                        "1. Mostrar contacto de Guillermo💣\n2. Comprar/ Vender Dólar MEP\n3. Transferir fondos a mi banco (Nuevo)\n4. Convertir dólar CABLE en dólar MEP\n5. Abrir una cuenta en Santander\n6. Hacer una consulta\n7. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
                     //Operar Activos (Compra, Venta, Sucripciones a FCI)
                     footerText:
                         "Selecciona una de las opciones para continuar:",
