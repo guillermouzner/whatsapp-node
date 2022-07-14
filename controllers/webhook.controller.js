@@ -4,6 +4,9 @@ import { Whatsapp } from "../utils/whatsappCloud.js";
 //     listaDeSesiones,
 //     datos,
 // } from "../utils/messagesFunction.js";
+
+import { dataMessage } from "../middlewares/dataMessage.js";
+
 export const verifyToken = (req, res) => {
     /**
      * UPDATE YOUR VERIFY TOKEN
@@ -35,6 +38,8 @@ let datos = [];
 
 export const sendReceiveMessages = async (req, res) => {
     try {
+        const { typeOfMsg } = dataMessage();
+        console.log("hola" + typeOfMsg);
         let data = Whatsapp.parseMessage(req.body);
         console.log(data);
 

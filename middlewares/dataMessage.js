@@ -1,6 +1,6 @@
 import { Whatsapp } from "../utils/whatsappCloud.js";
 
-export const prueba = (req, res, next) => {
+export const dataMessage = (req, res, next) => {
     try {
         let data = Whatsapp.parseMessage(req.body);
         console.log(data);
@@ -22,7 +22,15 @@ export const prueba = (req, res, next) => {
             console.log(recipientPhone, recipientName, typeOfMsg, message_id);
             // console.log(datos);
         }
+
         next();
+        return {
+            incomingMessage,
+            recipientPhone,
+            recipientName,
+            typeOfMsg,
+            message_id,
+        };
     } catch (error) {
         console.log(error);
         res.sendStatus(404);
