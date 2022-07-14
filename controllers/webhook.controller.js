@@ -1,5 +1,9 @@
 import { Whatsapp } from "../utils/whatsappCloud.js";
-import { textMessage } from "../utils/messagesFunction.js";
+import {
+    textMessage,
+    listaDeSesiones,
+    datos,
+} from "../utils/messagesFunction.js";
 
 // import { dataMessage } from "../middlewares/dataMessage.js";
 
@@ -28,9 +32,6 @@ export const verifyToken = (req, res) => {
         }
     }
 };
-
-let listaDeSesiones = [];
-let datos = [];
 
 // const textMessage = async (incomingMessage, recipientPhone) => {
 //     let theTextMessage = incomingMessage;
