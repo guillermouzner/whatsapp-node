@@ -21,16 +21,10 @@ export const dataMessage = (req, res, next) => {
             // let text = incomingMessage.button_reply.id;
             console.log(recipientPhone, recipientName, typeOfMsg, message_id);
             // console.log(datos);
+            return true;
         }
 
         next();
-        return {
-            incomingMessage,
-            recipientPhone,
-            recipientName,
-            typeOfMsg,
-            message_id,
-        };
     } catch (error) {
         console.log(error);
         res.sendStatus(404);
