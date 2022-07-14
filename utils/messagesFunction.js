@@ -86,30 +86,35 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
     }
 };
 
-export const radioButtonHome = async (recipientPhone) => {
-    await Whatsapp.sendContact({
-        recipientPhone: 543814987351,
-        contact_profile: {
-            emails: [
-                {
-                    email: "guillermouz16@gmail.com",
-                    type: "Gmail",
+export const radioButtonMenuInicio = async (
+    incomingMessage,
+    recipientPhone
+) => {
+    if (incomingMessage === "1") {
+        await Whatsapp.sendContact({
+            recipientPhone: 543814987351,
+            contact_profile: {
+                emails: [
+                    {
+                        email: "guillermouz16@gmail.com",
+                        type: "Gmail",
+                    },
+                ],
+                name: {
+                    formatted_name: "Guillermo Uzner",
+                    first_name: "Guillermo",
+                    last_name: "Uzner",
                 },
-            ],
-            name: {
-                formatted_name: "Guillermo Uzner",
-                first_name: "Guillermo",
-                last_name: "Uzner",
-            },
 
-            phones: [
-                {
-                    phone: "543814987351",
-                    type: "Cel",
-                    wa_id: "543814987351", // optional
-                },
-            ],
-        },
-    });
-    datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+                phones: [
+                    {
+                        phone: "543814987351",
+                        type: "Cel",
+                        wa_id: "543814987351", // optional
+                    },
+                ],
+            },
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
 };
