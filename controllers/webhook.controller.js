@@ -36,7 +36,7 @@ export const verifyToken = (req, res) => {
 let listaDeSesiones = [];
 let datos = [];
 
-const textMessage = async (incomingMessage) => {
+const textMessage = async (incomingMessage, recipientPhone) => {
     let theTextMessage = incomingMessage;
     if (!isNaN(theTextMessage)) {
         if (theTextMessage > 10) {
@@ -150,7 +150,7 @@ export const sendReceiveMessages = async (req, res) => {
             });
 
             if (typeOfMsg === "text_message") {
-                textMessage(incomingMessage.text.body);
+                textMessage(incomingMessage.text.body, recipientPhone);
                 //     let theTextMessage = incomingMessage.text.body;
                 //     if (!isNaN(theTextMessage)) {
                 //         if (theTextMessage > 10) {
