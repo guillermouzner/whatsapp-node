@@ -36,8 +36,8 @@ export const verifyToken = (req, res) => {
 let listaDeSesiones = [];
 let datos = [];
 
-const textMessage = async () => {
-    let theTextMessage = incomingMessage.text.body;
+const textMessage = async (incomingMessage) => {
+    let theTextMessage = incomingMessage;
     if (!isNaN(theTextMessage)) {
         if (theTextMessage > 10) {
             await Whatsapp.sendText({
@@ -150,7 +150,7 @@ export const sendReceiveMessages = async (req, res) => {
             });
 
             if (typeOfMsg === "text_message") {
-                textMessage();
+                textMessage(incomingMessage.text.body);
                 //     let theTextMessage = incomingMessage.text.body;
                 //     if (!isNaN(theTextMessage)) {
                 //         if (theTextMessage > 10) {
