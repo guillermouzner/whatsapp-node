@@ -79,12 +79,12 @@ export const sendReceiveMessages = async (req, res) => {
                     estaElNumero.includes(recipientPhone) &&
                     estaElNumero[1] === "menuInicio")
             ) {
-                let incomingMessage =
+                let message =
                     typeOfMsg === "radio_button_message"
                         ? incomingMessage.list_reply.description
                         : incomingMessage.text.body;
 
-                radioButtonMenuInicio(incomingMessage, recipientPhone);
+                radioButtonMenuInicio(message, recipientPhone);
             }
         }
 
