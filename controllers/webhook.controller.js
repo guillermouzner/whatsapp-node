@@ -101,7 +101,9 @@ export const sendReceiveMessages = async (req, res) => {
 
             if (
                 typeOfMsg === "text_message" &&
-                estaElNumero.includes(recipientPhone)
+                estaElNumero.includes(recipientPhone) &&
+                (estaElNumero[1] === "comprarUSDT" ||
+                    estaElNumero[1] === "venderUSDT")
             ) {
                 let compraVentaID = estaElNumero[1];
                 comprarVenderUSDT(
