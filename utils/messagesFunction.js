@@ -170,7 +170,7 @@ export const replyButton = async (incomingMessage, recipientPhone) => {
 };
 
 export const comprarUSDT = async (incomingMessage, recipientPhone) => {
-    if (!isNan(incomingMessage)) {
+    if (!isNaN(incomingMessage)) {
         await Whatsapp.sendText({
             message: `Su compra de ${incomingMessage} USDT se completo satisfactoriamente`,
             recipientPhone: 543814987351,
