@@ -121,7 +121,7 @@ export const radioButtonMenuInicio = async (
     if (incomingMessage === "2") {
         await Whatsapp.sendSimpleButtons({
             recipientPhone: 543814987351,
-            message: `Selecciona la opcion que desesa hacer`,
+            message: `Selecciona la opcion que deseas hacer`,
             listOfButtons: [
                 {
                     title: "COMPRAR USDT",
@@ -134,5 +134,10 @@ export const radioButtonMenuInicio = async (
             ],
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "comprarVenderUSDT",
+        });
     }
 };
