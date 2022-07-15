@@ -1,4 +1,5 @@
 import { Whatsapp } from "../utils/whatsappCloud.js";
+import { dolarMep } from "./precioDolarMep.js";
 export let listaDeSesiones = [];
 export let datos = [];
 
@@ -68,11 +69,12 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
                     ],
                 },
             ];
+            const { compra, venta } = await precioDolar();
+
             await Whatsapp.sendRadioButtons({
                 recipientPhone: 543814987351,
                 headerText: "¿En qué puedo ayudarte? 👇",
-                bodyText:
-                    "1️⃣. Comprar/ Vender Dolar MEP\n2️⃣. Recargar SUBE\n3️⃣. Pagar Servicios\n4️⃣. Abrir una cuenta en Santander\n5️⃣. Hacer una consulta\n6️⃣. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
+                bodyText: `1️⃣. Comprar/ Vender Dolar MEP\n2️⃣. Recargar SUBE\n3️⃣. Pagar Servicios\n4️⃣. Abrir una cuenta en Santander\n5️⃣. Hacer una consulta\n6️⃣. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ ${venta} / Compra: AR$ ${compra}\n`,
                 //Operar Activos (Compra, Venta, Sucripciones a FCI)
                 footerText: "Ingresá el número de opción seleccionada:",
                 listOfSections: listaDeSesiones,
