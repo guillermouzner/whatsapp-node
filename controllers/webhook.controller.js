@@ -5,7 +5,7 @@ import {
     replyButton,
     listaDeSesiones,
     datos,
-    comprarUSDT,
+    comprarVenderUSDT,
 } from "../utils/messagesFunction.js";
 
 export const verifyToken = (req, res) => {
@@ -104,7 +104,7 @@ export const sendReceiveMessages = async (req, res) => {
                 estaElNumero.includes(recipientPhone)
             ) {
                 let compraVentaID = estaElNumero[1];
-                comprarUSDT(
+                comprarVenderUSDT(
                     incomingMessage.text.body,
                     compraVentaID,
                     recipientPhone
