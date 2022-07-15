@@ -12,11 +12,7 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
                 recipientPhone: 543814987351,
             });
         }
-    } else if (
-        theTextMessage !== "Hola" &&
-        theTextMessage !== "hola" &&
-        !datos.length === "true"
-    ) {
+    } else if (theTextMessage !== "Hola" && theTextMessage !== "hola") {
         {
             await Whatsapp.sendText({
                 message:
