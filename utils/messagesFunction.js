@@ -72,7 +72,7 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
                 recipientPhone: 543814987351,
                 headerText: "¿En qué puedo ayudarte? 👇",
                 bodyText:
-                    "1️⃣. Mostrar contacto de Guillermo💣\n2️⃣. Comprar/ Vender Dolar MEP\n3️⃣. Transferir fondos a mi banco (Nuevo)\n4️⃣. Abrir una cuenta en Santander\n5️⃣. Hacer una consulta\n6️⃣. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
+                    "1️⃣. Recargar SUBE\n2️⃣. Comprar/ Vender Dolar MEP\n3️⃣. Pagar Servicios\n4️⃣. Abrir una cuenta en Santander\n5️⃣. Hacer una consulta\n6️⃣. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
                 //Operar Activos (Compra, Venta, Sucripciones a FCI)
                 footerText: "Ingresá el número de opción seleccionada:",
                 listOfSections: listaDeSesiones,
@@ -91,29 +91,9 @@ export const radioButtonMenuInicio = async (
     recipientPhone
 ) => {
     if (incomingMessage === "1") {
-        await Whatsapp.sendContact({
+        await Whatsapp.sendText({
+            message: `🤖 Opcion no disponible momentaneamente ♨️`,
             recipientPhone: 543814987351,
-            contact_profile: {
-                emails: [
-                    {
-                        email: "guillermouz16@gmail.com",
-                        type: "Gmail",
-                    },
-                ],
-                name: {
-                    formatted_name: "Guillermo Uzner",
-                    first_name: "Guillermo",
-                    last_name: "Uzner",
-                },
-
-                phones: [
-                    {
-                        phone: "543814987351",
-                        type: "Cel",
-                        wa_id: "543814987351", // optional
-                    },
-                ],
-            },
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
     }
@@ -146,7 +126,7 @@ export const radioButtonMenuInicio = async (
             recipientPhone: 543814987351,
             headerText: "¿En qué puedo ayudarte? 👇",
             bodyText:
-                "1️⃣. Quiero empezar a cobrar mi sueldo u honorario en Santander\n2️⃣. Aumentar límite de Tarjeta de Crédito Santander\n3️⃣. ¿Qué es Getnet?\n4️⃣. Soy freelancer, ¿puedo acreditar mi orden de pago en dólares? \n5️⃣. Qué operaciones podés hacer sin turno\n6️⃣. Preguntas Frecuentes\n",
+                "1️⃣. Quiero empezar a cobrar mi sueldo u honorario en Santander\n2️⃣. Aumentar límite de Tarjeta de Crédito Santander\n3️⃣. ¿Qué es Getnet?\n4️⃣. Soy freelancer, ¿puedo acreditar mi orden de pago en dólares? \n5️⃣. Cajeros cercanos\n6️⃣. Preguntas Frecuentes\n",
             footerText: "Ingresá el número de opción seleccionada:",
             listOfSections: listaDeSesiones,
         });
