@@ -146,10 +146,12 @@ export const radioButtonMenuInicio = async (
             recipientPhone: 543814987351,
             headerText: "¿En qué puedo ayudarte? 👇",
             bodyText:
-                "1️⃣. Quiero empezar a cobrar mi sueldo u honorario en Santander\n2. Aumentar límite de Tarjeta de Crédito Santander\n3. ¿Qué es Getnet?\n4. Soy freelancer, ¿puedo acreditar mi orden de pago en dólares? \n5. Qué operaciones podés hacer sin turno\n6. Preguntas Frecuentes\n",
+                "1️⃣. Quiero empezar a cobrar mi sueldo u honorario en Santander\n2️⃣. Aumentar límite de Tarjeta de Crédito Santander\n3. ¿Qué es Getnet?\n4. Soy freelancer, ¿puedo acreditar mi orden de pago en dólares? \n5. Qué operaciones podés hacer sin turno\n6. Preguntas Frecuentes\n",
             footerText: "Ingresá el número de opción seleccionada:",
             listOfSections: listaDeSesiones,
         });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+
         datos.push({
             recipientPhone,
             listaDeSesiones,
