@@ -150,7 +150,7 @@ export const replyButton = async (incomingMessage, recipientPhone) => {
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
     }
-    if (incomingMessage === "comprar_usdt") {
+    if (incomingMessage === "vender_usdt") {
         await Whatsapp.sendText({
             message: "Ingrese la cantidad que desea vender (en numeros)",
             recipientPhone: 543814987351,
