@@ -92,7 +92,7 @@ export const radioButtonMenuInicio = async (
     incomingMessage,
     recipientPhone
 ) => {
-    if (incomingMessage === "2") {
+    if (incomingMessage === "2" || incomingMessage === "3") {
         await Whatsapp.sendText({
             message: `🤖 Opcion no disponible momentaneamente ♨️`,
             recipientPhone: 543814987351,
@@ -106,11 +106,11 @@ export const radioButtonMenuInicio = async (
             message: `Selecciona la opcion que deseas hacer`,
             listOfButtons: [
                 {
-                    title: "COMPRAR USDT",
+                    title: "COMPRAR Dolar Mep",
                     id: "comprar_usdt",
                 },
                 {
-                    title: "VENDER USDT",
+                    title: "VENDER Dolar Mep",
                     id: "vender_usdt",
                 },
             ],
