@@ -62,11 +62,13 @@ export const sendReceiveMessages = async (req, res) => {
             await Whatsapp.markMessageAsRead({
                 message_id: message_id,
             });
+
             let estaElNumero = [];
             datos.forEach((item) => {
                 if (item.recipientPhone === recipientPhone)
                     estaElNumero.push(recipientPhone, item.id);
             });
+
             if (
                 typeOfMsg === "text_message" &&
                 !estaElNumero.includes(recipientPhone)
@@ -99,10 +101,14 @@ export const sendReceiveMessages = async (req, res) => {
 
             if (
                 typeOfMsg === "text_message" &&
-                estaElNumero.includes(recipientPhone) &&
-                estaElNumero[1] === "comprarUSDT"
+                estaElNumero.includes(recipientPhone)
             ) {
-                comprarUSDT(incomingMessage.text.body, recipientPhone);
+                let compraVentaID = estaElNumero[1];
+                comprarUSDT(
+                    incomingMessage.text.body,
+                    compraVentaID,
+                    recipientPhone
+                );
             }
         }
         res.sendStatus(200);

@@ -169,10 +169,20 @@ export const replyButton = async (incomingMessage, recipientPhone) => {
     }
 };
 
-export const comprarUSDT = async (incomingMessage, recipientPhone) => {
-    if (!isNaN(incomingMessage)) {
+export const comprarVenderUSDT = async (
+    incomingMessage,
+    id,
+    recipientPhone
+) => {
+    if (id === "comprarUSDT" && !isNaN(incomingMessage)) {
         await Whatsapp.sendText({
             message: `Su compra de ${incomingMessage} USDT se completo satisfactoriamente`,
+            recipientPhone: 543814987351,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    } else if (id === "venderUSDT" && !isNaN(incomingMessage)) {
+        await Whatsapp.sendText({
+            message: `Su venta de ${incomingMessage} USDT se completo satisfactoriamente`,
             recipientPhone: 543814987351,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
