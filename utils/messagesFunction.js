@@ -72,7 +72,7 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
                 recipientPhone: 543814987351,
                 headerText: "¿En qué puedo ayudarte? 👇",
                 bodyText:
-                    "1. Mostrar contacto de Guillermo💣\n2. Comprar/ Vender Dolar MEP\n3. Transferir fondos a mi banco (Nuevo)\n4. Abrir una cuenta en Santander\n5. Hacer una consulta\n6. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
+                    "1️⃣. Mostrar contacto de Guillermo💣\n2️⃣. Comprar/ Vender Dolar MEP\n3️⃣. Transferir fondos a mi banco (Nuevo)\n4️⃣. Abrir una cuenta en Santander\n5️⃣. Hacer una consulta\n6️⃣. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
                 //Operar Activos (Compra, Venta, Sucripciones a FCI)
                 footerText: "Ingresá el número de opción seleccionada:",
                 listOfSections: listaDeSesiones,
