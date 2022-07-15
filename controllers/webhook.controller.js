@@ -2,6 +2,7 @@ import { Whatsapp } from "../utils/whatsappCloud.js";
 import {
     textMessage,
     radioButtonMenuInicio,
+    replyButton,
     listaDeSesiones,
     datos,
 } from "../utils/messagesFunction.js";
@@ -88,13 +89,9 @@ export const sendReceiveMessages = async (req, res) => {
 
             if (
                 typeOfMsg === "simple_button_message" &&
-                estaElNumero[1] === "comprarVenderUSDT" &&
-                incomingMessage.button_reply.id === "comprar_usdt"
+                estaElNumero[1] === "comprarVenderUSDT"
             ) {
-                await Whatsapp.sendText({
-                    message: "Ingrese la cantidad",
-                    recipientPhone: 543814987351,
-                });
+                replyButton(incomingMessage.button_reply.id, recipientPhone);
             }
         }
         res.sendStatus(200);

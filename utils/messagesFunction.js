@@ -141,3 +141,20 @@ export const radioButtonMenuInicio = async (
         });
     }
 };
+
+export const replyButton = async (incomingMessage, recipientPhone) => {
+    if (incomingMessage === "comprar_usdt") {
+        await Whatsapp.sendText({
+            message: "Ingrese la cantidad que desea comprar (en numeros)",
+            recipientPhone: 543814987351,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
+    if (incomingMessage === "comprar_usdt") {
+        await Whatsapp.sendText({
+            message: "Ingrese la cantidad que desea vender (en numeros)",
+            recipientPhone: 543814987351,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
+};
