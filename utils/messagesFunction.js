@@ -69,7 +69,7 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
                     ],
                 },
             ];
-            const { compra, venta } = await precioDolar();
+            const { compra, venta } = await dolarMep();
 
             await Whatsapp.sendRadioButtons({
                 recipientPhone: 543814987351,
