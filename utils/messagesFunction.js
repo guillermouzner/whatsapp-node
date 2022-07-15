@@ -168,3 +168,18 @@ export const replyButton = async (incomingMessage, recipientPhone) => {
         });
     }
 };
+
+export const comprarUSDT = async (incomingMessage, recipientPhone) => {
+    if (!isNan(incomingMessage)) {
+        await Whatsapp.sendText({
+            message: `Su compra de ${incomingMessage} USDT se completo satisfactoriamente`,
+            recipientPhone: 543814987351,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    } else {
+        await Whatsapp.sendText({
+            message: `Debe ingresar el monto en formato numero`,
+            recipientPhone: 543814987351,
+        });
+    }
+};

@@ -5,6 +5,7 @@ import {
     replyButton,
     listaDeSesiones,
     datos,
+    comprarUSDT,
 } from "../utils/messagesFunction.js";
 
 export const verifyToken = (req, res) => {
@@ -100,13 +101,7 @@ export const sendReceiveMessages = async (req, res) => {
                 estaElNumero.includes(recipientPhone) &&
                 estaElNumero[1] === "comprarUSDT"
             ) {
-                await Whatsapp.sendText({
-                    message: `Su compra de ${incomingMessage.text.body} USDT se completo satisfactoriamente`,
-                    recipientPhone: 543814987351,
-                });
-                datos = datos.filter(
-                    (item) => item.recipientPhone !== recipientPhone
-                );
+                comprarUSDT(incomingMessage.text.body, recipientPhone);
             }
         }
         res.sendStatus(200);
