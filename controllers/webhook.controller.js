@@ -6,8 +6,6 @@ import {
     datos,
 } from "../utils/messagesFunction.js";
 
-// import { dataMessage } from "../middlewares/dataMessage.js";
-
 export const verifyToken = (req, res) => {
     /**
      * UPDATE YOUR VERIFY TOKEN
@@ -74,7 +72,8 @@ export const sendReceiveMessages = async (req, res) => {
             });
 
             if (
-                typeOfMsg === "radio_button_message" ||
+                (typeOfMsg === "radio_button_message" &&
+                    estaElNumero[1] === "menuInicio") ||
                 (typeOfMsg === "text_message" &&
                     estaElNumero.includes(recipientPhone) &&
                     estaElNumero[1] === "menuInicio")
