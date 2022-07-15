@@ -62,19 +62,17 @@ export const sendReceiveMessages = async (req, res) => {
             await Whatsapp.markMessageAsRead({
                 message_id: message_id,
             });
-
+            let estaElNumero = [];
+            datos.forEach((item) => {
+                if (item.recipientPhone === recipientPhone)
+                    estaElNumero.push(recipientPhone, item.id);
+            });
             if (
                 typeOfMsg === "text_message" &&
                 !estaElNumero.includes(recipientPhone)
             ) {
                 textMessage(incomingMessage.text.body, recipientPhone);
             }
-
-            let estaElNumero = [];
-            datos.forEach((item) => {
-                if (item.recipientPhone === recipientPhone)
-                    estaElNumero.push(recipientPhone, item.id);
-            });
 
             if (
                 (typeOfMsg === "radio_button_message" &&
