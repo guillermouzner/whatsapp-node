@@ -89,9 +89,24 @@ export const sendReceiveMessages = async (req, res) => {
 
             if (
                 typeOfMsg === "simple_button_message" &&
+                estaElNumero.includes(recipientPhone) &&
                 estaElNumero[1] === "comprarVenderUSDT"
             ) {
                 replyButton(incomingMessage.button_reply.id, recipientPhone);
+            }
+
+            if (
+                typeOfMsg === "text_message" &&
+                estaElNumero.includes(recipientPhone) &&
+                estaElNumero[1] === "comprarUSDT"
+            ) {
+                await Whatsapp.sendText({
+                    message: `Su compra de ${incomingMessage.text.body} USDT se completo satisfactoriamente`,
+                    recipientPhone: 543814987351,
+                });
+                datos = datos.filter(
+                    (item) => item.recipientPhone !== recipientPhone
+                );
             }
         }
         res.sendStatus(200);

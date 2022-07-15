@@ -149,6 +149,11 @@ export const replyButton = async (incomingMessage, recipientPhone) => {
             recipientPhone: 543814987351,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "comprarUSDT",
+        });
     }
     if (incomingMessage === "vender_usdt") {
         await Whatsapp.sendText({
@@ -156,5 +161,10 @@ export const replyButton = async (incomingMessage, recipientPhone) => {
             recipientPhone: 543814987351,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "venderUSDT",
+        });
     }
 };
