@@ -15,7 +15,7 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
     } else if (
         theTextMessage !== "Hola" &&
         theTextMessage !== "hola" &&
-        datos.length
+        !datos.length === "true"
     ) {
         {
             await Whatsapp.sendText({
