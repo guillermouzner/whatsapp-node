@@ -87,16 +87,16 @@ export const sendReceiveMessages = async (req, res) => {
             }
         }
 
-        if (
-            typeOfMsg === "simple_button_message" &&
-            estaElNumero[1] === "comprarVenderUSDT" &&
-            incomingMessage.button_reply.id === "comprar_usdt"
-        ) {
-            await Whatsapp.sendText({
-                message: "Ingrese la cantidad",
-                recipientPhone: 543814987351,
-            });
-        }
+        // if (
+        //     typeOfMsg === "simple_button_message" &&
+        //     estaElNumero[1] === "comprarVenderUSDT" &&
+        //     incomingMessage.button_reply.id === "comprar_usdt"
+        // ) {
+        //     await Whatsapp.sendText({
+        //         message: "Ingrese la cantidad",
+        //         recipientPhone: 543814987351,
+        //     });
+        // }
         res.sendStatus(200);
     } catch (error) {
         console.log(error);
