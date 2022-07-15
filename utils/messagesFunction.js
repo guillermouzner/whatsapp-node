@@ -72,7 +72,7 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
                 recipientPhone: 543814987351,
                 headerText: "¿En qué puedo ayudarte? 👇",
                 bodyText:
-                    "1️⃣. Recargar SUBE\n2️⃣. Comprar/ Vender Dolar MEP\n3️⃣. Pagar Servicios\n4️⃣. Abrir una cuenta en Santander\n5️⃣. Hacer una consulta\n6️⃣. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
+                    "1️⃣. Comprar/ Vender Dolar MEP\n2️⃣. Recargar SUBE\n3️⃣. Pagar Servicios\n4️⃣. Abrir una cuenta en Santander\n5️⃣. Hacer una consulta\n6️⃣. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
                 //Operar Activos (Compra, Venta, Sucripciones a FCI)
                 footerText: "Ingresá el número de opción seleccionada:",
                 listOfSections: listaDeSesiones,
@@ -90,7 +90,7 @@ export const radioButtonMenuInicio = async (
     incomingMessage,
     recipientPhone
 ) => {
-    if (incomingMessage === "1") {
+    if (incomingMessage === "2") {
         await Whatsapp.sendText({
             message: `🤖 Opcion no disponible momentaneamente ♨️`,
             recipientPhone: 543814987351,
@@ -98,7 +98,7 @@ export const radioButtonMenuInicio = async (
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
     }
 
-    if (incomingMessage === "2") {
+    if (incomingMessage === "1") {
         await Whatsapp.sendSimpleButtons({
             recipientPhone: 543814987351,
             message: `Selecciona la opcion que deseas hacer`,
