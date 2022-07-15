@@ -72,9 +72,9 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
                 recipientPhone: 543814987351,
                 headerText: "¿En qué puedo ayudarte? 👇",
                 bodyText:
-                    "1. Mostrar contacto de Guillermo💣\n2. Comprar/ Vender USDT\n3. Transferir fondos a mi banco (Nuevo)\n4. Convertir dólar CABLE en dólar MEP\n5. Abrir una cuenta en Santander\n6. Hacer una consulta\n7. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
+                    "1. Mostrar contacto de Guillermo💣\n2. Comprar/ Vender Dolar MEP\n3. Transferir fondos a mi banco (Nuevo)\n4. Abrir una cuenta en Santander\n5. Hacer una consulta\n6. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ 279 / Compra: AR$ 285\n",
                 //Operar Activos (Compra, Venta, Sucripciones a FCI)
-                footerText: "Selecciona una de las opciones para continuar:",
+                footerText: "Ingresá el número de opción seleccionada:",
                 listOfSections: listaDeSesiones,
             });
             datos.push({
@@ -141,7 +141,20 @@ export const radioButtonMenuInicio = async (
         });
     }
 
-    if (incomingMessage === "6") {
+    if (incomingMessage === "5") {
+        await Whatsapp.sendRadioButtons({
+            recipientPhone: 543814987351,
+            headerText: "¿En qué puedo ayudarte? 👇",
+            bodyText:
+                "1️⃣. Quiero empezar a cobrar mi sueldo u honorario en Santander\n2. Aumentar límite de Tarjeta de Crédito Santander\n3. ¿Qué es Getnet?\n4. Soy freelancer, ¿puedo acreditar mi orden de pago en dólares? \n5. Qué operaciones podés hacer sin turno\n6. Preguntas Frecuentes\n",
+            footerText: "Ingresá el número de opción seleccionada:",
+            listOfSections: listaDeSesiones,
+        });
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "consultas",
+        });
     }
 };
 
