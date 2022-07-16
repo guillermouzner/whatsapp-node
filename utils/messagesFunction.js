@@ -235,9 +235,32 @@ export const comprarVenderUSDT = async (
 export const estaDeAcuerdo = async (incomingMessage, recipientPhone) => {
     if (incomingMessage === "esta_de_acuerdo") {
         await Whatsapp.sendText({
-            message: `La solicitud finalizó correctamente 🤩.\nYa podes ver la orden reflejada en nuestra app`,
+            message: `La solicitud finalizó correctamente 🤩\nYa podes ver la orden reflejada en nuestra app.`,
             recipientPhone: 543814987351,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
+
+    if (incomingMessage === "modifica_monto") {
+        await Whatsapp.sendSimpleButtons({
+            recipientPhone: 543814987351,
+            message: `Selecciona la opcion que deseas hacer`,
+            listOfButtons: [
+                {
+                    title: "COMPRAR Dolar Mep",
+                    id: "comprar_usdt",
+                },
+                {
+                    title: "VENDER Dolar Mep",
+                    id: "vender_usdt",
+                },
+            ],
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "comprarVenderUSDT",
+        });
     }
 };
