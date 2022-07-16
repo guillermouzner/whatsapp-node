@@ -195,14 +195,14 @@ export const comprarVenderUSDT = async (
 
         await Whatsapp.sendSimpleButtons({
             recipientPhone: 543814987351,
-            message: `¿Estás de acuerdo?`,
+            message: `▫ ¿Estás de acuerdo?`,
             listOfButtons: [
                 {
-                    title: "Si",
+                    title: "✅ Si",
                     id: "esta_de_acuerdo",
                 },
                 {
-                    title: "No. Cancelar",
+                    title: "❌ No. Cancelar",
                     id: "no_esta_de_acuerdo",
                 },
             ],
