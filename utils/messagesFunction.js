@@ -175,9 +175,31 @@ export const comprarVenderUSDT = async (
     recipientPhone
 ) => {
     if (id === "comprarUSDT" && !isNaN(incomingMessage)) {
+        const { compra } = await dolarMep();
+        let numeroDeCuenta = Math.random();
         await Whatsapp.sendText({
-            message: `Su compra de ${incomingMessage} USDT se completo satisfactoriamente`,
+            message: `⚠ Vas a operar de tu cuenta Nº ${numeroDeCuenta}`,
             recipientPhone: 543814987351,
+        });
+        await Whatsapp.sendText({
+            message: `📄 Resumen de la operación:\n· Compra de Dólar Mep\n· Cotización indicativa: $${compra}\n· Número de cuenta: ${numeroDeCuenta}\n· Monto en pesos requerido: $${
+                compra * incomingMessage
+            }`,
+            recipientPhone: 543814987351,
+        });
+        await Whatsapp.sendSimpleButtons({
+            recipientPhone: 543814987351,
+            message: `¿Estás de acuerdo?`,
+            listOfButtons: [
+                {
+                    title: "Si",
+                    id: "esta_de_acuerdo",
+                },
+                {
+                    title: "No. Cancelar",
+                    id: "no_esta_de_acuerdo",
+                },
+            ],
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
     } else if (id === "venderUSDT" && !isNaN(incomingMessage)) {
