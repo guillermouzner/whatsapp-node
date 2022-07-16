@@ -183,7 +183,9 @@ export const comprarVenderUSDT = async (
             recipientPhone: 543814987351,
         });
         await Whatsapp.sendText({
-            message: `📄 Resumen de la operación:\n▫ Compra de Dólar Mep\n▫ Cotización indicativa: $ ${parseInt(
+            message: `📄 Resumen de la operación:\n▫ Compra de Dólar Mep\n▫ Cotización indicativa: $ ${Intl.NumberFormat(
+                "es-AR"
+            ).format(
                 compra
             )}\n▫ Número de cuenta: ${numeroDeCuenta}\n▫ Monto en pesos requerido: $ ${Intl.NumberFormat(
                 "es-AR"
