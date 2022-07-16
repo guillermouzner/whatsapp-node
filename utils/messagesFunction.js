@@ -237,9 +237,11 @@ export const comprarVenderUSDT = async (
                 venta
             )}\n▫ Número de cuenta: ${numeroDeCuenta}\n▫ Monto en dolares requerido: U$D ${Intl.NumberFormat(
                 "es-AR"
-            ).format(incomingMessage)}\n▫Pesos a recibir: $ ${Intl.NumberFormat(
-                "es-AR"
-            ).format(montoeEnPesos)}`,
+            ).format(
+                incomingMessage
+            )}\n▫ Pesos a recibir: $ ${Intl.NumberFormat("es-AR").format(
+                montoeEnPesos
+            )}`,
             recipientPhone: 543814987351,
         });
 
