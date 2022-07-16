@@ -146,7 +146,7 @@ export const replyButton = async (incomingMessage, recipientPhone) => {
     const { compra, venta } = await dolarMep();
     if (incomingMessage === "comprar_usdt") {
         await Whatsapp.sendText({
-            message: `El precio actual estimado es de $ ${compra}.\n\nIngrese la cantidad que desea comprar (en numeros):`,
+            message: `El precio actual estimado es de $ ${compra}.\n\nIngrese la cantidad de USD que desea comprar (en numeros):`,
             recipientPhone: 543814987351,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
@@ -158,7 +158,7 @@ export const replyButton = async (incomingMessage, recipientPhone) => {
     }
     if (incomingMessage === "vender_usdt") {
         await Whatsapp.sendText({
-            message: `El precio actual estimado es de $ ${venta}.\n\nIngrese la cantidad que desea vender (en numeros):`,
+            message: `El precio actual estimado es de $ ${venta}.\n\nIngrese la cantidad de USD que desea vender (en numeros):`,
             recipientPhone: 543814987351,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
@@ -190,7 +190,9 @@ export const comprarVenderUSDT = async (
                 compra
             )}\n▫ Número de cuenta: ${numeroDeCuenta}\n▫ Monto en pesos requerido: $ ${Intl.NumberFormat(
                 "es-AR"
-            ).format(montoeEnPesos)}`,
+            ).format(montoeEnPesos)}\n▫Dolares a recibir: $ ${Intl.NumberFormat(
+                "es-AR"
+            ).format(incomingMessage)}`,
             recipientPhone: 543814987351,
         });
 
@@ -219,11 +221,50 @@ export const comprarVenderUSDT = async (
             id: "estaDeAcuerdo",
         });
     } else if (id === "venderUSDT" && !isNaN(incomingMessage)) {
+        const { venta } = await dolarMep();
+        let numeroDeCuenta = 42121994;
+        let montoeEnPesos = venta * incomingMessage;
         await Whatsapp.sendText({
-            message: `Su venta de ${incomingMessage} USDT se completo satisfactoriamente`,
+            message: `⚠ Vas a operar de tu cuenta Nº ${numeroDeCuenta}`,
             recipientPhone: 543814987351,
         });
+        await Whatsapp.sendText({
+            message: `📄 Resumen de la operación:\n▫ Venta de Dólar Mep\n▫ Cotización indicativa: $ ${Intl.NumberFormat(
+                "es-AR"
+            ).format(
+                venta
+            )}\n▫ Número de cuenta: ${numeroDeCuenta}\n▫ Monto en dolares requerido: $ ${Intl.NumberFormat(
+                "es-AR"
+            ).format(venta)}\n▫Pesos a recibir: $ ${Intl.NumberFormat(
+                "es-AR"
+            ).format(montoeEnPesos)}`,
+            recipientPhone: 543814987351,
+        });
+
+        await Whatsapp.sendSimpleButtons({
+            recipientPhone: 543814987351,
+            message: `▫ ¿Estás de acuerdo?`,
+            listOfButtons: [
+                {
+                    title: "✅ Si",
+                    id: "esta_de_acuerdo",
+                },
+                {
+                    title: "📝 Modificar monto",
+                    id: "modifica_monto",
+                },
+                {
+                    title: "❌ No. Cancelar",
+                    id: "no_esta_de_acuerdo",
+                },
+            ],
+        });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "estaDeAcuerdo",
+        });
     } else {
         await Whatsapp.sendText({
             message: `Debe ingresar el monto en formato numero`,
@@ -262,5 +303,13 @@ export const estaDeAcuerdo = async (incomingMessage, recipientPhone) => {
             listaDeSesiones,
             id: "comprarVenderUSDT",
         });
+    }
+
+    if (incomingMessage === "no_esta_de_acuerdo") {
+        await Whatsapp.sendText({
+            message: `Operacion cancelada.`,
+            recipientPhone: 543814987351,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
     }
 };
