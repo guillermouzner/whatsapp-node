@@ -176,7 +176,7 @@ export const comprarVenderUSDT = async (
 ) => {
     if (id === "comprarUSDT" && !isNaN(incomingMessage)) {
         const { compra } = await dolarMep();
-        let numeroDeCuenta = Math.random();
+        let numeroDeCuenta = 42121994;
         await Whatsapp.sendText({
             message: `⚠ Vas a operar de tu cuenta Nº ${numeroDeCuenta}`,
             recipientPhone: 543814987351,
