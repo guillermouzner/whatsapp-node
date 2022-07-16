@@ -6,6 +6,7 @@ import {
     listaDeSesiones,
     datos,
     comprarVenderUSDT,
+    estaDeAcuerdo,
 } from "../utils/messagesFunction.js";
 
 export const verifyToken = (req, res) => {
@@ -111,6 +112,13 @@ export const sendReceiveMessages = async (req, res) => {
                     compraVentaID,
                     recipientPhone
                 );
+            }
+            if (
+                typeOfMsg === "simple_button_message" &&
+                estaElNumero.includes(recipientPhone) &&
+                estaElNumero[1] === "estaDeAcuerdo"
+            ) {
+                estaDeAcuerdo(incomingMessage.button_reply.id, recipientPhone);
             }
         }
         res.sendStatus(200);

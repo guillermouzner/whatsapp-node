@@ -213,6 +213,11 @@ export const comprarVenderUSDT = async (
             ],
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "estaDeAcuerdo",
+        });
     } else if (id === "venderUSDT" && !isNaN(incomingMessage)) {
         await Whatsapp.sendText({
             message: `Su venta de ${incomingMessage} USDT se completo satisfactoriamente`,
@@ -224,5 +229,15 @@ export const comprarVenderUSDT = async (
             message: `Debe ingresar el monto en formato numero`,
             recipientPhone: 543814987351,
         });
+    }
+};
+
+export const estaDeAcuerdo = async (incomingMessage, recipientPhone) => {
+    if (incomingMessage === "esta_de_acuerdo") {
+        await Whatsapp.sendText({
+            message: `La solicitud finalizó correctamente 🤩.\nYa podes ver la orden reflejada en nuestra app`,
+            recipientPhone: 543814987351,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
     }
 };
