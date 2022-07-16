@@ -177,14 +177,15 @@ export const comprarVenderUSDT = async (
     if (id === "comprarUSDT" && !isNaN(incomingMessage)) {
         const { compra } = await dolarMep();
         let numeroDeCuenta = 42121994;
+        let montoeEnPesos = compra * incomingMessage;
         await Whatsapp.sendText({
             message: `⚠ Vas a operar de tu cuenta Nº ${numeroDeCuenta}`,
             recipientPhone: 543814987351,
         });
         await Whatsapp.sendText({
-            message: `📄 Resumen de la operación:\n· Compra de Dólar Mep\n· Cotización indicativa: $${compra}\n· Número de cuenta: ${numeroDeCuenta}\n· Monto en pesos requerido: $${
-                compra * incomingMessage
-            }`,
+            message: `📄 Resumen de la operación:\n◽ Compra de Dólar Mep\n◽ Cotización indicativa: $${compra}\n◽ Número de cuenta: ${numeroDeCuenta}\n◽ Monto en pesos requerido: $${Intl.NumberFormat(
+                "es-AR"
+            ).format(montoeEnPesos)}`,
             recipientPhone: 543814987351,
         });
         await Whatsapp.sendSimpleButtons({
