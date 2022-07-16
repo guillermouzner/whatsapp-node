@@ -203,7 +203,7 @@ export const comprarVenderUSDT = async (
                     id: "esta_de_acuerdo",
                 },
                 {
-                    title: "📝 Modificar monto a comprar",
+                    title: "📝 Modificar monto",
                     id: "esta_de_acuerdo",
                 },
                 {
