@@ -375,5 +375,30 @@ export const replyButtonNoExiste = async (incomingMessage, recipientPhone) => {
                 },
             ],
         });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "terminosYCondiciones",
+        });
+    }
+    if (incomingMessage === "salir") {
+        await Whatsapp.sendText({
+            message: "😃",
+            recipientPhone: recipientPhone,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
+    if (incomingMessage === "soyCliente") {
+        await Whatsapp.sendText({
+            message: "¿Cuál es tu número de DNI?",
+            recipientPhone: recipientPhone,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "yaEsClienteDNI",
+        });
     }
 };
