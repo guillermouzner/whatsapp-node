@@ -93,17 +93,19 @@ export const radioButtonMenuInicio = async (
     incomingMessage,
     recipientPhone
 ) => {
-    if (incomingMessage === "2" || incomingMessage === "3") {
-        await Whatsapp.sendText({
-            message: `🤖 Opcion no disponible momentaneamente ♨️`,
-            recipientPhone: 543814987351,
-        });
-        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
-    }
+    const { existe } = await existeCel(recipientPhone);
+    if (existe === "existeCel") {
+        if (incomingMessage === "2" || incomingMessage === "3") {
+            await Whatsapp.sendText({
+                message: `🤖 Opcion no disponible momentaneamente ♨️`,
+                recipientPhone: 543814987351,
+            });
+            datos = datos.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
+        }
 
-    if (incomingMessage === "1") {
-        const { existe } = await existeCel(recipientPhone);
-        if (existe === "existeCel") {
+        if (incomingMessage === "1") {
             await Whatsapp.sendSimpleButtons({
                 recipientPhone: 543814987351,
                 message: `Selecciona la opcion que deseas hacer`,
@@ -127,46 +129,46 @@ export const radioButtonMenuInicio = async (
                 id: "comprarVenderUSDT",
             });
         }
-        if (existe === "noExiste") {
+
+        if (incomingMessage === "5") {
+            await Whatsapp.sendRadioButtons({
+                recipientPhone: 543814987351,
+                headerText: "¿En qué puedo ayudarte? 👇",
+                bodyText:
+                    "1️⃣. Quiero empezar a cobrar mi sueldo u honorario en Santander\n2️⃣. Aumentar límite de Tarjeta de Crédito Santander\n3️⃣. ¿Qué es Getnet?\n4️⃣. Soy freelancer, ¿puedo acreditar mi orden de pago en dólares? \n5️⃣. Cajeros cercanos\n6️⃣. Preguntas Frecuentes\n",
+                footerText: "Ingresá el número de opción seleccionada:",
+                listOfSections: listaDeSesiones,
+            });
             datos = datos.filter(
                 (item) => item.recipientPhone !== recipientPhone
             );
-            await Whatsapp.sendSimpleButtons({
-                recipientPhone: 543814987351,
-                message: `Uy, todavía no sos cliente de Santander. Tener cuenta es necesario para operar dólar mep.\n¿Querés abrirte una cuenta? Es gratis y te va a llevar sólo 5 minutos :)`,
-                listOfButtons: [
-                    {
-                        title: "Si",
-                        id: "crearCuenta",
-                    },
-                    {
-                        title: "No",
-                        id: "salir",
-                    },
-                    {
-                        title: "Ya soy cliente",
-                        id: "soyCliente",
-                    },
-                ],
+
+            datos.push({
+                recipientPhone,
+                listaDeSesiones,
+                id: "consultas",
             });
         }
     }
-
-    if (incomingMessage === "5") {
-        await Whatsapp.sendRadioButtons({
-            recipientPhone: 543814987351,
-            headerText: "¿En qué puedo ayudarte? 👇",
-            bodyText:
-                "1️⃣. Quiero empezar a cobrar mi sueldo u honorario en Santander\n2️⃣. Aumentar límite de Tarjeta de Crédito Santander\n3️⃣. ¿Qué es Getnet?\n4️⃣. Soy freelancer, ¿puedo acreditar mi orden de pago en dólares? \n5️⃣. Cajeros cercanos\n6️⃣. Preguntas Frecuentes\n",
-            footerText: "Ingresá el número de opción seleccionada:",
-            listOfSections: listaDeSesiones,
-        });
+    if (existe === "noExiste") {
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
-
-        datos.push({
-            recipientPhone,
-            listaDeSesiones,
-            id: "consultas",
+        await Whatsapp.sendSimpleButtons({
+            recipientPhone: 543814987351,
+            message: `Uy, todavía no sos cliente de Santander. Tener cuenta es necesario para operar dólar mep y pagar servicios.\n¿Querés abrirte una cuenta? Es gratis y te va a llevar sólo 5 minutos :)`,
+            listOfButtons: [
+                {
+                    title: "Si",
+                    id: "crearCuenta",
+                },
+                {
+                    title: "No",
+                    id: "salir",
+                },
+                {
+                    title: "Ya soy cliente",
+                    id: "soyCliente",
+                },
+            ],
         });
     }
 };
