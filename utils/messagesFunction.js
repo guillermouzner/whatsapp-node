@@ -1,90 +1,111 @@
 import { Whatsapp } from "../utils/whatsappCloud.js";
 import { dolarMep } from "./precioDolarMep.js";
+import { existeCel } from "./existeCel.js";
 export let listaDeSesiones = [];
 export let datos = [];
 
 export const textMessage = async (incomingMessage, recipientPhone) => {
-    let theTextMessage = incomingMessage;
-    if (!isNaN(theTextMessage)) {
-        if (theTextMessage > 10000) {
+    const { existe } = await existeCel(recipientPhone);
+    if (existe === "existeCel") {
+        let theTextMessage = incomingMessage;
+        if (!isNaN(theTextMessage)) {
+            if (theTextMessage > 10000) {
+                await Whatsapp.sendText({
+                    message:
+                        "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
+                    recipientPhone: 543814987351,
+                });
+            }
+        } else if (theTextMessage !== "Hola" && theTextMessage !== "hola") {
+            {
+                await Whatsapp.sendText({
+                    message:
+                        "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
+                    recipientPhone: 543814987351,
+                });
+            }
+        } else {
             await Whatsapp.sendText({
-                message:
-                    "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
+                message: `🤖 Hola soy Santi, tu asistente virtual en Santander♨️`,
                 recipientPhone: 543814987351,
             });
-        }
-    } else if (theTextMessage !== "Hola" && theTextMessage !== "hola") {
-        {
-            await Whatsapp.sendText({
-                message:
-                    "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
-                recipientPhone: 543814987351,
-            });
-        }
-    } else {
-        await Whatsapp.sendText({
-            message: `🤖 Hola soy Santi, tu asistente virtual en Santander♨️`,
-            recipientPhone: 543814987351,
-        });
-        {
-            listaDeSesiones = [
-                {
-                    title: "Selecciona una opcion",
-                    rows: [
-                        {
-                            title: "operar activos",
-                            description: "1",
-                            id: "operar_activos",
-                        },
-                        {
-                            title: "Comprar USDT",
-                            description: "2",
-                            id: "Comprar_USDT",
-                        },
-                        {
-                            title: "Transferir a Banco",
-                            description: "3",
-                            id: "Transferir_a_Banco",
-                        },
-                        {
-                            title: "Convertir Cable-Mep",
-                            description: "4",
-                            id: "Convertir_Cable-Mep",
-                        },
-                        {
-                            title: "Abrir cuenta Cocos",
-                            description: "5",
-                            id: "Abrir_cuenta_Cocos",
-                        },
-                        {
-                            title: "Consultar",
-                            description: "6",
-                            id: "consultar",
-                        },
-                        {
-                            title: "Cerrar cuenta",
-                            description: "7",
-                            id: "cerrar_cuenta",
-                        },
-                    ],
-                },
-            ];
-            const { compra, venta } = await dolarMep();
+            {
+                listaDeSesiones = [
+                    {
+                        title: "Selecciona una opcion",
+                        rows: [
+                            {
+                                title: "operar activos",
+                                description: "1",
+                                id: "operar_activos",
+                            },
+                            {
+                                title: "Comprar USDT",
+                                description: "2",
+                                id: "Comprar_USDT",
+                            },
+                            {
+                                title: "Transferir a Banco",
+                                description: "3",
+                                id: "Transferir_a_Banco",
+                            },
+                            {
+                                title: "Convertir Cable-Mep",
+                                description: "4",
+                                id: "Convertir_Cable-Mep",
+                            },
+                            {
+                                title: "Abrir cuenta Cocos",
+                                description: "5",
+                                id: "Abrir_cuenta_Cocos",
+                            },
+                            {
+                                title: "Consultar",
+                                description: "6",
+                                id: "consultar",
+                            },
+                            {
+                                title: "Cerrar cuenta",
+                                description: "7",
+                                id: "cerrar_cuenta",
+                            },
+                        ],
+                    },
+                ];
+                const { compra, venta } = await dolarMep();
 
-            await Whatsapp.sendRadioButtons({
-                recipientPhone: 543814987351,
-                headerText: "¿En qué puedo ayudarte? 👇",
-                bodyText: `1️⃣. Comprar/ Vender Dolar MEP\n2️⃣. Recargar SUBE\n3️⃣. Pagar Servicios\n4️⃣. Abrir una cuenta en Santander\n5️⃣. Hacer una consulta\n6️⃣. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ ${venta} / Compra: AR$ ${compra}\n`,
-                //Operar Activos (Compra, Venta, Sucripciones a FCI)
-                footerText: "Ingresá el número de opción seleccionada:",
-                listOfSections: listaDeSesiones,
-            });
-            datos.push({
-                recipientPhone,
-                listaDeSesiones,
-                id: "menuInicio",
-            });
+                await Whatsapp.sendRadioButtons({
+                    recipientPhone: 543814987351,
+                    headerText: "¿En qué puedo ayudarte? 👇",
+                    bodyText: `1️⃣. Comprar/ Vender Dolar MEP\n2️⃣. Recargar SUBE\n3️⃣. Pagar Servicios\n4️⃣. Abrir una cuenta en Santander\n5️⃣. Hacer una consulta\n6️⃣. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ ${venta} / Compra: AR$ ${compra}\n`,
+                    //Operar Activos (Compra, Venta, Sucripciones a FCI)
+                    footerText: "Ingresá el número de opción seleccionada:",
+                    listOfSections: listaDeSesiones,
+                });
+                datos.push({
+                    recipientPhone,
+                    listaDeSesiones,
+                    id: "menuInicio",
+                });
+            }
         }
+    }
+    if (existe === "noExiste") {
+        await Whatsapp.sendSimpleButtons({
+            recipientPhone: 543814987351,
+            message: `Uy, todavía no sos cliente de Cocos. Tener cuenta es necesario para operar dólar mep y poder comprar y vender activos.
+            ¿Querés abrirte una cuenta? Es gratis y te va a llevar sólo 5 minutos :)`,
+            listOfButtons: [
+                {
+                    title: "Si",
+                    id: "crearCuenta",
+                },
+                {
+                    title: "No",
+                    id: "salir",
+                },
+            ],
+        });
     }
 };
 
