@@ -376,11 +376,11 @@ export const replyButtonNoExiste = async (incomingMessage, recipientPhone) => {
             ],
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
-        // datos.push({
-        //     recipientPhone,
-        //     listaDeSesiones,
-        //     id: "terminosYCondiciones",
-        // });
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "terminosYCondiciones",
+        });
     }
     if (incomingMessage === "salir") {
         await Whatsapp.sendText({
@@ -400,5 +400,26 @@ export const replyButtonNoExiste = async (incomingMessage, recipientPhone) => {
         //     listaDeSesiones,
         //     id: "yaEsClienteDNI",
         // });
+    }
+};
+
+export const replyButtonAceptoTyC = async (incomingMessage, recipientPhone) => {
+    datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    if (incomingMessage === "siEstoyDeAcuerdo") {
+        await Whatsapp.sendText({
+            message: "Decime por favor tu nombre y apellido:",
+            recipientPhone: recipientPhone,
+        });
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "nombreYapellido",
+        });
+    }
+    if (incomingMessage === "noEstoyDeAcuerdo") {
+        await Whatsapp.sendText({
+            message: "😃",
+            recipientPhone: recipientPhone,
+        });
     }
 };

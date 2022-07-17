@@ -8,6 +8,7 @@ import {
     comprarVenderUSDT,
     estaDeAcuerdo,
     replyButtonNoExiste,
+    replyButtonAceptoTyC,
 } from "../utils/messagesFunction.js";
 
 export const verifyToken = (req, res) => {
@@ -133,6 +134,16 @@ export const sendReceiveMessages = async (req, res) => {
                 estaElNumero[1] === "noExiste"
             ) {
                 replyButtonNoExiste(
+                    incomingMessage.button_reply.id,
+                    recipientPhone
+                );
+            }
+            if (
+                typeOfMsg === "simple_button_message" &&
+                estaElNumero.includes(recipientPhone) &&
+                estaElNumero[1] === "terminosYCondiciones"
+            ) {
+                replyButtonAceptoTyC(
                     incomingMessage.button_reply.id,
                     recipientPhone
                 );
