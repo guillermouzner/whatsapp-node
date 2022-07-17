@@ -49,12 +49,16 @@ export const sendReceiveMessages = async (req, res) => {
         if (data?.isMessage) {
             let incomingMessage = data.message;
             let recipientPhone = incomingMessage.from.phone; // extract the phone number of the customer
-            let recipientName = incomingMessage.from.name; // extract the name of the customer
+            if (recipientPhone[2] === "9") {
+                recipientPhone.splice(2, 1);
+            }
+            recipientPhone = recipientPhone.join("");
             let typeOfMsg = incomingMessage.type; // extract the type of message
             let message_id = incomingMessage.message_id; // extract the message id
+            //let recipientName = incomingMessage.from.name; // extract the name of the customer
             // let text = incomingMessage.text.body;
             // let text = incomingMessage.button_reply.id;
-            console.log(recipientPhone, recipientName, typeOfMsg, message_id);
+            //console.log(recipientPhone, recipientName, typeOfMsg, message_id);
             console.log(datos);
             console.log(recipientPhone);
             if (incomingMessage?.context)
