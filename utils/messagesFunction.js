@@ -170,6 +170,11 @@ export const radioButtonMenuInicio = async (
                 },
             ],
         });
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "noExiste",
+        });
     }
 };
 
@@ -346,5 +351,29 @@ export const estaDeAcuerdo = async (incomingMessage, recipientPhone) => {
             recipientPhone: recipientPhone,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
+};
+
+export const replyButtonNoExiste = async (incomingMessage, recipientPhone) => {
+    if (incomingMessage === "crearCuenta") {
+        await Whatsapp.sendText({
+            message:
+                "Antes de comenzar, te pedimos que aceptes nuestros términos y condiciones:\n\n👉 https://www.santander.com.ar/banco/wcm/connect/23e5db12-42ef-4872-b9ed-b8b52e3fae9c/Terminos+y+Condiciones+App+Santander.pdf?MOD=AJPERES&CVID=nrtTxgR",
+            recipientPhone: recipientPhone,
+        });
+        await Whatsapp.sendSimpleButtons({
+            recipientPhone: recipientPhone,
+            message: `¿Estás de acuerdo?`,
+            listOfButtons: [
+                {
+                    title: "Si",
+                    id: "siEstoyDeAcuerdo",
+                },
+                {
+                    title: "No",
+                    id: "noEstoyDeAcuerdo",
+                },
+            ],
+        });
     }
 };
