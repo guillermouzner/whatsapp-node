@@ -130,7 +130,7 @@ export const radioButtonMenuInicio = async (
         if (existe === "noExiste") {
             await Whatsapp.sendSimpleButtons({
                 recipientPhone: 543814987351,
-                message: `Uy, todavía no sos cliente de Santander. Tener cuenta es necesario para operar dólar mep y poder comprar y vender activos.\n¿Querés abrirte una cuenta? Es gratis y te va a llevar sólo 5 minutos :)`,
+                message: `Uy, todavía no sos cliente de Santander. Tener cuenta es necesario para operar dólar mep.\n¿Querés abrirte una cuenta? Es gratis y te va a llevar sólo 5 minutos :)`,
                 listOfButtons: [
                     {
                         title: "Si",
@@ -139,6 +139,10 @@ export const radioButtonMenuInicio = async (
                     {
                         title: "No",
                         id: "salir",
+                    },
+                    {
+                        title: "Ya soy cliente",
+                        id: "soyCliente",
                     },
                 ],
             });
