@@ -11,7 +11,7 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
             await Whatsapp.sendText({
                 message:
                     "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
-                recipientPhone: 543814987351,
+                recipientPhone: recipientPhone,
             });
         }
     } else if (theTextMessage !== "Hola" && theTextMessage !== "hola") {
@@ -19,13 +19,13 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
             await Whatsapp.sendText({
                 message:
                     "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
-                recipientPhone: 543814987351,
+                recipientPhone: recipientPhone,
             });
         }
     } else {
         await Whatsapp.sendText({
             message: `🤖 Hola soy Santi, tu asistente virtual en Santander♨️`,
-            recipientPhone: 543814987351,
+            recipientPhone: recipientPhone,
         });
         {
             listaDeSesiones = [
@@ -73,7 +73,7 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
             const { compra, venta } = await dolarMep();
 
             await Whatsapp.sendRadioButtons({
-                recipientPhone: 543814987351,
+                recipientPhone: recipientPhone,
                 headerText: "¿En qué puedo ayudarte? 👇",
                 bodyText: `1️⃣. Comprar/ Vender Dolar MEP\n2️⃣. Recargar SUBE\n3️⃣. Pagar Servicios\n4️⃣. Abrir una cuenta en Santander\n5️⃣. Hacer una consulta\n6️⃣. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ ${venta} / Compra: AR$ ${compra}\n`,
                 //Operar Activos (Compra, Venta, Sucripciones a FCI)
@@ -98,7 +98,7 @@ export const radioButtonMenuInicio = async (
         if (incomingMessage === "2" || incomingMessage === "3") {
             await Whatsapp.sendText({
                 message: `🤖 Opcion no disponible momentaneamente ♨️`,
-                recipientPhone: 543814987351,
+                recipientPhone: recipientPhone,
             });
             datos = datos.filter(
                 (item) => item.recipientPhone !== recipientPhone
@@ -107,7 +107,7 @@ export const radioButtonMenuInicio = async (
 
         if (incomingMessage === "1") {
             await Whatsapp.sendSimpleButtons({
-                recipientPhone: 543814987351,
+                recipientPhone: recipientPhone,
                 message: `Selecciona la opcion que deseas hacer`,
                 listOfButtons: [
                     {
@@ -132,7 +132,7 @@ export const radioButtonMenuInicio = async (
 
         if (incomingMessage === "5") {
             await Whatsapp.sendRadioButtons({
-                recipientPhone: 543814987351,
+                recipientPhone: recipientPhone,
                 headerText: "¿En qué puedo ayudarte? 👇",
                 bodyText:
                     "1️⃣. Quiero empezar a cobrar mi sueldo u honorario en Santander\n2️⃣. Aumentar límite de Tarjeta de Crédito Santander\n3️⃣. ¿Qué es Getnet?\n4️⃣. Soy freelancer, ¿puedo acreditar mi orden de pago en dólares? \n5️⃣. Cajeros cercanos\n6️⃣. Preguntas Frecuentes\n",
@@ -153,7 +153,7 @@ export const radioButtonMenuInicio = async (
     if (existe === "noExiste") {
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
         await Whatsapp.sendSimpleButtons({
-            recipientPhone: 543814987351,
+            recipientPhone: recipientPhone,
             message: `Uy, todavía no sos cliente de Santander. Tener cuenta es necesario para operar dólar mep y pagar servicios.\n¿Querés abrirte una cuenta? Es gratis y te va a llevar sólo 5 minutos :)`,
             listOfButtons: [
                 {
@@ -178,7 +178,7 @@ export const replyButton = async (incomingMessage, recipientPhone) => {
     if (incomingMessage === "comprar_usdt") {
         await Whatsapp.sendText({
             message: `El precio actual estimado es de $ ${compra}\n\nIngrese la cantidad de USD que desea comprar (en numeros):`,
-            recipientPhone: 543814987351,
+            recipientPhone: recipientPhone,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
         datos.push({
@@ -190,7 +190,7 @@ export const replyButton = async (incomingMessage, recipientPhone) => {
     if (incomingMessage === "vender_usdt") {
         await Whatsapp.sendText({
             message: `El precio actual estimado es de $ ${venta}\n\nIngrese la cantidad de USD que desea vender (en numeros):`,
-            recipientPhone: 543814987351,
+            recipientPhone: recipientPhone,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
         datos.push({
@@ -212,7 +212,7 @@ export const comprarVenderUSDT = async (
         let montoeEnPesos = compra * incomingMessage;
         await Whatsapp.sendText({
             message: `⚠ Vas a operar de tu cuenta Nº ${numeroDeCuenta}`,
-            recipientPhone: 543814987351,
+            recipientPhone: recipientPhone,
         });
         await Whatsapp.sendText({
             message: `📄 Resumen de la operación:\n▫ Compra de Dólar Mep\n▫ Cotización indicativa: $ ${Intl.NumberFormat(
@@ -226,11 +226,11 @@ export const comprarVenderUSDT = async (
             )}\n▫ Dolares a recibir: U$D ${Intl.NumberFormat("es-AR").format(
                 incomingMessage
             )}`,
-            recipientPhone: 543814987351,
+            recipientPhone: recipientPhone,
         });
 
         await Whatsapp.sendSimpleButtons({
-            recipientPhone: 543814987351,
+            recipientPhone: recipientPhone,
             message: `▫ ¿Estás de acuerdo?`,
             listOfButtons: [
                 {
@@ -259,7 +259,7 @@ export const comprarVenderUSDT = async (
         let montoeEnPesos = venta * incomingMessage;
         await Whatsapp.sendText({
             message: `⚠ Vas a operar de tu cuenta Nº ${numeroDeCuenta}`,
-            recipientPhone: 543814987351,
+            recipientPhone: recipientPhone,
         });
         await Whatsapp.sendText({
             message: `📄 Resumen de la operación:\n▫ Venta de Dólar Mep\n▫ Cotización indicativa: $ ${Intl.NumberFormat(
@@ -273,11 +273,11 @@ export const comprarVenderUSDT = async (
             )}\n▫ Pesos a recibir: $ ${Intl.NumberFormat("es-AR").format(
                 montoeEnPesos
             )}`,
-            recipientPhone: 543814987351,
+            recipientPhone: recipientPhone,
         });
 
         await Whatsapp.sendSimpleButtons({
-            recipientPhone: 543814987351,
+            recipientPhone: recipientPhone,
             message: `▫ ¿Estás de acuerdo?`,
             listOfButtons: [
                 {
@@ -303,7 +303,7 @@ export const comprarVenderUSDT = async (
     } else {
         await Whatsapp.sendText({
             message: `Debe ingresar el monto en formato numero`,
-            recipientPhone: 543814987351,
+            recipientPhone: recipientPhone,
         });
     }
 };
@@ -312,14 +312,14 @@ export const estaDeAcuerdo = async (incomingMessage, recipientPhone) => {
     if (incomingMessage === "esta_de_acuerdo") {
         await Whatsapp.sendText({
             message: `La solicitud finalizó correctamente 🤩\nYa podes ver la orden reflejada en nuestra app.`,
-            recipientPhone: 543814987351,
+            recipientPhone: recipientPhone,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
     }
 
     if (incomingMessage === "modifica_monto") {
         await Whatsapp.sendSimpleButtons({
-            recipientPhone: 543814987351,
+            recipientPhone: recipientPhone,
             message: `Selecciona la opcion que deseas hacer`,
             listOfButtons: [
                 {
@@ -343,7 +343,7 @@ export const estaDeAcuerdo = async (incomingMessage, recipientPhone) => {
     if (incomingMessage === "no_esta_de_acuerdo") {
         await Whatsapp.sendText({
             message: `Operacion cancelada.`,
-            recipientPhone: 543814987351,
+            recipientPhone: recipientPhone,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
     }
