@@ -128,6 +128,9 @@ export const radioButtonMenuInicio = async (
             });
         }
         if (existe === "noExiste") {
+            datos = datos.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
             await Whatsapp.sendSimpleButtons({
                 recipientPhone: 543814987351,
                 message: `Uy, todavía no sos cliente de Santander. Tener cuenta es necesario para operar dólar mep.\n¿Querés abrirte una cuenta? Es gratis y te va a llevar sólo 5 minutos :)`,
