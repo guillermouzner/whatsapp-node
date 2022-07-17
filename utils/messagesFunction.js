@@ -3,7 +3,7 @@ import { dolarMep } from "./precioDolarMep.js";
 import { existeCel } from "./existeCel.js";
 export let listaDeSesiones = [];
 export let datos = [];
-export let createAccount = {};
+export let createAccount = [];
 export const textMessage = async (incomingMessage, recipientPhone) => {
     let theTextMessage = incomingMessage;
     if (!isNaN(theTextMessage)) {
@@ -425,9 +425,12 @@ export const replyButtonAceptoTyC = async (incomingMessage, recipientPhone) => {
 };
 
 export const textMessageNomyApe = async (incomingMessage, recipientPhone) => {
-    createAccount = {
-        ...{ userName: incomingMessage },
-    };
+    createAccount.push({ recipientPhone: recipientPhone });
+    createAccount.forEach((item) => {
+        if (item.recipientPhone === recipientPhone) {
+            Object.assign(item, { userName: incomingMessage });
+        }
+    });
     await Whatsapp.sendText({
         message:
             "¿Me decís tu email? Recordá que con él vas a poder acceder a tu cuenta.",
