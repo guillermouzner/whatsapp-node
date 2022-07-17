@@ -9,6 +9,8 @@ import {
     estaDeAcuerdo,
     replyButtonNoExiste,
     replyButtonAceptoTyC,
+    textMessageNomyApe,
+    createAccount,
 } from "../utils/messagesFunction.js";
 
 export const verifyToken = (req, res) => {
@@ -63,6 +65,7 @@ export const sendReceiveMessages = async (req, res) => {
             // let text = incomingMessage.button_reply.id;
             //console.log(recipientPhone, recipientName, typeOfMsg, message_id);
             console.log(datos);
+            console.log(createAccount);
             console.log(recipientPhone);
             if (incomingMessage?.context)
                 console.log("reply_button: " + incomingMessage.button_reply.id);
@@ -147,6 +150,13 @@ export const sendReceiveMessages = async (req, res) => {
                     incomingMessage.button_reply.id,
                     recipientPhone
                 );
+            }
+            if (
+                typeOfMsg === "text_message" &&
+                estaElNumero.includes(recipientPhone) &&
+                estaElNumero[1] === "nombreYapellido"
+            ) {
+                textMessageNomyApe(incomingMessage.text.body, recipientPhone);
             }
         }
         res.sendStatus(200);
