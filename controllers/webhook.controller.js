@@ -48,7 +48,7 @@ export const sendReceiveMessages = async (req, res) => {
 
         if (data?.isMessage) {
             let incomingMessage = data.message;
-            let recipientPhone = incomingMessage.from.phone; // extract the phone number of the customer
+            let recipientPhone = parseInt(incomingMessage.from.phone); // extract the phone number of the customer
             if (recipientPhone[2] === "9") {
                 recipientPhone.splice(2, 1);
             }
