@@ -376,11 +376,11 @@ export const replyButtonNoExiste = async (incomingMessage, recipientPhone) => {
             ],
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
-        datos.push({
-            recipientPhone,
-            listaDeSesiones,
-            id: "terminosYCondiciones",
-        });
+        // datos.push({
+        //     recipientPhone,
+        //     listaDeSesiones,
+        //     id: "terminosYCondiciones",
+        // });
     }
     if (incomingMessage === "salir") {
         await Whatsapp.sendText({
@@ -395,10 +395,10 @@ export const replyButtonNoExiste = async (incomingMessage, recipientPhone) => {
             recipientPhone: recipientPhone,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
-        datos.push({
-            recipientPhone,
-            listaDeSesiones,
-            id: "yaEsClienteDNI",
-        });
+        // datos.push({
+        //     recipientPhone,
+        //     listaDeSesiones,
+        //     id: "yaEsClienteDNI",
+        // });
     }
 };
