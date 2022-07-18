@@ -5,7 +5,6 @@ import { existeCel } from "./existeCel.js";
 export let listaDeSesiones = [];
 export let datos = [];
 export let createAccount = [];
-// export let numeroDeIntentos = [];
 
 export const textMessage = async (incomingMessage, recipientPhone) => {
     let theTextMessage = incomingMessage;
@@ -435,7 +434,8 @@ export const textMessageDNI = async (incomingMessage, recipientPhone) => {
         }
     });
     await Whatsapp.sendText({
-        message: "¿Cuál es tu número de DNI?",
+        message:
+            "¿Cuál es tu número de DNI?\n\nIngresar el DNI en formato numero y sin puntos.",
         recipientPhone: recipientPhone,
     });
     datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
@@ -447,22 +447,41 @@ export const textMessageDNI = async (incomingMessage, recipientPhone) => {
 };
 
 export const textMessageEmail = async (incomingMessage, recipientPhone) => {
-    createAccount.forEach((item) => {
-        if (item.recipientPhone === recipientPhone) {
-            Object.assign(item, { documento: incomingMessage });
-        }
-    });
-    await Whatsapp.sendText({
-        message:
-            "¿Me decís tu email? Recordá que con él vas a poder acceder a tu cuenta.",
-        recipientPhone: recipientPhone,
-    });
-    datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
-    datos.push({
-        recipientPhone,
-        listaDeSesiones,
-        id: "verificarEmail",
-    });
+    if (isNaN(incomingMessage)) {
+        await Whatsapp.sendText({
+            message: `Debe ingresar el DNI en formato numero y sin puntos`,
+            recipientPhone: recipientPhone,
+        });
+    }
+
+    if (incomingMessage.length !== 8 && incomingMessage.length !== 7) {
+        await Whatsapp.sendText({
+            message: `Debe ingresar un DNI válido`,
+            recipientPhone: recipientPhone,
+        });
+    }
+
+    if (
+        !isNaN(incomingMessage) &&
+        (incomingMessage.length === 8 || incomingMessage.length === 7)
+    ) {
+        createAccount.forEach((item) => {
+            if (item.recipientPhone === recipientPhone) {
+                Object.assign(item, { documento: incomingMessage });
+            }
+        });
+        await Whatsapp.sendText({
+            message:
+                "¿Me decís tu email? Recordá que con él vas a poder acceder a tu cuenta.",
+            recipientPhone: recipientPhone,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "verificarEmail",
+        });
+    }
 };
 
 export const verificarEmail = async (incomingMessage, recipientPhone) => {
@@ -486,7 +505,7 @@ export const verificarEmail = async (incomingMessage, recipientPhone) => {
         if (item.recipientPhone === recipientPhone) {
             Object.assign(item, { tokenConfirm }, { numeroDeIntentos: 0 });
         }
-    }); //numeroDeintentos:0
+    });
 };
 
 export const verificarToken = async (incomingMessage, recipientPhone) => {
@@ -533,14 +552,6 @@ export const verificarToken = async (incomingMessage, recipientPhone) => {
                 message: `❌ El código ingresado es incorrecto.`,
                 recipientPhone: recipientPhone,
             });
-
-            // await replyButtonAceptoTyC("siEstoyDeAcuerdo", recipientPhone);
         }
     });
 };
-
-/// agregar numeros de intentos si intentos = 1
-// intento = {recipientPhone,0}
-/// createAccount = createAccount.filter(
-///     (item) => item.recipientPhone !== recipientPhone
-/// replyButtonAceptoTyC('siEstoyDeAcuerdo',recipientPhone)
