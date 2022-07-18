@@ -503,7 +503,7 @@ export const verificarToken = async (incomingMessage, recipientPhone) => {
             recipientPhone: recipientPhone,
         });
         await Whatsapp.sendText({
-            message: `Hola ${item.username}!👋🏼\n\n👀 Estamos revisando la info que nos pasaste, estate atento a tu mail (${item.email}) que pronto te avisaremos las novedades.`,
+            message: `Hola ${tokenValidator[0].username}!👋🏼\n\n👀 Estamos revisando la info que nos pasaste, estate atento a tu mail (${tokenValidator[0].email}) que pronto te avisaremos las novedades.`,
             recipientPhone: recipientPhone,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
