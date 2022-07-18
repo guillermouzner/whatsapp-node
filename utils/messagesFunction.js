@@ -519,12 +519,13 @@ export const verificarToken = async (incomingMessage, recipientPhone) => {
                 recipientPhone: recipientPhone,
             });
             item.numeroDeIntentos = 1;
-        } else if (
-            item.recipientPhone === recipientPhone &&
-            item.numeroDeIntentos === 1
-        ) {
-            await replyButtonAceptoTyC("siEstoyDeAcuerdo", recipientPhone);
         }
+        // else if (
+        //     item.recipientPhone === recipientPhone &&
+        //     item.numeroDeIntentos === 1
+        // ) {
+        //     await replyButtonAceptoTyC("siEstoyDeAcuerdo", recipientPhone);
+        // }
     });
 };
 
