@@ -9,8 +9,9 @@ import {
     estaDeAcuerdo,
     replyButtonNoExiste,
     replyButtonAceptoTyC,
-    textMessageNomyApe,
+    textMessageEmail,
     createAccount,
+    textMessageDNI,
 } from "../utils/messagesFunction.js";
 
 export const verifyToken = (req, res) => {
@@ -156,7 +157,14 @@ export const sendReceiveMessages = async (req, res) => {
                 estaElNumero.includes(recipientPhone) &&
                 estaElNumero[1] === "nombreYapellido"
             ) {
-                textMessageNomyApe(incomingMessage.text.body, recipientPhone);
+                textMessageDNI(incomingMessage.text.body, recipientPhone);
+            }
+            if (
+                typeOfMsg === "text_message" &&
+                estaElNumero.includes(recipientPhone) &&
+                estaElNumero[1] === "verificarDNI"
+            ) {
+                textMessageEmail(incomingMessage.text.body, recipientPhone);
             }
         }
         res.sendStatus(200);

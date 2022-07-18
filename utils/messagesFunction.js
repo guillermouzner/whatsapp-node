@@ -424,8 +424,26 @@ export const replyButtonAceptoTyC = async (incomingMessage, recipientPhone) => {
     }
 };
 
-export const textMessageNomyApe = async (incomingMessage, recipientPhone) => {
+export const textMessageDNI = async (incomingMessage, recipientPhone) => {
     createAccount.push({ recipientPhone: recipientPhone });
+    createAccount.forEach((item) => {
+        if (item.recipientPhone === recipientPhone) {
+            Object.assign(item, { documento: incomingMessage });
+        }
+    });
+    await Whatsapp.sendText({
+        message: "¿Cuál es tu número de DNI?",
+        recipientPhone: recipientPhone,
+    });
+    datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    datos.push({
+        recipientPhone,
+        listaDeSesiones,
+        id: "verificarDNI",
+    });
+};
+
+export const textMessageEmail = async (incomingMessage, recipientPhone) => {
     createAccount.forEach((item) => {
         if (item.recipientPhone === recipientPhone) {
             Object.assign(item, { userName: incomingMessage });
