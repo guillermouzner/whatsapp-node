@@ -519,13 +519,19 @@ export const verificarToken = async (incomingMessage, recipientPhone) => {
                 recipientPhone: recipientPhone,
             });
             item.numeroDeIntentos = 1;
+        } else if (
+            item.recipientPhone === recipientPhone &&
+            item.numeroDeIntentos === 1
+        ) {
+            datos = datos.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
+            createAccount = createAccount.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
+
+            await replyButtonAceptoTyC("siEstoyDeAcuerdo", recipientPhone);
         }
-        // else if (
-        //     item.recipientPhone === recipientPhone &&
-        //     item.numeroDeIntentos === 1
-        // ) {
-        //     await replyButtonAceptoTyC("siEstoyDeAcuerdo", recipientPhone);
-        // }
     });
 };
 
