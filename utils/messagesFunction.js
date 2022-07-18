@@ -533,7 +533,11 @@ export const verificarToken = async (incomingMessage, recipientPhone) => {
             item.numeroDeIntentos === 0
         ) {
             await Whatsapp.sendText({
-                message: `❌ El código ingresado es incorrecto.\n\nPodras intentarlo una vez mas y en caso de error tendras que iniciar todo el proceso de nuevo.`,
+                message: `❌ El código ingresado es incorrecto.`,
+                recipientPhone: recipientPhone,
+            });
+            await Whatsapp.sendText({
+                message: `Podras intentarlo una vez mas y en caso de error tendras que iniciar todo el proceso de nuevo.`,
                 recipientPhone: recipientPhone,
             });
             item.numeroDeIntentos = 1;
