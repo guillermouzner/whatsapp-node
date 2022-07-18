@@ -45,8 +45,8 @@ export const verifyToken = (req, res) => {
 export const sendReceiveMessages = async (req, res) => {
     try {
         let data = Whatsapp.parseMessage(req.body);
-        //console.log(data);
-
+        console.log(data);
+        console.log("**********************************");
         if (!data?.isMessage) {
             console.log("VAMO KENIAAAAAAAAAAAA");
             console.log(data.notificationMessage.id);

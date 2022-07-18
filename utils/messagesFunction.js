@@ -5,7 +5,6 @@ import { existeCel } from "./existeCel.js";
 export let listaDeSesiones = [];
 export let datos = [];
 export let createAccount = [];
-export let tokenValidator = [];
 
 export const textMessage = async (incomingMessage, recipientPhone) => {
     let theTextMessage = incomingMessage;
@@ -504,6 +503,10 @@ export const verificarToken = async (incomingMessage, recipientPhone) => {
                 recipientPhone: recipientPhone,
             });
             datos = datos.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
+
+            createAccount = createAccount.filter(
                 (item) => item.recipientPhone !== recipientPhone
             );
         }
