@@ -5,6 +5,7 @@ import { existeCel } from "./existeCel.js";
 export let listaDeSesiones = [];
 export let datos = [];
 export let createAccount = [];
+export let numeroDeIntentos = [];
 
 export const textMessage = async (incomingMessage, recipientPhone) => {
     let theTextMessage = incomingMessage;
@@ -489,6 +490,14 @@ export const verificarEmail = async (incomingMessage, recipientPhone) => {
 };
 
 export const verificarToken = async (incomingMessage, recipientPhone) => {
+    numeroDeIntentos.forEach(async (item) => {
+        if (item.recipientPhone === recipientPhone) {
+            return await Whatsapp.sendText({
+                message: `❌ El código ingresado es incorrecto.`,
+                recipientPhone: recipientPhone,
+            });
+        }
+    });
     createAccount.forEach(async (item) => {
         if (
             item.recipientPhone === recipientPhone &&
@@ -514,6 +523,15 @@ export const verificarToken = async (incomingMessage, recipientPhone) => {
                 message: `❌ El código ingresado es incorrecto.\n\nPodras intentarlo una vez mas y en caso de error tendras que iniciar todo el proceso de nuevo.`,
                 recipientPhone: recipientPhone,
             });
+            numeroDeIntentos.push({
+                recipientPhone,
+            });
         }
     });
 };
+
+/// agregar numeros de intentos si intentos = 1
+// intento = {recipientPhone,0}
+/// createAccount = createAccount.filter(
+///     (item) => item.recipientPhone !== recipientPhone
+/// replyButtonAceptoTyC('siEstoyDeAcuerdo',recipientPhone)
