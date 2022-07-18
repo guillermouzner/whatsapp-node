@@ -434,8 +434,7 @@ export const textMessageDNI = async (incomingMessage, recipientPhone) => {
         }
     });
     await Whatsapp.sendText({
-        message:
-            "¿Cuál es tu número de DNI?\n\nIngresar el DNI en formato numero y sin puntos.",
+        message: "¿Cuál es tu número de DNI?",
         recipientPhone: recipientPhone,
     });
     datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
@@ -447,24 +446,9 @@ export const textMessageDNI = async (incomingMessage, recipientPhone) => {
 };
 
 export const textMessageEmail = async (incomingMessage, recipientPhone) => {
-    if (isNaN(incomingMessage)) {
-        await Whatsapp.sendText({
-            message: `Debe ingresar el DNI en formato numero y sin puntos`,
-            recipientPhone: recipientPhone,
-        });
-    }
+    const regexDNI = /^[\d]{1,3}\.?[\d]{3,3}\.?[\d]{3,3}$/;
 
-    if (incomingMessage.length !== 8 && incomingMessage.length !== 7) {
-        await Whatsapp.sendText({
-            message: `Debe ingresar un DNI válido`,
-            recipientPhone: recipientPhone,
-        });
-    }
-
-    if (
-        !isNaN(incomingMessage) &&
-        (incomingMessage.length === 8 || incomingMessage.length === 7)
-    ) {
+    if (regexDNI.test(incomingMessage)) {
         createAccount.forEach((item) => {
             if (item.recipientPhone === recipientPhone) {
                 Object.assign(item, { documento: incomingMessage });
@@ -481,31 +465,46 @@ export const textMessageEmail = async (incomingMessage, recipientPhone) => {
             listaDeSesiones,
             id: "verificarEmail",
         });
+    } else {
+        await Whatsapp.sendText({
+            message: `Debe ingresar un DNI válido`,
+            recipientPhone: recipientPhone,
+        });
     }
 };
 
 export const verificarEmail = async (incomingMessage, recipientPhone) => {
-    createAccount.forEach((item) => {
-        if (item.recipientPhone === recipientPhone) {
-            Object.assign(item, { email: incomingMessage });
-        }
-    });
-    const tokenConfirm = nanoid(5);
-    await Whatsapp.sendText({
-        message: `📩 Te voy a mandar un código a tu mail (${incomingMessage}). Si no lo recibís, recordá revisar el correo no deseado.\n\n¿Cuál es el código de verificación?\n\n(token: ${tokenConfirm})`,
-        recipientPhone: recipientPhone,
-    });
-    datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
-    datos.push({
-        recipientPhone,
-        listaDeSesiones,
-        id: "verificarToken",
-    });
-    createAccount.forEach((item) => {
-        if (item.recipientPhone === recipientPhone) {
-            Object.assign(item, { tokenConfirm }, { numeroDeIntentos: 0 });
-        }
-    });
+    const regexEmail =
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (regexEmail.test(incomingMessage)) {
+        createAccount.forEach((item) => {
+            if (item.recipientPhone === recipientPhone) {
+                Object.assign(item, { email: incomingMessage });
+            }
+        });
+        const tokenConfirm = nanoid(5);
+        await Whatsapp.sendText({
+            message: `📩 Te voy a mandar un código a tu mail (${incomingMessage}). Si no lo recibís, recordá revisar el correo no deseado.\n\n¿Cuál es el código de verificación?\n\n(token: ${tokenConfirm})`,
+            recipientPhone: recipientPhone,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "verificarToken",
+        });
+        createAccount.forEach((item) => {
+            if (item.recipientPhone === recipientPhone) {
+                Object.assign(item, { tokenConfirm }, { numeroDeIntentos: 0 });
+            }
+        });
+    } else {
+        await Whatsapp.sendText({
+            message: `Debe ingresar un email válido`,
+            recipientPhone: recipientPhone,
+        });
+    }
 };
 
 export const verificarToken = async (incomingMessage, recipientPhone) => {
