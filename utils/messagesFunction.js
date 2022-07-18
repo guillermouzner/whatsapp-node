@@ -490,7 +490,7 @@ export const verificarEmail = async (incomingMessage, recipientPhone) => {
 };
 
 export const verificarToken = async (incomingMessage, recipientPhone) => {
-    createAccount.forEach((item) => {
+    createAccount.forEach(async (item) => {
         if (
             item.recipientPhone === recipientPhone &&
             item.tokenConfirm === incomingMessage
@@ -503,8 +503,9 @@ export const verificarToken = async (incomingMessage, recipientPhone) => {
                 message: `Hola ${item.username}!👋🏼\n\n👀 Estamos revisando la info que nos pasaste, estate atento a tu mail (${item.email}) que pronto te avisaremos las novedades.`,
                 recipientPhone: recipientPhone,
             });
-            datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+            datos = datos.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
         }
     });
-    
 };
