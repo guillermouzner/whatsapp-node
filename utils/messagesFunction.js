@@ -529,8 +529,12 @@ export const verificarToken = async (incomingMessage, recipientPhone) => {
             createAccount = createAccount.filter(
                 (item) => item.recipientPhone !== recipientPhone
             );
+            await Whatsapp.sendText({
+                message: `❌ El código ingresado es incorrecto.`,
+                recipientPhone: recipientPhone,
+            });
 
-            await replyButtonAceptoTyC("siEstoyDeAcuerdo", recipientPhone);
+            // await replyButtonAceptoTyC("siEstoyDeAcuerdo", recipientPhone);
         }
     });
 };
