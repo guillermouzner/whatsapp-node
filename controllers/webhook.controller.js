@@ -12,6 +12,7 @@ import {
     textMessageEmail,
     createAccount,
     textMessageDNI,
+    verificarEmail,
 } from "../utils/messagesFunction.js";
 
 export const verifyToken = (req, res) => {
@@ -165,6 +166,13 @@ export const sendReceiveMessages = async (req, res) => {
                 estaElNumero[1] === "verificarDNI"
             ) {
                 textMessageEmail(incomingMessage.text.body, recipientPhone);
+            }
+            if (
+                typeOfMsg === "text_message" &&
+                estaElNumero.includes(recipientPhone) &&
+                estaElNumero[1] === "verificarEmail"
+            ) {
+                verificarEmail(incomingMessage.text.body, recipientPhone);
             }
         }
         res.sendStatus(200);

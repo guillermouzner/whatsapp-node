@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { Whatsapp } from "../utils/whatsappCloud.js";
 import { dolarMep } from "./precioDolarMep.js";
 import { existeCel } from "./existeCel.js";
@@ -428,7 +429,7 @@ export const textMessageDNI = async (incomingMessage, recipientPhone) => {
     createAccount.push({ recipientPhone: recipientPhone });
     createAccount.forEach((item) => {
         if (item.recipientPhone === recipientPhone) {
-            Object.assign(item, { documento: incomingMessage });
+            Object.assign(item, { username: incomingMessage });
         }
     });
     await Whatsapp.sendText({
@@ -446,7 +447,7 @@ export const textMessageDNI = async (incomingMessage, recipientPhone) => {
 export const textMessageEmail = async (incomingMessage, recipientPhone) => {
     createAccount.forEach((item) => {
         if (item.recipientPhone === recipientPhone) {
-            Object.assign(item, { userName: incomingMessage });
+            Object.assign(item, { documento: incomingMessage });
         }
     });
     await Whatsapp.sendText({
@@ -459,5 +460,25 @@ export const textMessageEmail = async (incomingMessage, recipientPhone) => {
         recipientPhone,
         listaDeSesiones,
         id: "verificarEmail",
+    });
+};
+
+export const verificarEmail = async (incomingMessage, recipientPhone) => {
+    createAccount.forEach((item) => {
+        if (item.recipientPhone === recipientPhone) {
+            Object.assign(item, { email: incomingMessage });
+        }
+    });
+    const tokenConfirm = nanoid(5);
+    await Whatsapp.sendText({
+        message: `📩 Te voy a mandar un código a tu mail ${incomingMessage}. Si no lo recibís, recordá revisar el correo no deseado.\n¿Cuál es el código de verificación?\n\n(token: ${tokenConfirm})`,
+        recipientPhone: recipientPhone,
+    });
+    datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+
+    createAccount.forEach((item) => {
+        if (item.recipientPhone === recipientPhone) {
+            Object.assign(item, { tokenConfirm });
+        }
     });
 };
