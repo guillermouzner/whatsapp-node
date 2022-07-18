@@ -471,14 +471,42 @@ export const verificarEmail = async (incomingMessage, recipientPhone) => {
     });
     const tokenConfirm = nanoid(5);
     await Whatsapp.sendText({
-        message: `📩 Te voy a mandar un código a tu mail ${incomingMessage}. Si no lo recibís, recordá revisar el correo no deseado.\n¿Cuál es el código de verificación?\n\n(token: ${tokenConfirm})`,
+        message: `📩 Te voy a mandar un código a tu mail (${incomingMessage}). Si no lo recibís, recordá revisar el correo no deseado.\n\n¿Cuál es el código de verificación?\n\n(token: ${tokenConfirm})`,
         recipientPhone: recipientPhone,
     });
     datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
-
+    datos.push({
+        recipientPhone,
+        listaDeSesiones,
+        id: "verificarToken",
+    });
     createAccount.forEach((item) => {
         if (item.recipientPhone === recipientPhone) {
             Object.assign(item, { tokenConfirm });
         }
     });
+};
+
+export const verificarToken = async (incomingMessage, recipientPhone) => {
+    createAccount.forEach((item)=> {
+        if (item.recipientPhone === recipientPhone && item.tokenConfirm === incomingMessage)
+        {
+            await Whatsapp.sendText({
+                message: `✅ El código ingresado es correcto.`,
+                recipientPhone: recipientPhone,
+            });
+            await Whatsapp.sendText({
+                message: `Hola ${item.username}!👋🏼\n\n👀 Estamos revisando la info que nos pasaste, estate atento a tu mail (${item.email}) que pronto te avisaremos las novedades.`,
+                recipientPhone: recipientPhone,
+            });
+            datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+        }
+        else{
+            await Whatsapp.sendText({
+                message: `❌ El código ingresado es incorrecto.\n\nPrueba una vez mas. Si fallas debes comenzar con todo el proceso de nuevo.`,
+                recipientPhone: recipientPhone,
+            });
+        }
+
+    })
 };
