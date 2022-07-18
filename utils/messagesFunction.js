@@ -427,7 +427,7 @@ export const replyButtonAceptoTyC = async (incomingMessage, recipientPhone) => {
 };
 
 export const textMessageDNI = async (incomingMessage, recipientPhone) => {
-    createAccount.push({ recipientPhone: recipientPhone });
+    createAccount.push({ recipientPhone: recipientPhone, numeroDeIntentos: 0 });
     createAccount.forEach((item) => {
         if (item.recipientPhone === recipientPhone) {
             Object.assign(item, { username: incomingMessage });
@@ -496,7 +496,7 @@ export const verificarEmail = async (incomingMessage, recipientPhone) => {
         });
         createAccount.forEach((item) => {
             if (item.recipientPhone === recipientPhone) {
-                Object.assign(item, { tokenConfirm }, { numeroDeIntentos: 0 });
+                Object.assign(item, { tokenConfirm });
             }
         });
     } else {
