@@ -518,15 +518,12 @@ export const verificarToken = async (incomingMessage, recipientPhone) => {
                 message: `❌ El código ingresado es incorrecto.\n\nPodras intentarlo una vez mas y en caso de error tendras que iniciar todo el proceso de nuevo.`,
                 recipientPhone: recipientPhone,
             });
-            createAccount.forEach((item) => {
-                if (item.recipientPhone === recipientPhone)
-                    item.numeroDeIntentos = 1;
-            });
+            item.numeroDeIntentos = 1;
         } else if (
             item.recipientPhone === recipientPhone &&
             item.numeroDeIntentos === 1
         ) {
-            replyButtonAceptoTyC("siEstoyDeAcuerdo", recipientPhone);
+            await replyButtonAceptoTyC("siEstoyDeAcuerdo", recipientPhone);
         }
     });
 };
