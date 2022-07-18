@@ -488,25 +488,29 @@ export const verificarEmail = async (incomingMessage, recipientPhone) => {
 };
 
 export const verificarToken = async (incomingMessage, recipientPhone) => {
-    createAccount.forEach((item)=> {
-        if (item.recipientPhone === recipientPhone && item.tokenConfirm === incomingMessage)
-        {
-            await Whatsapp.sendText({
-                message: `✅ El código ingresado es correcto.`,
-                recipientPhone: recipientPhone,
-            });
-            await Whatsapp.sendText({
-                message: `Hola ${item.username}!👋🏼\n\n👀 Estamos revisando la info que nos pasaste, estate atento a tu mail (${item.email}) que pronto te avisaremos las novedades.`,
-                recipientPhone: recipientPhone,
-            });
-            datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    let tokenValidator = [];
+    createAccount.forEach((item) => {
+        if (
+            item.recipientPhone === recipientPhone &&
+            item.tokenConfirm === incomingMessage
+        ) {
+            tokenValidator.push(item);
         }
-        else{
-            await Whatsapp.sendText({
-                message: `❌ El código ingresado es incorrecto.\n\nPrueba una vez mas. Si fallas debes comenzar con todo el proceso de nuevo.`,
-                recipientPhone: recipientPhone,
-            });
-        }
-
-    })
+    });
+    if (tokenValidator[0].recipientPhone === recipientPhone) {
+        await Whatsapp.sendText({
+            message: `✅ El código ingresado es correcto.`,
+            recipientPhone: recipientPhone,
+        });
+        await Whatsapp.sendText({
+            message: `Hola ${item.username}!👋🏼\n\n👀 Estamos revisando la info que nos pasaste, estate atento a tu mail (${item.email}) que pronto te avisaremos las novedades.`,
+            recipientPhone: recipientPhone,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    } else {
+        await Whatsapp.sendText({
+            message: `❌ El código ingresado es incorrecto.\n\nPrueba una vez mas. Si fallas debes comenzar con todo el proceso de nuevo.`,
+            recipientPhone: recipientPhone,
+        });
+    }
 };
