@@ -5,6 +5,8 @@ import { existeCel } from "./existeCel.js";
 export let listaDeSesiones = [];
 export let datos = [];
 export let createAccount = [];
+export let tokenValidator = [];
+
 export const textMessage = async (incomingMessage, recipientPhone) => {
     let theTextMessage = incomingMessage;
     if (!isNaN(theTextMessage)) {
@@ -488,7 +490,6 @@ export const verificarEmail = async (incomingMessage, recipientPhone) => {
 };
 
 export const verificarToken = async (incomingMessage, recipientPhone) => {
-    let tokenValidator = [];
     createAccount.forEach((item) => {
         if (
             item.recipientPhone === recipientPhone &&
