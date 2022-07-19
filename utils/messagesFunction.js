@@ -406,9 +406,9 @@ export const replyButtonNoExiste = async (incomingMessage, recipientPhone) => {
 };
 
 export const existeDni = async (incomingMessage, recipientPhone) => {
-    datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
     const { existe } = await existeCelDni(incomingMessage, recipientPhone);
     if (existe === "existeCel") {
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
         await textMessage("hola", recipientPhone);
     } else {
         await Whatsapp.sendSimpleButtons({
@@ -429,6 +429,8 @@ export const existeDni = async (incomingMessage, recipientPhone) => {
                 },
             ],
         });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+
         datos.push({
             recipientPhone,
             listaDeSesiones,
