@@ -15,6 +15,7 @@ import {
     verificarEmail,
     verificarToken,
     existeDni,
+    existeDniToken,
 } from "../utils/messagesFunction.js";
 
 export const verifyToken = (req, res) => {
@@ -162,6 +163,15 @@ export const sendReceiveMessages = async (req, res) => {
                 estaElNumero[1] === "yaEsClienteDNI"
             ) {
                 existeDni(incomingMessage.text.body, recipientPhone);
+            }
+
+            //// COINCIDE DNI, DOBLE AUTENTICACION AHORA CON MAIL
+            if (
+                typeOfMsg === "text_message" &&
+                estaElNumero.includes(recipientPhone) &&
+                estaElNumero[1] === "verificarTokenYaEsCliente"
+            ) {
+                existeDniToken(incomingMessage.text.body, recipientPhone);
             }
 
             if (
