@@ -406,10 +406,27 @@ export const replyButtonNoExiste = async (incomingMessage, recipientPhone) => {
 };
 
 export const existeDni = async (incomingMessage, recipientPhone) => {
-    const { existe } = await existeCelDni(incomingMessage, recipientPhone);
+    const { existe, email } = await existeCelDni(
+        incomingMessage,
+        recipientPhone
+    );
     if (existe === "existeCel") {
+        const tokenConfirm = nanoid(5);
+        await Whatsapp.sendText({
+            message: `📩 Te voy a mandar un código a tu mail (${email}). Si no lo recibís, recordá revisar el correo no deseado.\n\n¿Cuál es el código de verificación?\n\n(token: ${tokenConfirm})`,
+            recipientPhone: recipientPhone,
+        });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
-        await textMessage("hola", recipientPhone);
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "verificarTokenYaEsCliente",
+        });
+        createAccount.push({
+            recipientPhone: recipientPhone,
+            numeroDeIntentos: 0,
+            tokenConfirm: tokenConfirm,
+        });
     } else {
         await Whatsapp.sendSimpleButtons({
             recipientPhone: recipientPhone,
@@ -437,6 +454,55 @@ export const existeDni = async (incomingMessage, recipientPhone) => {
             id: "noExiste",
         });
     }
+};
+
+export const existeDniToken = async (incomingMessage, recipientPhone) => {
+    createAccount.forEach(async (item) => {
+        if (
+            item.recipientPhone === recipientPhone &&
+            item.tokenConfirm === incomingMessage
+        ) {
+            await Whatsapp.sendText({
+                message: `✅ El código ingresado es correcto.`,
+                recipientPhone: recipientPhone,
+            });
+            datos = datos.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
+
+            createAccount = createAccount.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
+            await textMessage("hola", recipientPhone);
+        } else if (
+            item.recipientPhone === recipientPhone &&
+            item.numeroDeIntentos === 0
+        ) {
+            await Whatsapp.sendText({
+                message: `❌ El código ingresado es incorrecto.`,
+                recipientPhone: recipientPhone,
+            });
+            await Whatsapp.sendText({
+                message: `Podras intentarlo una vez mas y en caso de error tendras que iniciar todo el proceso de nuevo.`,
+                recipientPhone: recipientPhone,
+            });
+            item.numeroDeIntentos = 1;
+        } else if (
+            item.recipientPhone === recipientPhone &&
+            item.numeroDeIntentos === 1
+        ) {
+            datos = datos.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
+            createAccount = createAccount.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
+            await Whatsapp.sendText({
+                message: `❌ El código ingresado es incorrecto.`,
+                recipientPhone: recipientPhone,
+            });
+        }
+    });
 };
 
 export const replyButtonAceptoTyC = async (incomingMessage, recipientPhone) => {
