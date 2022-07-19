@@ -157,7 +157,7 @@ export const sendReceiveMessages = async (req, res) => {
             }
             ///// YA ES CLIENTE PERO NO TIENE REGISTRADO EL CELULAR
             if (
-                typeOfMsg === "simple_button_message" &&
+                typeOfMsg === "text_message" &&
                 estaElNumero.includes(recipientPhone) &&
                 estaElNumero[1] === "yaEsClienteDNI"
             ) {
