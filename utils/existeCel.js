@@ -22,7 +22,7 @@ export const existeCel = async (numTel) => {
 export const existeCelDni = async (documento, numTel) => {
     try {
         const data = await fetch(
-            "https://homebanking-wp.herokuapp.com/auth/loginCel",
+            "https://homebanking-wp.herokuapp.com/auth/loginCelDni",
             {
                 method: "POST",
                 headers: {

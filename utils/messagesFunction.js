@@ -407,7 +407,6 @@ export const replyButtonNoExiste = async (incomingMessage, recipientPhone) => {
 
 export const existeDni = async (incomingMessage, recipientPhone) => {
     const { existe } = await existeCelDni(incomingMessage, recipientPhone);
-    console.log(existe);
     if (existe === "existeCel") {
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
         await textMessage("hola", recipientPhone);
