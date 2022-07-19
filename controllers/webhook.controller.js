@@ -14,6 +14,7 @@ import {
     textMessageDNI,
     verificarEmail,
     verificarToken,
+    existeDni,
 } from "../utils/messagesFunction.js";
 
 export const verifyToken = (req, res) => {
@@ -132,6 +133,7 @@ export const sendReceiveMessages = async (req, res) => {
             ) {
                 estaDeAcuerdo(incomingMessage.button_reply.id, recipientPhone);
             }
+            ///crear cuenta primero debe aceptar terminos y condiciones
             if (
                 typeOfMsg === "simple_button_message" &&
                 estaElNumero.includes(recipientPhone) &&
@@ -142,6 +144,7 @@ export const sendReceiveMessages = async (req, res) => {
                     recipientPhone
                 );
             }
+
             if (
                 typeOfMsg === "simple_button_message" &&
                 estaElNumero.includes(recipientPhone) &&
@@ -152,6 +155,15 @@ export const sendReceiveMessages = async (req, res) => {
                     recipientPhone
                 );
             }
+            ///// YA ES CLIENTE PERO NO TIENE REGISTRADO EL CELULAR
+            if (
+                typeOfMsg === "simple_button_message" &&
+                estaElNumero.includes(recipientPhone) &&
+                estaElNumero[1] === "yaEsClienteDNI"
+            ) {
+                existeDni(incomingMessage.text.body, recipientPhone);
+            }
+
             if (
                 typeOfMsg === "text_message" &&
                 estaElNumero.includes(recipientPhone) &&

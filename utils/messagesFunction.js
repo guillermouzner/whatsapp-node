@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { Whatsapp } from "../utils/whatsappCloud.js";
 import { dolarMep } from "./precioDolarMep.js";
-import { existeCel } from "./existeCel.js";
+import { existeCel, existeCelDni } from "./existeCel.js";
 export let listaDeSesiones = [];
 export let datos = [];
 export let createAccount = [];
@@ -397,11 +397,43 @@ export const replyButtonNoExiste = async (incomingMessage, recipientPhone) => {
             recipientPhone: recipientPhone,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
-        // datos.push({
-        //     recipientPhone,
-        //     listaDeSesiones,
-        //     id: "yaEsClienteDNI",
-        // });
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "yaEsClienteDNI",
+        });
+    }
+};
+
+export const existeDni = async (incomingMessage, recipientPhone) => {
+    datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    const { existe } = await existeCelDni(incomingMessage, recipientPhone);
+    if (existe === "existeCel") {
+        await textMessage("hola", recipientPhone);
+    } else {
+        await Whatsapp.sendSimpleButtons({
+            recipientPhone: recipientPhone,
+            message: `Uy, todavía no sos cliente de Santander. Tener cuenta es necesario para operar dólar mep y pagar servicios.\n¿Querés abrirte una cuenta? Es gratis y te va a llevar sólo 5 minutos :)`,
+            listOfButtons: [
+                {
+                    title: "Si",
+                    id: "crearCuenta",
+                },
+                {
+                    title: "No",
+                    id: "salir",
+                },
+                {
+                    title: "Ya soy cliente",
+                    id: "soyCliente",
+                },
+            ],
+        });
+        datos.push({
+            recipientPhone,
+            listaDeSesiones,
+            id: "noExiste",
+        });
     }
 };
 
