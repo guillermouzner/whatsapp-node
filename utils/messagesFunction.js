@@ -84,8 +84,8 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
             });
             datos.push({
                 recipientPhone,
-                listaDeSesiones,
                 id: "menuInicio",
+                // numeroDeIntentos: 1
             });
         }
     }
