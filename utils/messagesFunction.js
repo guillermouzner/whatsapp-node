@@ -32,7 +32,7 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
         }
     } else {
         await Whatsapp.sendText({
-            message: `🤖 Hola soy Santi, tu asistente virtual en Santander♨️`,
+            message: `*[NO OFICIAL]*\n🤖 Hola soy Santi, tu asistente virtual en Santander♨️`,
             recipientPhone: recipientPhone,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
