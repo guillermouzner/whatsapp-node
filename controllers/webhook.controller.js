@@ -85,8 +85,9 @@ export const sendReceiveMessages = async (req, res) => {
             });
 
             if (
-                typeOfMsg === "text_message" &&
-                !estaElNumero.includes(recipientPhone)
+                typeOfMsg === "text_message"
+                //&&
+                // !estaElNumero.includes(recipientPhone)
             ) {
                 textMessage(incomingMessage.text.body, recipientPhone);
             }

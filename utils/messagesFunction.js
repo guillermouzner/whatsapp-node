@@ -15,6 +15,9 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
                     "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
                 recipientPhone: recipientPhone,
             });
+            datos = datos.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
         }
     } else if (theTextMessage !== "Hola" && theTextMessage !== "hola") {
         {
@@ -23,12 +26,16 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
                     "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
                 recipientPhone: recipientPhone,
             });
+            datos = datos.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
         }
     } else {
         await Whatsapp.sendText({
             message: `🤖 Hola soy Santi, tu asistente virtual en Santander♨️`,
             recipientPhone: recipientPhone,
         });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
         {
             listaDeSesiones = [
                 {
