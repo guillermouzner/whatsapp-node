@@ -224,6 +224,8 @@ export const comprarVenderUSDT = async (
         const { compra } = await dolarMep();
         const { token, documento } = await existeCel(recipientPhone);
         const { pesos, dolares } = await saldos(token);
+        let cuentaPesos = pesos;
+        let cuentaDolares = dolares;
         let numeroDeCuenta = documento;
         let montoeEnPesos = compra * incomingMessage;
         await Whatsapp.sendText({
@@ -242,8 +244,8 @@ export const comprarVenderUSDT = async (
             )}\n▫ Dolares a recibir: U$D ${Intl.NumberFormat("es-AR").format(
                 incomingMessage
             )}\n▫ Pesos: ${Intl.NumberFormat("es-AR").format(
-                pesos
-            )}, Dolares: ${dolares}`,
+                cuentaPesos
+            )}, Dolares: ${cuentaDolares}`,
             recipientPhone: recipientPhone,
         });
 
