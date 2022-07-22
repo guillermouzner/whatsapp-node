@@ -241,7 +241,9 @@ export const comprarVenderUSDT = async (
                 montoeEnPesos
             )}\n▫ Dolares a recibir: U$D ${Intl.NumberFormat("es-AR").format(
                 incomingMessage
-            )}\n▫ Pesos: ${pesos}, Dolares: ${dolares}`,
+            )}\n▫ Pesos: ${Intl.NumberFormat("es-AR").format(
+                pesos
+            )}, Dolares: ${dolares}`,
             recipientPhone: recipientPhone,
         });
 
