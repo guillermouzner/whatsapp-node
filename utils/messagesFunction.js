@@ -286,8 +286,10 @@ export const comprarVenderUSDT = async (
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
         datos.push({
             recipientPhone,
-            listaDeSesiones,
             id: "estaDeAcuerdo",
+            accion: "comprarUSDT",
+            pesos: comprarDolares,
+            dolares: incomingMessage,
         });
     } else if (
         id === "venderUSDT" &&
@@ -334,8 +336,10 @@ export const comprarVenderUSDT = async (
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
         datos.push({
             recipientPhone,
-            listaDeSesiones,
             id: "estaDeAcuerdo",
+            accion: "venderUSDT",
+            pesos: venderDolares,
+            dolares: incomingMessage,
         });
     }
     if (isNaN(incomingMessage)) {
@@ -348,6 +352,8 @@ export const comprarVenderUSDT = async (
 
 export const estaDeAcuerdo = async (incomingMessage, recipientPhone) => {
     if (incomingMessage === "esta_de_acuerdo") {
+        const { token } = await existeCel(recipientPhone);
+        const { saldos } = await saldo(token);
         await Whatsapp.sendText({
             message: `La solicitud finalizó correctamente 🤩\nYa podes ver la orden reflejada en nuestra app.`,
             recipientPhone: recipientPhone,
@@ -444,7 +450,10 @@ export const existeDni = async (incomingMessage, recipientPhone) => {
     if (existe === "existeCel") {
         const tokenConfirm = nanoid(5);
         await Whatsapp.sendText({
-            message: `📩 Te voy a mandar un código a tu mail (${email}). Si no lo recibís, recordá revisar el correo no deseado.\n\n¿Cuál es el código de verificación?\n\n(token: ${tokenConfirm})`,
+            message: `📩 Te voy a mandar un código a tu mail (${email.replace(
+                /(\w{1})[\w.-]+@([\w.]+\w)/,
+                "$1*****@$2"
+            )}). Si no lo recibís, recordá revisar el correo no deseado.\n\n¿Cuál es el código de verificación?\n\n(token: ${tokenConfirm})`,
             recipientPhone: recipientPhone,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
