@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { Whatsapp } from "../utils/whatsappCloud.js";
 import { dolarMep } from "./precioDolarMep.js";
-import { existeCel, existeCelDni, saldos } from "./existeCel.js";
+import { existeCel, existeCelDni, saldo } from "./existeCel.js";
 export let listaDeSesiones = [];
 export let datos = [];
 export let createAccount = [];
@@ -223,9 +223,8 @@ export const comprarVenderUSDT = async (
     if (id === "comprarUSDT" && !isNaN(incomingMessage)) {
         const { compra } = await dolarMep();
         const { token, documento } = await existeCel(recipientPhone);
-        const { pesos, dolares } = await saldos(token);
-        let cuentaPesos = pesos;
-        let cuentaDolares = dolares;
+        const { saldos } = await saldo(token);
+
         let numeroDeCuenta = documento;
         let montoeEnPesos = compra * incomingMessage;
         await Whatsapp.sendText({
@@ -244,8 +243,8 @@ export const comprarVenderUSDT = async (
             )}\n▫ Dolares a recibir: U$D ${Intl.NumberFormat("es-AR").format(
                 incomingMessage
             )}\n▫ Pesos: ${Intl.NumberFormat("es-AR").format(
-                cuentaPesos
-            )}, Dolares: ${cuentaDolares}`,
+                saldos.pesos
+            )}, Dolares: ${saldos.dolares}`,
             recipientPhone: recipientPhone,
         });
 
