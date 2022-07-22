@@ -220,13 +220,32 @@ export const comprarVenderUSDT = async (
     id,
     recipientPhone
 ) => {
-    if (id === "comprarUSDT" && !isNaN(incomingMessage)) {
-        const { compra } = await dolarMep();
-        const { token, documento } = await existeCel(recipientPhone);
-        const { saldos } = await saldo(token);
+    const { compra, venta } = await dolarMep();
+    const { token, documento } = await existeCel(recipientPhone);
+    const { saldos } = await saldo(token);
+    let numeroDeCuenta = documento;
+    let comprarDolares = compra * incomingMessage;
+    let venderDolares = venta * incomingMessage;
 
-        let numeroDeCuenta = documento;
-        let montoeEnPesos = compra * incomingMessage;
+    if (
+        (id === "comprarUSDT" &&
+            !isNaN(incomingMessage) &&
+            saldos.pesos < comprarDolares) ||
+        (id === "venderUSDT" &&
+            !isNaN(incomingMessage) &&
+            saldos.dolares < incomingMessage)
+    ) {
+        await Whatsapp.sendText({
+            message: `No contas con suficiente saldo para realizar la operacion. Indicada`,
+            recipientPhone: recipientPhone,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
+    if (
+        id === "comprarUSDT" &&
+        !isNaN(incomingMessage) &&
+        saldos.pesos > comprarDolares
+    ) {
         await Whatsapp.sendText({
             message: `⚠ Vas a operar de tu cuenta Nº ${numeroDeCuenta}`,
             recipientPhone: recipientPhone,
@@ -272,10 +291,11 @@ export const comprarVenderUSDT = async (
             listaDeSesiones,
             id: "estaDeAcuerdo",
         });
-    } else if (id === "venderUSDT" && !isNaN(incomingMessage)) {
-        const { venta } = await dolarMep();
-        let numeroDeCuenta = 42121994;
-        let montoeEnPesos = venta * incomingMessage;
+    } else if (
+        id === "venderUSDT" &&
+        !isNaN(incomingMessage) &&
+        saldos.dolares > incomingMessage
+    ) {
         await Whatsapp.sendText({
             message: `⚠ Vas a operar de tu cuenta Nº ${numeroDeCuenta}`,
             recipientPhone: recipientPhone,
@@ -290,7 +310,7 @@ export const comprarVenderUSDT = async (
             ).format(
                 incomingMessage
             )}\n▫ Pesos a recibir: $ ${Intl.NumberFormat("es-AR").format(
-                montoeEnPesos
+                venderDolares
             )}`,
             recipientPhone: recipientPhone,
         });
