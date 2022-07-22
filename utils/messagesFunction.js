@@ -236,7 +236,7 @@ export const comprarVenderUSDT = async (
             saldos.dolares < incomingMessage)
     ) {
         await Whatsapp.sendText({
-            message: `No contas con suficiente saldo para realizar la operacion. Indicada`,
+            message: `No contas con suficiente saldo para realizar la operacion indicada`,
             recipientPhone: recipientPhone,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
@@ -339,7 +339,8 @@ export const comprarVenderUSDT = async (
             listaDeSesiones,
             id: "estaDeAcuerdo",
         });
-    } else {
+    }
+    if (isNaN(incomingMessage)) {
         await Whatsapp.sendText({
             message: `Debe ingresar el monto en formato numero`,
             recipientPhone: recipientPhone,
