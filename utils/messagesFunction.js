@@ -222,8 +222,8 @@ export const comprarVenderUSDT = async (
     recipientPhone
 ) => {
     const { compra, venta } = await dolarMep();
-    const { token, documento } = await existeCel(recipientPhone);
-    const { saldos } = await saldo(token);
+    const { uid, documento } = await existeCel(recipientPhone);
+    const { pesos, dolares } = await saldo(uid);
     let numeroDeCuenta = documento;
     let comprarDolares = compra * incomingMessage;
     let venderDolares = venta * incomingMessage;
@@ -231,10 +231,10 @@ export const comprarVenderUSDT = async (
     if (
         (id === "comprarUSDT" &&
             !isNaN(incomingMessage) &&
-            saldos.pesos < comprarDolares) ||
+            pesos < comprarDolares) ||
         (id === "venderUSDT" &&
             !isNaN(incomingMessage) &&
-            saldos.dolares < incomingMessage)
+            dolares < incomingMessage)
     ) {
         await Whatsapp.sendText({
             message: `No contas con suficiente saldo para realizar la operacion indicada`,
@@ -245,7 +245,7 @@ export const comprarVenderUSDT = async (
     if (
         id === "comprarUSDT" &&
         !isNaN(incomingMessage) &&
-        saldos.pesos > comprarDolares
+        pesos > comprarDolares
     ) {
         await Whatsapp.sendText({
             message: `⚠ Vas a operar de tu cuenta Nº ${numeroDeCuenta}`,
@@ -295,7 +295,7 @@ export const comprarVenderUSDT = async (
     } else if (
         id === "venderUSDT" &&
         !isNaN(incomingMessage) &&
-        saldos.dolares > incomingMessage
+        dolares > incomingMessage
     ) {
         await Whatsapp.sendText({
             message: `⚠ Vas a operar de tu cuenta Nº ${numeroDeCuenta}`,

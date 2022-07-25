@@ -39,15 +39,14 @@ export const existeCelDni = async (documento, numTel) => {
     }
 };
 
-export const saldo = async (token) => {
+export const saldo = async (uid) => {
     try {
         const obtenerSaldo = await fetch(
-            "https://homebanking-wp.herokuapp.com/home",
+            `https://homebanking-wp.herokuapp.com/home/${uid}`,
             {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + token,
                 },
             }
         );
