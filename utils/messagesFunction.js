@@ -15,7 +15,7 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
     ) {
         await Whatsapp.sendText({
             message:
-                "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
+                "_No cuento con una respuesta exacta a tu consulta._\n_Sin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:_\nHola",
             recipientPhone: recipientPhone,
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
@@ -44,39 +44,34 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
                     title: "Selecciona una opcion",
                     rows: [
                         {
-                            title: "operar activos",
+                            title: "Comprar - Vender Dolar MEP",
                             description: "1",
                             id: "operar_activos",
                         },
                         {
-                            title: "Comprar USDT",
+                            title: "Recargar SUBE",
                             description: "2",
-                            id: "Comprar_USDT",
+                            id: "recarga_sube",
                         },
                         {
-                            title: "Transferir a Banco",
+                            title: "Pagar Servicios",
                             description: "3",
-                            id: "Transferir_a_Banco",
+                            id: "pagar_servicios",
                         },
                         {
-                            title: "Convertir Cable-Mep",
+                            title: "Abrir cuenta Santander",
                             description: "4",
-                            id: "Convertir_Cable-Mep",
+                            id: "abrir_cuenta_santander",
                         },
                         {
-                            title: "Abrir cuenta Cocos",
+                            title: "Hacer una consulta",
                             description: "5",
-                            id: "Abrir_cuenta_Cocos",
+                            id: "consulta",
                         },
                         {
-                            title: "Consultar",
+                            title: "Cerrar sesion en este celular",
                             description: "6",
-                            id: "consultar",
-                        },
-                        {
-                            title: "Cerrar cuenta",
-                            description: "7",
-                            id: "cerrar_cuenta",
+                            id: "cerrar_sesion",
                         },
                     ],
                 },
@@ -88,7 +83,7 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
             await Whatsapp.sendRadioButtons({
                 recipientPhone: recipientPhone,
                 headerText: "¿En qué puedo ayudarte? 👇",
-                bodyText: `1️⃣. Comprar/ Vender Dolar MEP\n2️⃣. Recargar SUBE\n3️⃣. Pagar Servicios\n4️⃣. Abrir una cuenta en Santander\n5️⃣. Hacer una consulta\n6️⃣. Cerrar mi cuenta Santander\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ ${venta} / Compra: AR$ ${compra}\n`,
+                bodyText: `1️⃣. Comprar/ Vender Dolar MEP\n2️⃣. Recargar SUBE\n3️⃣. Pagar Servicios\n4️⃣. Abrir una cuenta en Santander\n5️⃣. Hacer una consulta\n6️⃣. Cerrar sesion en este celular\n\n📈 Cotización indicativa Dólar MEP (mediante Bonos):\n\nVenta: AR$ ${venta} / Compra: AR$ ${compra}\n`,
                 //Operar Activos (Compra, Venta, Sucripciones a FCI)
                 footerText: "Ingresá el número de opción seleccionada:",
                 listOfSections: listaDeSesiones,
@@ -125,11 +120,11 @@ export const radioButtonMenuInicio = async (
                 listOfButtons: [
                     {
                         title: "COMPRAR Dolar Mep",
-                        id: "comprar_usdt",
+                        id: "comprar_mep",
                     },
                     {
                         title: "VENDER Dolar Mep",
-                        id: "vender_usdt",
+                        id: "vender_mep",
                     },
                 ],
             });
@@ -139,7 +134,7 @@ export const radioButtonMenuInicio = async (
             datos.push({
                 recipientPhone,
                 listaDeSesiones,
-                id: "comprarVenderUSDT",
+                id: "comprarVenderMEP",
             });
         }
 
@@ -195,7 +190,7 @@ export const replyButton = async (incomingMessage, recipientPhone) => {
     const { compra, venta } = await dolarMep();
     // const compra = 315;
     // const venta = 310;
-    if (incomingMessage === "comprar_usdt") {
+    if (incomingMessage === "comprar_mep") {
         await Whatsapp.sendText({
             message: `El precio actual estimado es de $ ${compra}\n\nIngrese la cantidad de USD que desea comprar (en numeros):`,
             recipientPhone: recipientPhone,
@@ -204,10 +199,10 @@ export const replyButton = async (incomingMessage, recipientPhone) => {
         datos.push({
             recipientPhone,
             listaDeSesiones,
-            id: "comprarUSDT",
+            id: "comprarMEP",
         });
     }
-    if (incomingMessage === "vender_usdt") {
+    if (incomingMessage === "vender_mep") {
         await Whatsapp.sendText({
             message: `El precio actual estimado es de $ ${venta}\n\nIngrese la cantidad de USD que desea vender (en numeros):`,
             recipientPhone: recipientPhone,
@@ -216,16 +211,12 @@ export const replyButton = async (incomingMessage, recipientPhone) => {
         datos.push({
             recipientPhone,
             listaDeSesiones,
-            id: "venderUSDT",
+            id: "venderMEP",
         });
     }
 };
-
-export const comprarVenderUSDT = async (
-    incomingMessage,
-    id,
-    recipientPhone
-) => {
+a;
+export const comprarVenderMEP = async (incomingMessage, id, recipientPhone) => {
     const { compra, venta } = await dolarMep();
     // const compra = 315;
     // const venta = 310;
@@ -236,10 +227,10 @@ export const comprarVenderUSDT = async (
     let venderDolares = venta * incomingMessage;
 
     if (
-        (id === "comprarUSDT" &&
+        (id === "comprarMEP" &&
             !isNaN(incomingMessage) &&
             pesos < comprarDolares) ||
-        (id === "venderUSDT" &&
+        (id === "venderMEP" &&
             !isNaN(incomingMessage) &&
             dolares < incomingMessage)
     ) {
@@ -250,7 +241,7 @@ export const comprarVenderUSDT = async (
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
     }
     if (
-        id === "comprarUSDT" &&
+        id === "comprarMEP" &&
         !isNaN(incomingMessage) &&
         pesos > comprarDolares
     ) {
@@ -295,12 +286,12 @@ export const comprarVenderUSDT = async (
         datos.push({
             recipientPhone,
             id: "estaDeAcuerdo",
-            accion: "comprarUSDT",
+            accion: "comprarMEP",
             pesos: comprarDolares,
             dolares: Number(incomingMessage),
         });
     } else if (
-        id === "venderUSDT" &&
+        id === "venderMEP" &&
         !isNaN(incomingMessage) &&
         dolares > incomingMessage
     ) {
@@ -345,7 +336,7 @@ export const comprarVenderUSDT = async (
         datos.push({
             recipientPhone,
             id: "estaDeAcuerdo",
-            accion: "venderUSDT",
+            accion: "venderMEP",
             pesos: venderDolares,
             dolares: Number(incomingMessage),
         });
@@ -363,11 +354,11 @@ export const estaDeAcuerdo = async (incomingMessage, recipientPhone) => {
         const { token } = await existeCel(recipientPhone);
         // const { saldos } = await saldo(token);
         datos.forEach(async (item) => {
-            if (item.accion === "comprarUSDT") {
+            if (item.accion === "comprarMEP") {
                 await compraVentaDolares(token, item.dolares);
                 await compraVentaPesos(token, -item.pesos);
             }
-            if (item.accion === "venderUSDT") {
+            if (item.accion === "venderMEP") {
                 await compraVentaDolares(token, -item.dolares);
                 await compraVentaPesos(token, item.pesos);
             }
@@ -387,11 +378,11 @@ export const estaDeAcuerdo = async (incomingMessage, recipientPhone) => {
             listOfButtons: [
                 {
                     title: "COMPRAR Dolar Mep",
-                    id: "comprar_usdt",
+                    id: "comprar_mep",
                 },
                 {
                     title: "VENDER Dolar Mep",
-                    id: "vender_usdt",
+                    id: "vender_mep",
                 },
             ],
         });
@@ -399,7 +390,7 @@ export const estaDeAcuerdo = async (incomingMessage, recipientPhone) => {
         datos.push({
             recipientPhone,
             listaDeSesiones,
-            id: "comprarVenderUSDT",
+            id: "comprarVenderMEP",
         });
     }
 

@@ -5,7 +5,7 @@ import {
     replyButton,
     listaDeSesiones,
     datos,
-    comprarVenderUSDT,
+    comprarVenderMEP,
     estaDeAcuerdo,
     replyButtonNoExiste,
     replyButtonAceptoTyC,
@@ -109,7 +109,7 @@ export const sendReceiveMessages = async (req, res) => {
             if (
                 typeOfMsg === "simple_button_message" &&
                 estaElNumero.includes(recipientPhone) &&
-                estaElNumero[1] === "comprarVenderUSDT"
+                estaElNumero[1] === "comprarVenderMEP"
             ) {
                 replyButton(incomingMessage.button_reply.id, recipientPhone);
             }
@@ -117,11 +117,11 @@ export const sendReceiveMessages = async (req, res) => {
             if (
                 typeOfMsg === "text_message" &&
                 estaElNumero.includes(recipientPhone) &&
-                (estaElNumero[1] === "comprarUSDT" ||
-                    estaElNumero[1] === "venderUSDT")
+                (estaElNumero[1] === "comprarMEP" ||
+                    estaElNumero[1] === "venderMEP")
             ) {
                 let compraVentaID = estaElNumero[1];
-                comprarVenderUSDT(
+                comprarVenderMEP(
                     incomingMessage.text.body,
                     compraVentaID,
                     recipientPhone
