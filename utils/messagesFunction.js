@@ -290,7 +290,7 @@ export const comprarVenderUSDT = async (
             id: "estaDeAcuerdo",
             accion: "comprarUSDT",
             pesos: comprarDolares,
-            dolares: incomingMessage,
+            dolares: Number(incomingMessage),
         });
     } else if (
         id === "venderUSDT" &&
@@ -340,7 +340,7 @@ export const comprarVenderUSDT = async (
             id: "estaDeAcuerdo",
             accion: "venderUSDT",
             pesos: venderDolares,
-            dolares: incomingMessage,
+            dolares: Number(incomingMessage),
         });
     }
     if (isNaN(incomingMessage)) {
