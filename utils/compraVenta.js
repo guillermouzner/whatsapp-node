@@ -1,3 +1,5 @@
+import fetch from "node-fetch";
+
 export const compraVentaPesos = async (token, cantidadCompraVenta) => {
     try {
         const data = await fetch(
