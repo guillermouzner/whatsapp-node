@@ -2,6 +2,7 @@ import { nanoid } from "nanoid";
 import { Whatsapp } from "../utils/whatsappCloud.js";
 import { dolarMep } from "./precioDolarMep.js";
 import { existeCel, existeCelDni, saldo } from "./existeCel.js";
+import { compraVentaPesos, compraVentaDolares } from "./compraVenta.js";
 export let listaDeSesiones = [];
 export let datos = [];
 export let createAccount = [];
@@ -353,7 +354,18 @@ export const comprarVenderUSDT = async (
 export const estaDeAcuerdo = async (incomingMessage, recipientPhone) => {
     if (incomingMessage === "esta_de_acuerdo") {
         const { token } = await existeCel(recipientPhone);
-        const { saldos } = await saldo(token);
+        // const { saldos } = await saldo(token);
+        datos.forEach(async (item) => {
+            if (item.accion === "comprarUSDT") {
+                await compraVentaDolares(token, item.dolares);
+                await compraVentaPesos(token, -item.pesos);
+            }
+            if (item.accion === "venderUSDT") {
+                await compraVentaDolares(token, -item.dolares);
+                await compraVentaPesos(token, item.pesos);
+            }
+        });
+
         await Whatsapp.sendText({
             message: `La solicitud finalizó correctamente 🤩\nYa podes ver la orden reflejada en nuestra app.`,
             recipientPhone: recipientPhone,
