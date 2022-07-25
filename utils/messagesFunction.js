@@ -616,9 +616,33 @@ export const textMessageEmail = async (incomingMessage, recipientPhone) => {
             id: "verificarEmail",
         });
     } else {
-        await Whatsapp.sendText({
-            message: `Debe ingresar un DNI válido`,
-            recipientPhone: recipientPhone,
+        createAccount.forEach(async (item) => {
+            if (
+                item.recipientPhone === recipientPhone &&
+                item.numeroDeIntentos === 1
+            ) {
+                datos = datos.filter(
+                    (item) => item.recipientPhone !== recipientPhone
+                );
+                createAccount = createAccount.filter(
+                    (item) => item.recipientPhone !== recipientPhone
+                );
+                await Whatsapp.sendText({
+                    message: `Debe ingresar un DNI válido`,
+                    recipientPhone: recipientPhone,
+                });
+            }
+
+            if (
+                item.recipientPhone === recipientPhone &&
+                item.numeroDeIntentos === 0
+            ) {
+                await Whatsapp.sendText({
+                    message: `Debe ingresar un DNI válido`,
+                    recipientPhone: recipientPhone,
+                });
+                item.numeroDeIntentos = 1;
+            }
         });
     }
 };

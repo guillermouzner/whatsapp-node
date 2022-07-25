@@ -212,7 +212,7 @@ export const sendReceiveMessages = async (req, res) => {
                 verificarToken(incomingMessage.text.body, recipientPhone);
             }
         }
-        res.sendStatus(200);
+        return res.sendStatus(200);
     } catch (error) {
         console.log(error);
         res.sendStatus(404);
