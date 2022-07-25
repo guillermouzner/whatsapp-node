@@ -9,29 +9,30 @@ export let createAccount = [];
 
 export const textMessage = async (incomingMessage, recipientPhone) => {
     let theTextMessage = incomingMessage;
-    if (!isNaN(theTextMessage)) {
-        if (theTextMessage > 10000) {
-            await Whatsapp.sendText({
-                message:
-                    "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
-                recipientPhone: recipientPhone,
-            });
-            datos = datos.filter(
-                (item) => item.recipientPhone !== recipientPhone
-            );
-        }
-    } else if (theTextMessage !== "Hola" && theTextMessage !== "hola") {
-        {
-            await Whatsapp.sendText({
-                message:
-                    "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
-                recipientPhone: recipientPhone,
-            });
-            datos = datos.filter(
-                (item) => item.recipientPhone !== recipientPhone
-            );
-        }
-    } else {
+    if (
+        !isNaN(theTextMessage) ||
+        (theTextMessage !== "Hola" && theTextMessage !== "hola")
+    ) {
+        await Whatsapp.sendText({
+            message:
+                "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
+            recipientPhone: recipientPhone,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
+    // else if (theTextMessage !== "Hola" && theTextMessage !== "hola") {
+    //     {
+    //         await Whatsapp.sendText({
+    //             message:
+    //                 "No cuento con una respuesta exacta a tu consulta.\nSin embargo te puedo sugerir arrancar desde el Menu inicial poniendo:\nHola",
+    //             recipientPhone: recipientPhone,
+    //         });
+    //         datos = datos.filter(
+    //             (item) => item.recipientPhone !== recipientPhone
+    //         );
+    //     }
+    // }
+    else {
         await Whatsapp.sendText({
             message: `*[NO OFICIAL]*\n🤖 Hola soy Santi, tu asistente virtual en Santander♨️`,
             recipientPhone: recipientPhone,
