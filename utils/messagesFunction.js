@@ -44,7 +44,7 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
                     title: "Selecciona una opcion",
                     rows: [
                         {
-                            title: "Comprar - Vender Dolar MEP",
+                            title: "Comprar/Vender Dolar MEP",
                             description: "1",
                             id: "operar_activos",
                         },
@@ -69,7 +69,7 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
                             id: "consulta",
                         },
                         {
-                            title: "Cerrar sesion en este celular",
+                            title: "Cerrar sesion",
                             description: "6",
                             id: "cerrar_sesion",
                         },
