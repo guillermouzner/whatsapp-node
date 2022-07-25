@@ -620,10 +620,6 @@ export const textMessageEmail = async (incomingMessage, recipientPhone) => {
             message: `Debe ingresar un DNI válido`,
             recipientPhone: recipientPhone,
         });
-        datos.push({
-            recipientPhone,
-            intentos: 1,
-        });
     }
 };
 

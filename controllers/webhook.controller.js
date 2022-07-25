@@ -78,11 +78,11 @@ export const sendReceiveMessages = async (req, res) => {
                 message_id: message_id,
             });
 
-            let numeroIntentos = [];
-            datos.forEach((item) => {
-                if (item.intentos === 1)
-                    numeroIntentos.push(recipientPhone, item.intentos);
-            });
+            // let numeroIntentos = [];
+            // datos.forEach((item) => {
+            //     if (item.intentos === 1)
+            //         numeroIntentos.push(recipientPhone, item.intentos);
+            // });
 
             let estaElNumero = [];
             datos.forEach((item) => {
@@ -91,10 +91,11 @@ export const sendReceiveMessages = async (req, res) => {
             });
 
             if (
-                (typeOfMsg === "text_message" &&
-                    !estaElNumero.includes(recipientPhone)) ||
-                (numeroIntentos.includes(recipientPhone) &&
-                    numeroIntentos[1] === 1)
+                typeOfMsg === "text_message" &&
+                !estaElNumero.includes(recipientPhone)
+                //      ||
+                // (numeroIntentos.includes(recipientPhone) &&
+                //     numeroIntentos[1] === 1)
             ) {
                 textMessage(incomingMessage.text.body, recipientPhone);
             }
