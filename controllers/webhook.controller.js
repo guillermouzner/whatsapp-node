@@ -71,7 +71,7 @@ export const sendReceiveMessages = async (req, res) => {
             console.log(createAccount);
             console.log(recipientPhone);
             if (incomingMessage?.context)
-                console.log("reply_button: " + incomingMessage.button_reply.id);
+                console.log("reply_button: " + incomingMessage.list_reply.id);
             else console.log("texto: " + incomingMessage.text.body);
 
             await Whatsapp.markMessageAsRead({
