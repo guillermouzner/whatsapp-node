@@ -759,6 +759,7 @@ export const verificarEmail = async (incomingMessage, recipientPhone) => {
         createAccount.forEach((item) => {
             if (item.recipientPhone === recipientPhone) {
                 Object.assign(item, { tokenConfirm });
+                item.numeroDeIntentos = 0;
             }
         });
     } else {
@@ -774,7 +775,7 @@ export const verificarEmail = async (incomingMessage, recipientPhone) => {
                     (item) => item.recipientPhone !== recipientPhone
                 );
                 await Whatsapp.sendText({
-                    message: `Debe ingresar un DNI válido`,
+                    message: `Debe ingresar un Email válido`,
                     recipientPhone: recipientPhone,
                 });
             }
@@ -784,7 +785,7 @@ export const verificarEmail = async (incomingMessage, recipientPhone) => {
                 item.numeroDeIntentos === 0
             ) {
                 await Whatsapp.sendText({
-                    message: `Debe ingresar un DNI válido`,
+                    message: `Debe ingresar un Email válido`,
                     recipientPhone: recipientPhone,
                 });
                 item.numeroDeIntentos = 1;
