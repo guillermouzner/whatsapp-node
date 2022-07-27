@@ -142,7 +142,11 @@ export const radioButtonMenuInicio = async (
     incomingMessage,
     recipientPhone
 ) => {
-    if (isNaN(incomingMessage)) {
+    if (
+        isNaN(incomingMessage) ||
+        Number(incomingMessage) > 6 ||
+        Number(incomingMessage) < 0
+    ) {
         await Whatsapp.sendText({
             message: `😃`,
             recipientPhone: recipientPhone,
@@ -203,7 +207,18 @@ export const radioButtonMenuInicio = async (
             id: "consultas",
         });
     } else if (incomingMessage === "4") {
-        await replyButtonNoExiste("crearCuenta", recipientPhone);
+        const { existe } = await existeCel(recipientPhone);
+        if (existe === "existeCel") {
+            await Whatsapp.sendText({
+                message: `Ya existe una cuenta asociado a este número.`,
+                recipientPhone: recipientPhone,
+            });
+            datos = datos.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
+        } else {
+            await replyButtonNoExiste("crearCuenta", recipientPhone);
+        }
     } else {
         const { existe } = await existeCel(recipientPhone);
         if (existe === "existeCel") {
