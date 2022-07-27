@@ -221,7 +221,7 @@ export const radioButtonMenuInicio = async (
                 recipientPhone: recipientPhone,
                 headerText: "¿En qué puedo ayudarte? 👇",
                 bodyText:
-                    "1️⃣. Quiero empezar a cobrar mi sueldo u honorario en Santander\n2️⃣. Aumentar límite de Tarjeta de Crédito Santander\n3️⃣. ¿Qué es Getnet?\n4️⃣. Soy freelancer, ¿puedo acreditar mi orden de pago en dólares? \n5️⃣. Preguntas Frecuentes\n",
+                    "1️⃣. Quiero empezar a cobrar mi sueldo u honorario en Santander\n2️⃣. Aumentar límite de Tarjeta de Crédito Santander\n3️⃣. ¿Qué es Getnet?\n4️⃣. Soy freelancer, ¿puedo acreditar mi orden de pago en dólares? \n5️⃣. Preguntas Frecuentes\n6️⃣. Volver al menu inicial",
                 footerText: "Ingresá el número de opción seleccionada:",
                 listOfSections: listaDeSesiones,
             });
