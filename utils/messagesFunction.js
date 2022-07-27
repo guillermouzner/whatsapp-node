@@ -142,6 +142,13 @@ export const radioButtonMenuInicio = async (
     incomingMessage,
     recipientPhone
 ) => {
+    if (isNaN(incomingMessage)) {
+        await Whatsapp.sendText({
+            message: `😃`,
+            recipientPhone: recipientPhone,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
     if (incomingMessage === "5") {
         const listaDeSesiones = [
             {
