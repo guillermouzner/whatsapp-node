@@ -57,3 +57,22 @@ export const saldo = async (uid) => {
         console.log(error);
     }
 };
+
+export const cerrarSesion = async (numTel) => {
+    try {
+        const cerrarSesion = await fetch(
+            `https://homebanking-wp.herokuapp.com/auth/logoutCel/${numTel}`,
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        const responseSesion = await cerrarSesion.json();
+
+        return responseSesion;
+    } catch (error) {
+        console.log(error);
+    }
+};

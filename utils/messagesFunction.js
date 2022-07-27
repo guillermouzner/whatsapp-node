@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { Whatsapp } from "../utils/whatsappCloud.js";
 import { dolarMep } from "./precioDolarMep.js";
-import { existeCel, existeCelDni, saldo } from "./existeCel.js";
+import { existeCel, existeCelDni, saldo, cerrarSesion } from "./existeCel.js";
 import { compraVentaPesos, compraVentaDolares } from "./compraVenta.js";
 export let listaDeSesiones = [];
 export let datos = [];
@@ -156,6 +156,16 @@ export const radioButtonMenuInicio = async (
                 listaDeSesiones,
                 id: "consultas",
             });
+        }
+        if (incomingMessage === "6") {
+            await cerrarSesion(recipientPhone);
+            await Whatsapp.sendText({
+                message: `Su sesión se cerró con exito.`,
+                recipientPhone: recipientPhone,
+            });
+            datos = datos.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
         }
     }
     if (existe === "noExiste") {
