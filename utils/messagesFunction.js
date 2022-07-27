@@ -104,7 +104,36 @@ export const radioButtonConsultas = async (incomingMessage, recipientPhone) => {
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
     }
+    if (incomingMessage === "2") {
+        await Whatsapp.sendText({
+            message: `Para solicitar una ampliación del límite de compra de tus tarjeta de crédito, tenés que acercarte a tu sucursal.\nVas a necesitar:\n▫ DNI\n▫ Comprobantes de ingresos\n▫ Y, según tu situación laboral, los tres últimos recibos de sueldo, tu comprobante de monotributo o Declaración Jurada de ganancias\n\nTené en cuenta que *la ampliación quedará sujeta a análisis*.\n¿Necesitas más límite para una situación especial? Tenés la opción de pedir una *ampliación transitoria* del 30% de tu límite actual para compras puntuales, acercándote a tu sucursal, con tu DNI.\nPara las compras con tarjeta de débito, tenés un límite fijo de $10.000 diarios.`,
+            recipientPhone: recipientPhone,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
+    if (incomingMessage === "3") {
+        await Whatsapp.sendText({
+            message: `Getnet es una plataforma abierta de cobros y servicios que brinda a comerciantes, emprendedores y profesionales una alternativa más *fácil, rápida y segura de cobrar*.\nCon Getnet podés realizar el cobro de tus ventas de forma presencial y a distancia, a través de diferentes medios de pago como tarjetas de crédito, tarjetas de débito, tarjetas prepagas y links de pago, en un solo pago o en cuotas.\nPara más información no dudes en escribir a somos@globalgetnet.com.ar.`,
+            recipientPhone: recipientPhone,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
+    if (incomingMessage === "4") {
+        await Whatsapp.sendText({
+            message: `A partir del 03/06/2022 si trabajas como freelancer (exportando servicios al exterior) vas a poder ingresar los cobros que recibas y acreditarlos en tu *cuenta en dólares* por los siguientes conceptos y descripciones:\n\n▫ Mantenimiento y reparaciones (S01)\n▫ Servicios de construcción (S07)\n▫ Servicios de telecomunicaciones (S12)\n▫ Servicios de informática (S13)\n▫ Servicios de información (S14)\n▫ Cargos por el uso de la propiedad intelectual (S15)\n▫ Servicios de investigación y desarrollo (S16)\n▫ Servicios jurídicos, contables y gerenciales (S17)\n▫ Servicios de publicidad, investigación de mercado y encuestas de opinión pública (S18)\n▫ Servicios arquitectónicos, de ingeniería y otros servicios técnicos (S19)\n▫ Servicios relacionados con el comercio (S21)\n▫ Otros servicios empresariales (S22)\n▫ Servicios audiovisuales y conexos (S23)\n▫ Otros servicios personales, culturales y recreativos -incluye enseñanzas educativas- (S24)\n▫ Otros servicios de salud (S27)\n\n*Tené en cuenta que para poder hacer uso de éste beneficio debés cumplir con los siguientes requisitos que establece la normativa:*\n\n▫ Podés usar este mecanismo por hasta *USD 12.000* en el año calendario en todas las entidades financieras. Los ingresos que excedan ese monto serán acreditados en pesos. Ej: si ingresás USD 13.000, solo USD 12.000 se podrán acreditar en dólares y el equivalente a USD 1000 se deberá acreditar en pesos.\n\n ▫ Los fondos deben ingresarse dentro de los 5 días hábiles contados desde su recepción en el exterior o en argentina, a una cuenta local en moneda extranjera a tu nombre. *Pasado el plazo de los 5 días hábiles no se podrá utilizar este mecanismo y deberás acreditar  en tu cuenta en pesos.*\n\n▫ Cuando cargues *la solicitud por Online Banking* estarás aceptando las siguientes *declaraciones juradas:*\n1. *No superaste el límite de los USD 12.000* anuales en todo el sistema financiero por los conceptos alcanzados.\n2. *No realizaste 90 días antes ni realizarás 90 días después compras de moneda extranjera* mediante la venta de títulos valores, o su canje, transferencia al exterior, o la adquisición en el país de títulos valores emitidos por no residentes (entre otros, dólar MEP o CCL).\n\n⚠ Desde el punto de fiscal esta operatoria no tributará impuestos.\n\nSi recibiste una orden de pago y querés acreditarla en tu cuenta, podés hacerlo desde Online Banking 👉 https://productos.santander.com.ar/personas/cobros-del-exterior`,
+            recipientPhone: recipientPhone,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
+    if (incomingMessage === "5") {
+        await Whatsapp.sendText({
+            message: `Por ahora, podés ir a nuestro *Centro de ayuda*. Tenemos un montón de *artículos para ayudarte con todas tus operaciones e inconvenientes:* https://ayuda.santander.com.ar.`,
+            recipientPhone: recipientPhone,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
 };
+
 export const radioButtonMenuInicio = async (
     incomingMessage,
     recipientPhone
