@@ -689,26 +689,43 @@ export const textMessageDNI = async (incomingMessage, recipientPhone) => {
 };
 
 export const textMessageEmail = async (incomingMessage, recipientPhone) => {
+    //aca tengo que verificar que dni que ingreso no existe en BD
     const regexDNI = /^[\d]{1,3}\.?[\d]{3,3}\.?[\d]{3,3}$/;
 
     if (regexDNI.test(incomingMessage)) {
-        createAccount.forEach((item) => {
-            if (item.recipientPhone === recipientPhone) {
-                Object.assign(item, { documento: incomingMessage });
-                item.numeroDeIntentos = 0;
-            }
-        });
-        await Whatsapp.sendText({
-            message:
-                "¿Me decís tu email? Recordá que con él vas a poder acceder a tu cuenta.",
-            recipientPhone: recipientPhone,
-        });
-        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
-        datos.push({
-            recipientPhone,
-            listaDeSesiones,
-            id: "verificarEmail",
-        });
+        const { existe } = await existeCelDni(incomingMessage, recipientPhone);
+        if (existe === "existeCel") {
+            await Whatsapp.sendText({
+                message: "Ya existe una cuenta registrada con este DNI",
+                recipientPhone: recipientPhone,
+            });
+            datos = datos.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
+            createAccount = createAccount.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
+        } else {
+            createAccount.forEach((item) => {
+                if (item.recipientPhone === recipientPhone) {
+                    Object.assign(item, { documento: incomingMessage });
+                    item.numeroDeIntentos = 0;
+                }
+            });
+            await Whatsapp.sendText({
+                message:
+                    "¿Me decís tu email? Recordá que con él vas a poder acceder a tu cuenta.",
+                recipientPhone: recipientPhone,
+            });
+            datos = datos.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
+            datos.push({
+                recipientPhone,
+                listaDeSesiones,
+                id: "verificarEmail",
+            });
+        }
     } else {
         createAccount.forEach(async (item) => {
             if (
