@@ -132,6 +132,10 @@ export const radioButtonConsultas = async (incomingMessage, recipientPhone) => {
         });
         datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
     }
+    if (incomingMessage === "6") {
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+        textMessage("hola", recipientPhone);
+    }
 };
 
 export const radioButtonMenuInicio = async (
@@ -204,6 +208,11 @@ export const radioButtonMenuInicio = async (
                             title: "Preguntas frecuentes",
                             description: "5",
                             id: "preguntas_frecuentes",
+                        },
+                        {
+                            title: "Volver al menu inicial",
+                            description: "6",
+                            id: "menu_inicial",
                         },
                     ],
                 },
