@@ -195,14 +195,12 @@ export const radioButtonMenuInicio = async (
             listaDeSesiones,
             id: "consultas",
         });
+    } else if (incomingMessage === "4") {
+        await replyButtonNoExiste("crearCuenta", recipientPhone);
     } else {
         const { existe } = await existeCel(recipientPhone);
         if (existe === "existeCel") {
-            if (
-                incomingMessage === "2" ||
-                incomingMessage === "3" ||
-                incomingMessage === "4"
-            ) {
+            if (incomingMessage === "2" || incomingMessage === "3") {
                 await Whatsapp.sendText({
                     message: `🤖 Opcion no disponible momentaneamente ♨️`,
                     recipientPhone: recipientPhone,
