@@ -16,6 +16,7 @@ import {
     verificarToken,
     existeDni,
     existeDniToken,
+    radioButtonConsultas,
 } from "../utils/messagesFunction.js";
 
 export const verifyToken = (req, res) => {
@@ -210,6 +211,21 @@ export const sendReceiveMessages = async (req, res) => {
                 estaElNumero[1] === "verificarToken"
             ) {
                 verificarToken(incomingMessage.text.body, recipientPhone);
+            }
+
+            if (
+                (typeOfMsg === "radio_button_message" &&
+                    estaElNumero[1] === "consultas") ||
+                (typeOfMsg === "text_message" &&
+                    estaElNumero.includes(recipientPhone) &&
+                    estaElNumero[1] === "consultas")
+            ) {
+                let message =
+                    typeOfMsg === "radio_button_message"
+                        ? incomingMessage.list_reply.description
+                        : incomingMessage.text.body;
+
+                radioButtonConsultas(message, recipientPhone);
             }
         }
         return res.sendStatus(200);

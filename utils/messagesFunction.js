@@ -96,7 +96,15 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
         }
     }
 };
-
+export const radioButtonConsultas = async (incomingMessage, recipientPhone) => {
+    if (incomingMessage === "1") {
+        await Whatsapp.sendText({
+            message: `*Si no tenés cuenta en el Banco*, podés sacar una en 3 simples pasos sin tener que acercarte a la sucursal, comenzas y finalizas el proceso en forma digital. Ingresá a www.santander.com.ar/banco/plan-sueldo para más información y seguí los pasos en "Si todavía no tenés cuenta en el Banco".\n\n*Si ya tenés cuenta en el Banco*, solo tenés que avisarle a tu empleador tu CBU para que comience a depositarte el sueldo en Santander.`,
+            recipientPhone: recipientPhone,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
+};
 export const radioButtonMenuInicio = async (
     incomingMessage,
     recipientPhone
@@ -139,11 +147,43 @@ export const radioButtonMenuInicio = async (
         }
 
         if (incomingMessage === "5") {
+            const listaDeSesiones = [
+                {
+                    title: "Selecciona una opcion",
+                    rows: [
+                        {
+                            title: "Cobrar honorarios",
+                            description: "1",
+                            id: "cobrar_honorarios",
+                        },
+                        {
+                            title: "Aumentar limite tarjeta",
+                            description: "2",
+                            id: "aumentar_limite_tarjeta",
+                        },
+                        {
+                            title: "Que es Getnet",
+                            description: "3",
+                            id: "que_es_getnet",
+                        },
+                        {
+                            title: "Soy Freelancer",
+                            description: "4",
+                            id: "soy_freelancer",
+                        },
+                        {
+                            title: "Preguntas frecuentes",
+                            description: "5",
+                            id: "preguntas_frecuentes",
+                        },
+                    ],
+                },
+            ];
             await Whatsapp.sendRadioButtons({
                 recipientPhone: recipientPhone,
                 headerText: "¿En qué puedo ayudarte? 👇",
                 bodyText:
-                    "1️⃣. Quiero empezar a cobrar mi sueldo u honorario en Santander\n2️⃣. Aumentar límite de Tarjeta de Crédito Santander\n3️⃣. ¿Qué es Getnet?\n4️⃣. Soy freelancer, ¿puedo acreditar mi orden de pago en dólares? \n5️⃣. Cajeros cercanos\n6️⃣. Preguntas Frecuentes\n",
+                    "1️⃣. Quiero empezar a cobrar mi sueldo u honorario en Santander\n2️⃣. Aumentar límite de Tarjeta de Crédito Santander\n3️⃣. ¿Qué es Getnet?\n4️⃣. Soy freelancer, ¿puedo acreditar mi orden de pago en dólares? \n5️⃣. Preguntas Frecuentes\n",
                 footerText: "Ingresá el número de opción seleccionada:",
                 listOfSections: listaDeSesiones,
             });
