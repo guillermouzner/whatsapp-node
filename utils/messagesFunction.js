@@ -690,6 +690,7 @@ export const textMessageEmail = async (incomingMessage, recipientPhone) => {
         createAccount.forEach((item) => {
             if (item.recipientPhone === recipientPhone) {
                 Object.assign(item, { documento: incomingMessage });
+                item.numeroDeIntentos = 0;
             }
         });
         await Whatsapp.sendText({
