@@ -233,6 +233,10 @@ export const radioButtonMenuInicio = async (
                 });
             }
 
+            if (incomingMessage === "4") {
+                await replyButtonNoExiste("crearCuenta", recipientPhone);
+            }
+
             if (incomingMessage === "6") {
                 await cerrarSesion(recipientPhone);
                 await Whatsapp.sendText({
