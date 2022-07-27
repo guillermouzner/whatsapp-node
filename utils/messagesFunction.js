@@ -142,135 +142,136 @@ export const radioButtonMenuInicio = async (
     incomingMessage,
     recipientPhone
 ) => {
-    const { existe } = await existeCel(recipientPhone);
-    if (existe === "existeCel") {
-        if (incomingMessage === "2" || incomingMessage === "3") {
-            await Whatsapp.sendText({
-                message: `🤖 Opcion no disponible momentaneamente ♨️`,
-                recipientPhone: recipientPhone,
-            });
-            datos = datos.filter(
-                (item) => item.recipientPhone !== recipientPhone
-            );
-        }
-
-        if (incomingMessage === "1") {
-            await Whatsapp.sendSimpleButtons({
-                recipientPhone: recipientPhone,
-                message: `Selecciona la opcion que deseas hacer`,
-                listOfButtons: [
+    if (incomingMessage === "5") {
+        const listaDeSesiones = [
+            {
+                title: "Selecciona una opcion",
+                rows: [
                     {
-                        title: "COMPRAR Dolar Mep",
-                        id: "comprar_mep",
+                        title: "Cobrar honorarios",
+                        description: "1",
+                        id: "cobrar_honorarios",
                     },
                     {
-                        title: "VENDER Dolar Mep",
-                        id: "vender_mep",
+                        title: "Aumentar limite tarjeta",
+                        description: "2",
+                        id: "aumentar_limite_tarjeta",
+                    },
+                    {
+                        title: "Que es Getnet",
+                        description: "3",
+                        id: "que_es_getnet",
+                    },
+                    {
+                        title: "Soy Freelancer",
+                        description: "4",
+                        id: "soy_freelancer",
+                    },
+                    {
+                        title: "Preguntas frecuentes",
+                        description: "5",
+                        id: "preguntas_frecuentes",
+                    },
+                    {
+                        title: "Volver al menu inicial",
+                        description: "6",
+                        id: "menu_inicial",
                     },
                 ],
-            });
-            datos = datos.filter(
-                (item) => item.recipientPhone !== recipientPhone
-            );
-            datos.push({
-                recipientPhone,
-                listaDeSesiones,
-                id: "comprarVenderMEP",
-            });
-        }
-
-        if (incomingMessage === "5") {
-            const listaDeSesiones = [
-                {
-                    title: "Selecciona una opcion",
-                    rows: [
-                        {
-                            title: "Cobrar honorarios",
-                            description: "1",
-                            id: "cobrar_honorarios",
-                        },
-                        {
-                            title: "Aumentar limite tarjeta",
-                            description: "2",
-                            id: "aumentar_limite_tarjeta",
-                        },
-                        {
-                            title: "Que es Getnet",
-                            description: "3",
-                            id: "que_es_getnet",
-                        },
-                        {
-                            title: "Soy Freelancer",
-                            description: "4",
-                            id: "soy_freelancer",
-                        },
-                        {
-                            title: "Preguntas frecuentes",
-                            description: "5",
-                            id: "preguntas_frecuentes",
-                        },
-                        {
-                            title: "Volver al menu inicial",
-                            description: "6",
-                            id: "menu_inicial",
-                        },
-                    ],
-                },
-            ];
-            await Whatsapp.sendRadioButtons({
-                recipientPhone: recipientPhone,
-                headerText: "¿En qué puedo ayudarte? 👇",
-                bodyText:
-                    "1️⃣. Quiero empezar a cobrar mi sueldo u honorario en Santander\n2️⃣. Aumentar límite de Tarjeta de Crédito Santander\n3️⃣. ¿Qué es Getnet?\n4️⃣. Soy freelancer, ¿puedo acreditar mi orden de pago en dólares? \n5️⃣. Preguntas Frecuentes\n6️⃣. Volver al menu inicial",
-                footerText: "Ingresá el número de opción seleccionada:",
-                listOfSections: listaDeSesiones,
-            });
-            datos = datos.filter(
-                (item) => item.recipientPhone !== recipientPhone
-            );
-
-            datos.push({
-                recipientPhone,
-                listaDeSesiones,
-                id: "consultas",
-            });
-        }
-        if (incomingMessage === "6") {
-            await cerrarSesion(recipientPhone);
-            await Whatsapp.sendText({
-                message: `Su sesión se cerró con exito.`,
-                recipientPhone: recipientPhone,
-            });
-            datos = datos.filter(
-                (item) => item.recipientPhone !== recipientPhone
-            );
-        }
-    }
-    if (existe === "noExiste") {
-        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
-        await Whatsapp.sendSimpleButtons({
+            },
+        ];
+        await Whatsapp.sendRadioButtons({
             recipientPhone: recipientPhone,
-            message: `Uy, todavía no sos cliente de Santander. Tener cuenta es necesario para operar dólar mep y pagar servicios.\n¿Querés abrirte una cuenta? Es gratis y te va a llevar sólo 5 minutos :)`,
-            listOfButtons: [
-                {
-                    title: "Si",
-                    id: "crearCuenta",
-                },
-                {
-                    title: "No",
-                    id: "salir",
-                },
-                {
-                    title: "Ya soy cliente",
-                    id: "soyCliente",
-                },
-            ],
+            headerText: "¿En qué puedo ayudarte? 👇",
+            bodyText:
+                "1️⃣. Quiero empezar a cobrar mi sueldo u honorario en Santander\n2️⃣. Aumentar límite de Tarjeta de Crédito Santander\n3️⃣. ¿Qué es Getnet?\n4️⃣. Soy freelancer, ¿puedo acreditar mi orden de pago en dólares? \n5️⃣. Preguntas Frecuentes\n6️⃣. Volver al menu inicial",
+            footerText: "Ingresá el número de opción seleccionada:",
+            listOfSections: listaDeSesiones,
         });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+
         datos.push({
             recipientPhone,
             listaDeSesiones,
-            id: "noExiste",
+            id: "consultas",
         });
+    } else {
+        const { existe } = await existeCel(recipientPhone);
+        if (existe === "existeCel") {
+            if (incomingMessage === "2" || incomingMessage === "3") {
+                await Whatsapp.sendText({
+                    message: `🤖 Opcion no disponible momentaneamente ♨️`,
+                    recipientPhone: recipientPhone,
+                });
+                datos = datos.filter(
+                    (item) => item.recipientPhone !== recipientPhone
+                );
+            }
+
+            if (incomingMessage === "1") {
+                await Whatsapp.sendSimpleButtons({
+                    recipientPhone: recipientPhone,
+                    message: `Selecciona la opcion que deseas hacer`,
+                    listOfButtons: [
+                        {
+                            title: "COMPRAR Dolar Mep",
+                            id: "comprar_mep",
+                        },
+                        {
+                            title: "VENDER Dolar Mep",
+                            id: "vender_mep",
+                        },
+                    ],
+                });
+                datos = datos.filter(
+                    (item) => item.recipientPhone !== recipientPhone
+                );
+                datos.push({
+                    recipientPhone,
+                    listaDeSesiones,
+                    id: "comprarVenderMEP",
+                });
+            }
+
+            if (incomingMessage === "6") {
+                await cerrarSesion(recipientPhone);
+                await Whatsapp.sendText({
+                    message: `Su sesión se cerró con exito.`,
+                    recipientPhone: recipientPhone,
+                });
+                datos = datos.filter(
+                    (item) => item.recipientPhone !== recipientPhone
+                );
+            }
+        }
+        if (existe === "noExiste") {
+            datos = datos.filter(
+                (item) => item.recipientPhone !== recipientPhone
+            );
+            await Whatsapp.sendSimpleButtons({
+                recipientPhone: recipientPhone,
+                message: `Uy, todavía no sos cliente de Santander. Tener cuenta es necesario para operar dólar mep y pagar servicios.\n¿Querés abrirte una cuenta? Es gratis y te va a llevar sólo 5 minutos :)`,
+                listOfButtons: [
+                    {
+                        title: "Si",
+                        id: "crearCuenta",
+                    },
+                    {
+                        title: "No",
+                        id: "salir",
+                    },
+                    {
+                        title: "Ya soy cliente",
+                        id: "soyCliente",
+                    },
+                ],
+            });
+            datos.push({
+                recipientPhone,
+                listaDeSesiones,
+                id: "noExiste",
+            });
+        }
     }
 };
 
