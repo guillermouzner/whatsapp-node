@@ -198,7 +198,11 @@ export const radioButtonMenuInicio = async (
     } else {
         const { existe } = await existeCel(recipientPhone);
         if (existe === "existeCel") {
-            if (incomingMessage === "2" || incomingMessage === "3") {
+            if (
+                incomingMessage === "2" ||
+                incomingMessage === "3" ||
+                incomingMessage === "4"
+            ) {
                 await Whatsapp.sendText({
                     message: `🤖 Opcion no disponible momentaneamente ♨️`,
                     recipientPhone: recipientPhone,
@@ -231,10 +235,6 @@ export const radioButtonMenuInicio = async (
                     listaDeSesiones,
                     id: "comprarVenderMEP",
                 });
-            }
-
-            if (incomingMessage === "4") {
-                await replyButtonNoExiste("crearCuenta", recipientPhone);
             }
 
             if (incomingMessage === "6") {
