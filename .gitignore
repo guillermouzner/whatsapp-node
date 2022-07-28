@@ -4,3 +4,5 @@ controllers
 models
 routes
 utils
+package.json
+package-lock.json
