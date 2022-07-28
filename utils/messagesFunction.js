@@ -729,8 +729,8 @@ export const textMessageEmail = async (incomingMessage, recipientPhone) => {
     const regexDNI = /^[\d]{1,3}\.?[\d]{3,3}\.?[\d]{3,3}$/;
 
     if (regexDNI.test(incomingMessage)) {
-        const { existe } = await existeCelDni(incomingMessage, recipientPhone);
-        if (existe === "existeCel") {
+        const { existe, documento } = await existeCel(recipientPhone);
+        if (existe === "existeCel" && documento === incomingMessage) {
             await Whatsapp.sendText({
                 message: "Ya existe una cuenta registrada con este DNI",
                 recipientPhone: recipientPhone,
