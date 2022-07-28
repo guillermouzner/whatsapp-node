@@ -283,8 +283,7 @@ export const radioButtonMenuInicio = async (
         if (
             existe === "noExiste" &&
             !isNaN(incomingMessage) &&
-            Number(incomingMessage) > 0 &&
-            Number(incomingMessage) <= 6
+            [1, 2, 3, 6].includes(Number(incomingMessage))
         ) {
             datos = datos.filter(
                 (item) => item.recipientPhone !== recipientPhone
