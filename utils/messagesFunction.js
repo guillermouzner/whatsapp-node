@@ -217,7 +217,8 @@ export const radioButtonMenuInicio = async (
             listaDeSesiones,
             id: "consultas",
         });
-    } else if (incomingMessage === "4") {
+    }
+    if (incomingMessage === "4") {
         const { existe } = await existeCel(recipientPhone);
         if (existe === "existeCel") {
             await Whatsapp.sendText({
