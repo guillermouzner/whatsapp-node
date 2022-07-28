@@ -280,7 +280,12 @@ export const radioButtonMenuInicio = async (
                 );
             }
         }
-        if (existe === "noExiste") {
+        if (
+            existe === "noExiste" &&
+            !isNaN(incomingMessage) &&
+            Number(incomingMessage) > 0 &&
+            Number(incomingMessage) <= 6
+        ) {
             datos = datos.filter(
                 (item) => item.recipientPhone !== recipientPhone
             );
