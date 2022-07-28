@@ -97,6 +97,17 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
     }
 };
 export const radioButtonConsultas = async (incomingMessage, recipientPhone) => {
+    if (
+        isNaN(incomingMessage) ||
+        Number(incomingMessage) > 6 ||
+        Number(incomingMessage) < 0
+    ) {
+        await Whatsapp.sendText({
+            message: `😃`,
+            recipientPhone: recipientPhone,
+        });
+        datos = datos.filter((item) => item.recipientPhone !== recipientPhone);
+    }
     if (incomingMessage === "1") {
         await Whatsapp.sendText({
             message: `*Si no tenés cuenta en el Banco*, podés sacar una en 3 simples pasos sin tener que acercarte a la sucursal, comenzas y finalizas el proceso en forma digital. Ingresá a www.santander.com.ar/banco/plan-sueldo para más información y seguí los pasos en "Si todavía no tenés cuenta en el Banco".\n\n*Si ya tenés cuenta en el Banco*, solo tenés que avisarle a tu empleador tu CBU para que comience a depositarte el sueldo en Santander.`,
