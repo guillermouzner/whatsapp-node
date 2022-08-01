@@ -70,7 +70,7 @@ export const sendReceiveMessages = async (req, res) => {
             //console.log(recipientPhone, recipientName, typeOfMsg, message_id);
             console.log(datos);
             console.log(createAccount);
-            // console.log(recipientPhone);
+            console.log(recipientPhone);
             // if (incomingMessage?.context)
             //     console.log("reply_button: " + incomingMessage.list_reply.id);
             // else console.log("texto: " + incomingMessage.text.body);
