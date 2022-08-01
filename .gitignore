@@ -1,8 +1,2 @@
 node_modules
 .env
-controllers
-models
-routes
-utils
-package.json
-package-lock.json
