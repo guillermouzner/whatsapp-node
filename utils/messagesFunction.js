@@ -77,8 +77,8 @@ export const textMessage = async (incomingMessage, recipientPhone) => {
                 },
             ];
             // const { compra, venta } = await dolarMep();
-            const compra = 282;
-            const venta = 276;
+            const compra = 287;
+            const venta = 277;
 
             await Whatsapp.sendRadioButtons({
                 recipientPhone: recipientPhone,
@@ -317,8 +317,8 @@ export const radioButtonMenuInicio = async (
 
 export const replyButton = async (incomingMessage, recipientPhone) => {
     // const { compra, venta } = await dolarMep();
-    const compra = 276;
-    const venta = 282;
+    const compra = 287;
+    const venta = 277;
     if (incomingMessage === "comprar_mep") {
         await Whatsapp.sendText({
             message: `El precio actual estimado es de $ ${compra}\n\nIngrese la cantidad de USD que desea comprar (en numeros):`,
@@ -347,8 +347,8 @@ export const replyButton = async (incomingMessage, recipientPhone) => {
 
 export const comprarVenderMEP = async (incomingMessage, id, recipientPhone) => {
     // const { compra, venta } = await dolarMep();
-    const compra = 282;
-    const venta = 276;
+    const compra = 287;
+    const venta = 277;
     const { uid, documento } = await existeCel(recipientPhone);
     const { pesos, dolares } = await saldo(uid);
     let numeroDeCuenta = documento;
